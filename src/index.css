@@ -1,3 +1,11 @@
+:root{
+    --main-bg-color: #1E90FF;
+    --main-color:  #fff;
+
+}
+
+
+
 *{
     padding: 0;
     margin: 0;
@@ -12,8 +20,8 @@
 /*header*/
 
 .header {
-    background-color: #1E90FF;
-    color: #fff;
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
     
 
 }
@@ -43,8 +51,8 @@ align-items: center;
 /*footer*/
 
 .footer{
-    background-color: #1E90FF;
-    color: #fff;
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
     position: fixed;
     left: 0;
     right: 0;
@@ -57,3 +65,53 @@ align-items: center;
     font-size: 25px;
 }
 
+/*post*/
+.post{
+    width: 300px;
+    height: 150px;
+    position: relative;
+}
+.post:hover{
+    cursor: pointer;
+}
+
+.post__wrapper:hover .post__info{
+    opacity: 1;
+    transition: all 1s;
+}
+
+
+.post__img{
+    position: absolute;
+}
+
+.post__img>img{
+    width: 320px;
+    height: 150px;
+
+}
+.post__info {
+   
+   cursor: pointer;
+   position: absolute;
+   bottom: -30px;
+   left: 0;
+   background-color: var(--main-bg-color);
+   color: var(--main-color);
+   width: 100%;
+   line-height: 30px;
+   padding: 10px;
+   opacity: 0;
+   transition: all 1s;
+  
+  
+    
+}
+.post__title {
+    font-size: 20px;
+   
+}
+.post__auter {
+    font-size: 16px;
+    
+}

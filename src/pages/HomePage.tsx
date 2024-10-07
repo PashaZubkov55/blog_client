@@ -1,5 +1,10 @@
+import { Post } from "../components/Past"
+
 export const HomePage =()=>{
     return(
-        <h1>home Page</h1>
+        <div className="container">
+        <Post />
+        </div>
+        
     )
 }
