@@ -9,6 +9,8 @@
 
 }
 
+/*header*/
+
 .header {
     background-color: #1E90FF;
     color: #fff;
@@ -21,7 +23,7 @@ justify-content: space-between;
 align-items: center;
 
 }
-.heade_logo {
+.header_logo {
     font-size: 30px;
 }
 .menu {
@@ -38,3 +40,20 @@ align-items: center;
     list-style: none;
 
 }
+/*footer*/
+
+.footer{
+    background-color: #1E90FF;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.footer__wrapper{
+    display: flex;
+    font-size: 25px;
+}
+

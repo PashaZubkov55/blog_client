@@ -3,6 +3,7 @@ import { useSelector,  } from 'react-redux'
 import AppRouter from './router/AppRouter'
 import './App.css'
 import {Header} from './components/Header'
+import { Footer } from './components/Footer'
 function App() {
   const auth = useSelector((state) => state.auth.isAuth)
   return (
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
       <AppRouter />
      </BrowserRouter>
+     <Footer/>
      </main>
      
   )
