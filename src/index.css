@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+
+}
+
+.header {
+    background-color: #1E90FF;
+    color: #fff;
+    
+
+}
+.header__wrapper {
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+}
+.heade_logo {
+    font-size: 30px;
+}
+.menu {
+    font-size: 25px;
+}
+.menu__list {
+    display: flex;
+}
+.list {
+
+}
+.list__item {
+    margin: 10px;
+    list-style: none;
+
+}
