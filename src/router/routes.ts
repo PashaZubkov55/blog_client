@@ -1,5 +1,6 @@
 import { HomePage } from "../pages/HomePage";
 import { PostPage } from "../pages/PostPage";
+import { AuthPage } from "../pages/AuthPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { HOME_ROUTE, LOGUIN_ROUTE, POST_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from "./Url";
 
@@ -26,7 +27,7 @@ export const publicRouts =[
     },
     {
         path: LOGUIN_ROUTE,
-        component: PostPage
+        component: AuthPage
 
     },
     {
