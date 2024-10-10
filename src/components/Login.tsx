@@ -1,4 +1,6 @@
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
+import { NavLink } from 'react-router-dom'
+import { REGISTRATION_ROUTE } from "../router/Url"
 
 export const Login = ()=>{
     const {
@@ -48,7 +50,9 @@ export const Login = ()=>{
                         Войти
                     </button>
                 </div>
+                <div className="form__message">Нет акаунта ?<NavLink to={REGISTRATION_ROUTE}> Завести акаунт</NavLink> </div>
             </div>
+            
         </form>
       </div>
     )
