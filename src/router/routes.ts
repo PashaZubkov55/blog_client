@@ -32,7 +32,7 @@ export const publicRouts =[
     },
     {
        path: REGISTRATION_ROUTE ,
-       component: PostPage
+       component: AuthPage
 
     },
     {
