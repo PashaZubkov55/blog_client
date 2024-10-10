@@ -1,6 +1,7 @@
 :root{
     --main-bg-color: #1E90FF;
     --main-color:  #fff;
+    --main-error-color: #FF0000;
 
 }
 
@@ -122,9 +123,7 @@ align-items: center;
 
 /*Auth*/
 
-.login {
-   
-}
+
 .login__form {
     height: 500px;
     display: flex;
@@ -158,4 +157,8 @@ align-items: center;
     font-size: 20px;
     padding: 5px;
     margin-top: 15px;
+}
+
+.input__error{
+    color: var(--main-error-color);
 }
