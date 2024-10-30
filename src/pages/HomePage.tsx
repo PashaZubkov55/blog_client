@@ -2,14 +2,19 @@ import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 export const HomePage =()=>{
     const {data=[]} = useGetPostsQuery()
-    console.log(data)
+  
 
     return(
         <div className="container">
+            <div className="postList">
             {data.map(item=>(
-                <p key={item.id}>{item.title}</p>
+                <Post 
+                key = {item.id} 
+                title ={item.title}
+                
+                />
             ))}
-        <Post />
+       </div>
         </div>
         
     )
