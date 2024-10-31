@@ -1,3 +1,7 @@
+
+import { NavLink } from 'react-router-dom';
+import { HOME_ROUTE, LOGUIN_ROUTE } from '../router/Url';
+import { Navbar } from './Navbar';
 export const Header =()=>{
     return(
             <header className="header">
@@ -5,13 +9,7 @@ export const Header =()=>{
                 <div className="header__wrapper">
                 
                     <div className="header_logo">Blog</div>
-                    <nav className="menu">
-                        <ul className="menu__list list">
-                            <li className="list__item">Главная</li>
-                            <li className="list__item">Регистрация</li>
-                        </ul>
-
-                    </nav>
+                    <Navbar/>
                 </div>
                 </div>
             </header>

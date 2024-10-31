@@ -42,20 +42,20 @@ align-items: center;
 .header_logo {
     font-size: 30px;
 }
-.menu {
+.navbar {
     font-size: 25px;
 }
-.menu__list {
+.navbar_list {
     display: flex;
 }
-.list {
 
-}
 .list__item {
     margin: 10px;
     list-style: none;
+    color: var(--main-color);
 
 }
+
 /*footer*/
 
 .footer{
