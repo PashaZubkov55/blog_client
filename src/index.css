@@ -42,7 +42,7 @@ align-items: center;
 .header_logo {
     font-size: 30px;
 }
-.menu {
+.navbar {
     font-size: 25px;
 }
 .navbar_list {
@@ -197,4 +197,35 @@ align-items: center;
 }
 .detail__description {
     font-size: 20px;
+}
+
+/*Profile*/
+.profile__head {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile__icon>img{
+    width: 100px;
+    height: 100px;
+}
+
+
+.profile__body{
+    
+    padding-bottom: 10px;
+}
+.profile__line{
+    border-bottom: 2px solid var(--main-bg-color);
+}
+.profile__title {
+    margin-top: 19px;
+    
+}
+.profile__posts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0px 100px 0px;
 }

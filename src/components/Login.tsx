@@ -1,8 +1,14 @@
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
-import { REGISTRATION_ROUTE } from "../router/Url"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router"
+import { HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
+import { setStatus } from "../store/Auth/AuthSlice"
+
 
 export const Login = ()=>{
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {
         register,
         formState:{errors},
@@ -11,8 +17,10 @@ export const Login = ()=>{
     } = useForm()
 
     const isLogin = (data)=>{
-
+        dispatch(setStatus(true))
+        navigate(HOME_ROUTE)
         console.log(data.email, data.password)
+
     }
     return(
         <div className="login">
