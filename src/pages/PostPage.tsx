@@ -1,5 +1,8 @@
+import { Postdetail } from "../components/Postdetail"
+
 export const PostPage=()=>{
     return(
-        <h1>post page</h1>
+        <Postdetail/>
     )
+
 }

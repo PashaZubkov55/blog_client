@@ -9,8 +9,9 @@ function App() {
   return (
     
    <main className="main">
-    <Header/>
+   
     <BrowserRouter>
+    <Header/>
       <AppRouter />
      </BrowserRouter>
      <Footer/>

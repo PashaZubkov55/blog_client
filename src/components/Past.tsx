@@ -1,6 +1,11 @@
-export const Post = ({title})=>{
+import { useNavigate } from "react-router"
+import { POST_ROUTE } from "../router/Url"
+
+export const Post = ({title, id})=>{
+    const navigate = useNavigate()
 return(
-   <div className="post">
+   
+   <div className="post" onClick={(()=>{navigate(POST_ROUTE+id)})}>
     <div className="post__wrapper">
         <div className="post__img">
             <img src="https://avatars.mds.yandex.net/i?id=b0d08c2379524331b4b93ac74511c383a9cd1f44-4234302-images-thumbs&n=13" alt="imgPost" />
