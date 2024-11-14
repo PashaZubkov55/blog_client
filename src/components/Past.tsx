@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router"
 import { POST_ROUTE } from "../router/Url"
+import { useGetPostsQuery } from "../store/posts/PostsSlice";
 
-export const Post = ({title, id})=>{
+export const Post = ({title,id})=>{
+    const {data} = useGetPostsQuery()
     const navigate = useNavigate()
 return(
    
