@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 export const HomePage =()=>{
-    const {data=[]} = useGetPostsQuery()
+    const {data=[], isLoading} = useGetPostsQuery()
     useEffect(()=>{
         console.log(data)
     },[])
@@ -10,16 +10,23 @@ export const HomePage =()=>{
 
     return(
         <div className="container">
+            {isLoading?<h1>loading...</h1>
+            :
             <div className="postList">
-            {data.map(item:=>(
-                <Post 
-                key = {item.id} 
-                title ={item.title}
-                id = {item.id}
+             {    data.map((post)=>(
+                <Post
+                key = {post.id}
+                title= {post.title}
+                id = {post.id}
                 
                 />
-            ))
-       </div>
+            ))}
+
+            </div>
+           
+            }
+
+           
         </div>
         
     )
