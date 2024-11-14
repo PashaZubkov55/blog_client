@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Loader } from "../components/Loader"
 import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 export const HomePage =()=>{
@@ -7,10 +8,15 @@ export const HomePage =()=>{
         console.log(data)
     },[])
   
-
+    if (isLoading) {
+        return(
+            <Loader/>
+        )
+        
+    }
     return(
         <div className="container">
-            {isLoading? <h1>loading...</h1>:
+           
             
             <div className="postList">
             {data.map(post=>(
@@ -23,7 +29,7 @@ export const HomePage =()=>{
                 ))}
     
             </div>
-            }
+            
        
     </div>
     
