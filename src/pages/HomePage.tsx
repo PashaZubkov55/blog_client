@@ -10,24 +10,24 @@ export const HomePage =()=>{
 
     return(
         <div className="container">
-            {isLoading?<h1>loading...</h1>
-            :
+            {isLoading? <h1>loading...</h1>:
+            
             <div className="postList">
-             {    data.map((post)=>(
-                <Post
-                key = {post.id}
-                title= {post.title}
+            {data.map(post=>(
+                <Post 
+                key = {post.id} 
+                title ={post.title}
                 id = {post.id}
                 
                 />
-            ))}
-
+                ))}
+    
             </div>
-           
             }
-
-           
-        </div>
-        
-    )
+       
+    </div>
+    
+)
 }
+        
+    
