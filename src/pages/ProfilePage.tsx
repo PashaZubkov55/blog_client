@@ -35,6 +35,7 @@ export const ProfilePage=()=>{
             <Post
                key = {item.id}
                title= {item.title}
+               id = {item.id}
                />
                 
                 
