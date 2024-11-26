@@ -18,10 +18,12 @@ export const ProfilePage=()=>{
         <div className="profile__head">
             <div className="profile__icon">
                 <img src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" alt="avatar" />
+
             </div>
             <div className="profile__info">
                 <h1>Person</h1>
             </div>
+            <img className="profile__Settings" src="https://media.forgecdn.net/avatars/482/965/637782295613298008.png" alt="" />
         </div>
         </div>
         <div className="profile__body">
