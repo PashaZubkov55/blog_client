@@ -275,4 +275,29 @@ align-items: center;
       transform: rotate(1turn);
     }
   }
-  
+ 
+  .setting {
+}
+.setting__wrapper {
+    min-width: 1000px;
+    min-height: 500px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+  justify-content: center;
+   
+}
+.setting__item {
+}
+.setting__btn {
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    border-color: var(--main-color);
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+    
+}
+.setting__btn:hover{
+    cursor: pointer;
+}
