@@ -2,7 +2,8 @@ import { HomePage } from "../pages/HomePage";
 import { PostPage } from "../pages/PostPage";
 import { AuthPage } from "../pages/AuthPage";
 import { ProfilePage } from "../pages/ProfilePage";
-import { HOME_ROUTE, LOGUIN_ROUTE, POST_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from "./Url";
+import { SettingsPage } from "../pages/SettingsPage";
+import { HOME_ROUTE, LOGUIN_ROUTE, POST_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, SESTTINGS_ROUTE } from "./Url";
 
 
 
@@ -11,8 +12,13 @@ export const authRouts =[
         path: PROFILE_ROUTE,
         component: ProfilePage
 
-        
     },
+    {
+        path: SESTTINGS_ROUTE,
+        component: SettingsPage
+
+    },
+    
    
 
    
