@@ -1,7 +1,10 @@
 import React from "react";
+import { CreatePostComponent } from "../modals/CreatePostComponent";
 
 export const SettingsPage = ()=>{
     return(
+        <>
+        <CreatePostComponent/>
         <div className="setting">
             <div className="setting__wrapper">
                 <div className="setting__item">
@@ -11,10 +14,12 @@ export const SettingsPage = ()=>{
                 </div>
                 <div className="setting__item">
                 <button className="setting__btn">
-                    Добавить пост 
+                    Добавить пост
                 </button>
+                
                 </div>
             </div>
         </div>
+        </>
     )
 }
