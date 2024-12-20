@@ -54,7 +54,7 @@ export const Login = ()=>{
                     <div className='input__error'>{errors?.password?.message}</div>
                 </div>
                 <div className="form__button">
-                    <button   type='Submit' className="login__success">
+                    <button   type='Submit' className="button-success">
                         Войти
                     </button>
                 </div>

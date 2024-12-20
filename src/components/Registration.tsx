@@ -56,7 +56,7 @@ export const Registration = ()=>{
                     <div className = 'input__error'>{errors?.password?.message}</div>
                 </div>
                 <div className="form__button">
-                    <button   type='submit' className="login__success">
+                    <button   type='submit' className=".button-success">
                         Регистрация
                     </button>
                 </div>

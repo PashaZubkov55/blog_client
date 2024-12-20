@@ -11,6 +11,20 @@ a{
 input:focus {outline:none;}
 textarea:focus{outline: none;}
 
+.button-success{
+    font-size: 20px;
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+    font-size: 20px;
+    padding: 5px;
+    margin-top: 15px;
+}
+.button-success:hover{
+    cursor: pointer;
+}
+.modal__file:hover{
+    cursor: pointer;
+}
 *{
     padding: 0;
     margin: 0;
@@ -353,3 +367,9 @@ align-items: center;
     padding: 15px;
     font-size: 20px;
 }
+
+/*file*/
+.file{
+    display: none;
+}
+
