@@ -17,6 +17,7 @@ export const CreatePostComponent = ()=>{
         <div className="modal">
             <div className="modal__container">
                 <form className="modal__body">
+                    <span className="modal__close"></span>
                    <div className="modal__title">
                     Добавить пост
                    </div>
