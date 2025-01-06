@@ -1,8 +1,15 @@
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setModal } from "../store/Auth/AuthSlice";
 
 export const CreatePostComponent = ()=>{
+    const dispatch = useDispatch()
     const fileInputRef = useRef(null);
     const [file, setFile] = useState('')
+
+   const modalClose = (status:any)=>{
+    dispatch(setModal(status))
+    }
     const handleClick = () => {
         // Вызываем метод click() у input элемента, чтобы открыть диалог выбора файла
         fileInputRef.current.click();
@@ -17,7 +24,7 @@ export const CreatePostComponent = ()=>{
         <div className="modal">
             <div className="modal__container">
                 <form className="modal__body">
-                    <span className="modal__close"></span>
+                    <span className="modal__close" onClick={()=>{modalClose(false)}}></span>
                    <div className="modal__title">
                     Добавить пост
                    </div>
