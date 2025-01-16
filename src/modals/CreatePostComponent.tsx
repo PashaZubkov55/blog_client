@@ -69,7 +69,7 @@ export const CreatePostComponent = ()=>{
                     {...register('file', )}/>
                    </div>
                    <div className="modal__sucsess">
-                    <button className="button-success"> Создать</button>
+                    <button type="submit" className="button-success"> Создать</button>
                    </div>
                   
                   
