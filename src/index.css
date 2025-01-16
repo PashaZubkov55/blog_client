@@ -386,4 +386,7 @@ align-items: center;
 .file{
     display: none;
 }
+.modal__file{
+    margin-top: 15px;
+}
 

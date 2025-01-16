@@ -1,42 +1,72 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
+import { useForm } from "react-hook-form";
 
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
     const fileInputRef = useRef(null);
-    const [file, setFile] = useState('')
+    //const [file, setFile] = useState('')
+    const {
+        register,
+        formState:{errors},
+        handleSubmit
+
+    } = useForm()
 
    const modalClose = (status:any)=>{
     dispatch(setModal(status))
     }
-    const handleClick = () => {
+   /*  const handleClick = () => {
         // Вызываем метод click() у input элемента, чтобы открыть диалог выбора файла
         fileInputRef.current.click();
       };
       const handleFileChange = (event) => {
-       // console.log('Выбранный файл:', event.target.files[0].name);
-       setFile(event.target.files[0])
+        console.log('Выбранный файл:', event.target.files[0].name);
+       //setFile(event.target.files[0])
            
       };
-      console.log(file)
+      */
+      const createPost=(data)=>{
+      const  formData = new FormData()
+        formData.append('postName',data.postName)
+        formData.append('postText',data.postText)
+        formData.append('file',  data.file[0])
+    
+
+        for(let [key, value] of formData.entries()){
+            console.log(`${key}: ${value}`)
+        }
+
+      }
+     
     return(
         <div className="modal">
             <div className="modal__container">
-                <form className="modal__body">
+                <form className="modal__body" onSubmit={handleSubmit(createPost)}>
                     <span className="modal__close" onClick={()=>{modalClose(false)}}></span>
                    <div className="modal__title">
                     Добавить пост
                    </div>
                    <div className="modal__input">
-                    <input type="text" placeholder="Название" className="input-text" />
+                    <input type="text" placeholder="Название" className="input-text"
+                    {...register('postName',{
+                        required:'поле обизательно к заполнению'
+                    })} />
                    </div>
+                   <div className = 'input__error'>{errors?.postName?.message}</div>
                    <div className="modal__input">
-                   <textarea className="input   modal__descriptinon" ></textarea>
+                   <textarea className="input   modal__descriptinon" 
+                    {...register('postText',{
+                        required:'поле обизательно к заполнению'
+                    })}
+                   
+                   ></textarea>
                    </div>
+                   <div className = 'input__error'>{errors?.postText?.message}</div>
                    <div className="modal__files">
-                   <button type="button" className="button-success" onClick={handleClick}>Выбрать фото</button>
-                   <input type="file"  className="file"ref = {fileInputRef} onChange={handleFileChange}/>
+                   <input type="file" className="modal__file"
+                    {...register('file', )}/>
                    </div>
                    <div className="modal__sucsess">
                     <button className="button-success"> Создать</button>
