@@ -1,12 +1,18 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { setModal } from "../store/Auth/AuthSlice"
 import { useForm } from "react-hook-form"
-export const UpdateUserComponent =()=>{
 
+export const UpdateUserComponent =()=>{
+    const [avatar, setAvatar] = useState()
     const dispatch = useDispatch()
     const modalClose= (status:any)=>{
         dispatch(setModal(status))
+    }
+    const handleFileChange = (event:any)=>{
+        
+        setAvatar( URL.createObjectURL(event.target.files[0]))
+        console.log(avatar)
     }
     const {
         register,
@@ -39,16 +45,23 @@ export const UpdateUserComponent =()=>{
                             />
                         </div>
                         <div className = 'input__error'>{errors?.text?.message}</div>
-                        <img 
-                        src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" 
-                        alt="avatar" 
-                        className="modal__img"
-                        />
+                        {avatar? <img 
+                    src={avatar} 
+                    alt="avatar" 
+                    className="modal__img"
+                    />:  <img 
+                    src='https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png' 
+                    alt="avatar" 
+                    className="modal__img"
+                    />  }
+                        
                         <div className="modal__input">
                         <input 
                         type="file" 
                         className="input--file" 
-                         {...register('file')}
+                        onChange={handleFileChange}
+                     
+                        
                         
                         />
                         </div>
