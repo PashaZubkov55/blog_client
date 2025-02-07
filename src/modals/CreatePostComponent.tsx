@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
     const fileInputRef = useRef(null);
-    //const [file, setFile] = useState('')
+    const [image, setImage] = useState('')
     const {
         register,
         formState:{errors},
@@ -21,12 +21,13 @@ export const CreatePostComponent = ()=>{
         // Вызываем метод click() у input элемента, чтобы открыть диалог выбора файла
         fileInputRef.current.click();
       };
+       */
       const handleFileChange = (event) => {
         console.log('Выбранный файл:', event.target.files[0].name);
-       //setFile(event.target.files[0])
+        setImage(URL.createObjectURL(event.target.files[0]))
            
       };
-      */
+     
       const createPost=(data)=>{
       const  formData = new FormData()
         formData.append('postName',data.postName)
@@ -66,7 +67,16 @@ export const CreatePostComponent = ()=>{
                    <div className = 'input__error'>{errors?.postText?.message}</div>
                    <div className="modal__files">
                    <input type="file" className="modal__file"
-                    {...register('file', )}/>
+                    onChange={handleFileChange}
+                    />
+                    <div>
+                    {image? <img 
+                    src={image} 
+                    alt="avatar" 
+                    className="modal__img modal__img-post"
+                    />:  <></>
+                      }
+                    </div>
                    </div>
                    <div className="modal__sucsess">
                     <button type="submit" className="button-success"> Создать</button>
