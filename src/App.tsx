@@ -8,13 +8,13 @@ function App() {
   const auth = useSelector((state) => state.auth.isAuth)
   return (
     
-   <main className="main">
+   <main className="main w-screen">
    
     <BrowserRouter>
-    <Header/>
+    
       <AppRouter />
      </BrowserRouter>
-     <Footer/>
+     
      </main>
      
   )

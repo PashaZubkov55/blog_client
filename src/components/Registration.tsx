@@ -41,6 +41,7 @@ export const Registration = ()=>{
                         }
                     })}
                     />
+
                       <div className = 'input__error'>{errors?.email?.message}</div>
                 </div>
                 <div className="login__password">
