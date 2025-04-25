@@ -26,6 +26,10 @@ export const Login = ()=>{
         <div className="login  ">
         
 <form className="max-w-sm mx-auto mt-40" onSubmit={handleSubmit(isLogin)}>
+<div className="mb-5">
+    <h3 className="text-4xl font-semibold dark:text-white">Войти</h3>
+    </div>
+
   <div className="mb-5">
     <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Введите E-mail</label>
     <input type="text"  
