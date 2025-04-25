@@ -11,7 +11,7 @@ function App() {
    <main className="main w-screen">
    
     <BrowserRouter>
-    
+      <Header/>
       <AppRouter />
      </BrowserRouter>
      
