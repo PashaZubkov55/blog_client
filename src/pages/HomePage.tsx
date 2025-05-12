@@ -15,10 +15,8 @@ export const HomePage =()=>{
         
     }
     return(
-        <div className="container">
-           
             
-            <div className="postList">
+            <div className="postList  ">
             {data.map(post=>(
                 <Post 
                 key = {post.id} 
@@ -30,8 +28,6 @@ export const HomePage =()=>{
     
             </div>
             
-       
-    </div>
     
 )
 }

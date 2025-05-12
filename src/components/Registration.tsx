@@ -17,9 +17,9 @@ export const Registration = ()=>{
         
     }
     return(
-        <div className="registration">
+        <div className="registration ">
         
-<form className="max-w-sm mx-auto mt-40" onSubmit={handleSubmit(isRegistration)}>
+<form className="max-w-sm mx-auto mt-40  shadow-2xl  p-5" onSubmit={handleSubmit(isRegistration)}>
     <div className="mb-5">
     <h3 className="text-4xl font-semibold dark:text-white">Регистрация</h3>
     </div>
