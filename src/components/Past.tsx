@@ -7,7 +7,7 @@ export const Post = ({title, id})=>{
     const navigate = useNavigate()
 return(
     <div className="post  ">
-    <div className="flex flex-col justify-center items-center  my-8  w-full">
+    <div className="flex flex-col justify-center items-center  mb-25 mt-10  w-full">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
             <div className="post__img">
         <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606" alt="Mountain" className="w-full h-64 object-cover">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Post } from "../components/Past"
+import Person from '../components/Person'
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 import { useNavigate } from "react-router"
 import { SESTTINGS_ROUTE } from "../router/Url"
@@ -17,23 +18,17 @@ export const ProfilePage=()=>{
     })
     console.log(myPost)
     return(
-      <main className="container">
+      
         <div className="profile">
-        <div className="profile__head">
-            <div className="profile__icon">
-                <img src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png" alt="avatar" />
+        <div className="profile__person">
+            <Person/>
+        </div>
 
-            </div>
-            <div className="profile__info">
-                <h1>Person</h1>
-            </div>
-            <img className="profile__Settings"  onClick={()=>{navigate(SESTTINGS_ROUTE)}}src="https://media.forgecdn.net/avatars/482/965/637782295613298008.png" alt="" />
-        </div>
-        </div>
         <div className="profile__body">
-            <h2 className="profile__title">Мои посты</h2>
-            <hr className = 'profile__line' />
            <div className="profile__posts">
+            <div className="profile__title">
+                <h1 className="text-2xl font-semibold mt-4 pl-15">Мои Посты</h1>
+            </div>
             
             {
             
@@ -49,6 +44,7 @@ export const ProfilePage=()=>{
               
            </div>
         </div>
-      </main>
+        </div>
+     
     )
 }
