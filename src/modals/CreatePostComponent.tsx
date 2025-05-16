@@ -42,11 +42,14 @@ export const CreatePostComponent = ()=>{
       }
      
     return(
-        <div className="modal">
-            <div className="modal__container">
-                <form className="modal__body" onSubmit={handleSubmit(createPost)}>
-                    <span className="modal__close" onClick={()=>{modalClose(false)}}></span>
-                   <div className="modal__title">
+      <div className="modal">
+      <div className=" overflow-y-auto bg-black opacity-75 overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div className="modal__shawow relative p-4 w-full max-w-2xl max-h-full">
+        <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+       
+                
+                <form className="modal_body relative " onSubmit={handleSubmit(createPost)}>
+                   <div className="modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                     Добавить пост
                    </div>
                    <div className="modal__input">
@@ -85,7 +88,10 @@ export const CreatePostComponent = ()=>{
                   
                        
                 </form>
+                </div>
             </div>
-        </div>
+            </div>
+            </div>
+
     )
 }
