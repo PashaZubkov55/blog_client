@@ -16,8 +16,10 @@ export const CreatePostComponent = ()=>{
 
     } = useForm()
 
-   const modalClose = (status:any)=>{
+   const modalClose = (event, status:any)=>{
+   
     dispatch(setModal(status))
+    
     }
      const handleClick = () => {
         // Вызываем метод click() у input элемента, чтобы открыть диалог выбора файла
@@ -37,7 +39,7 @@ export const CreatePostComponent = ()=>{
       };
      
       const createPost=(data)=>{
-       console.log(data.file)
+       //console.log(data.file)
         
       const  formData = new FormData()
         formData.append('postTitle',data.PostTitle)
@@ -46,19 +48,19 @@ export const CreatePostComponent = ()=>{
     
 
         for(let [key, value] of formData.entries()){
-           // console.log(`${key}: ${value}`)
+           console.log(`${key}: ${value}`)
         }
 
       }
      
     return(
-      <div className="modal">
+      <div className="modal"  onClick={(e)=>{modalClose(e, false)}}>
       <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
        
                 
-                <form className="modal_body relative px-20 py-5 " onSubmit={handleSubmit(createPost)}>
+                <form className="modal_body relative px-20 py-5 " onSubmit={handleSubmit(createPost)}  onClick={(e)=>{e.stopPropagation()}}>
                 <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
