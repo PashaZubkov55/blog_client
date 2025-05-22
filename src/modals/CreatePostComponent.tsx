@@ -7,12 +7,12 @@ export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
     const fileInputRef = useRef(null);
     const [image, setImage] = useState('')
-  
-    
+   
     const {
         register,
         formState:{errors},
         handleSubmit
+        
 
     } = useForm()
 
@@ -21,10 +21,11 @@ export const CreatePostComponent = ()=>{
     dispatch(setModal(status))
     
     }
-     const handleClick = () => {
+     const selectAvatar = (event) => {
         // Вызываем метод click() у input элемента, чтобы открыть диалог выбора файла
         if (fileInputRef.current) {
           fileInputRef.current.click();
+         
         }
       
       };
@@ -88,19 +89,7 @@ export const CreatePostComponent = ()=>{
                    </div>
                    <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.PostText?.message}</div>
                    
-                   <div className="modal__files ">
-                   <input type="file" 
-                   
-                   {...register('file',{
-                    required: 'файл не выбран'
-                   }
-                   )}
-                   className="modal__file "
-                 
-                    onChange={handleFileChange}
-                    />
-                    
-                    <div className=" person__awatar flex justify-center">
+                   <div className=" person__awatar flex justify-center">
                     {image? 
                      <div className=" w-32 h-32  my-3 border-4 border-green-600 rounded-full overflow-hidden">
                     <img className=" object-cover h-32" src={image} alt='Woman looking front'/>
@@ -109,8 +98,23 @@ export const CreatePostComponent = ()=>{
                       }
                      
                     </div>
+                   <div className="modal__files ">
+                   <input type="file" 
+                 {...register('file',{
+                  required:'файл не выбран'
+                 })}
+                   className=" modal__file text-center flex flex-column mt-4 text-white inline-flex w-full justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 "
+                  
+                   
+                  onChange={handleFileChange}
+                  />
+                    
+                    
                     <div className = 'input__error mt-2 text-red-600'>{errors?.file?.message}</div>
+                    
+                    
                    </div>
+                   
 
    
                    
