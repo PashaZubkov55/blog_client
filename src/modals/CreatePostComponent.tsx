@@ -90,6 +90,7 @@ export const CreatePostComponent = ()=>{
                    
                    <div className="modal__files ">
                    <input type="file" 
+                   
                    {...register('file',{
                     required: 'файл не выбран'
                    }
@@ -99,12 +100,12 @@ export const CreatePostComponent = ()=>{
                     onChange={handleFileChange}
                     />
                     
-                    <div>
-                    {image? <img 
-                    src={image} 
-                    alt="avatar" 
-                    className="modal__img modal__img-post"
-                    />:  <></>
+                    <div className=" person__awatar flex justify-center">
+                    {image? 
+                     <div className=" w-32 h-32  my-3 border-4 border-green-600 rounded-full overflow-hidden">
+                    <img className=" object-cover h-32" src={image} alt='Woman looking front'/>
+                    </div>
+                    :<></>
                       }
                      
                     </div>
