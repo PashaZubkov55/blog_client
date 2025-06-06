@@ -1,5 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+interface Post{
+    id: number,
+    title: string,
+    description: string,
+    userId: number,
+    img: string
+}
+
+
 export const postsApi = createApi({
     reducerPath: 'postsApi',
     baseQuery: fetchBaseQuery({
@@ -7,14 +16,14 @@ export const postsApi = createApi({
        
     }),
     keepUnusedDataFor: 10,
-    endpoints: (builder:any) => ({
-       getPosts: builder.query({
+    endpoints: (builder) => ({
+       getPosts: builder.query <Post[], void>({
         query: ()=> 'posts',
         
 
        }),
-       getPost: builder.query({
-        query: (id:string)=>  `posts/${id}`,
+       getPost: builder.query<Post, number>({
+        query: (id:number)=>  `posts/${id}`,
        
 
        
