@@ -5,25 +5,27 @@ interface Post{
     title: string,
     description: string,
     userId: number,
-    img: string
+    img: string,
+    
 }
 
 
 export const postsApi = createApi({
     reducerPath: 'postsApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://jsonplaceholder.typicode.com/',
+        //baseUrl: 'https://jsonplaceholder.typicode.com/',
+        baseUrl: 'http://localhost:5000/api/'
        
     }),
     keepUnusedDataFor: 10,
     endpoints: (builder) => ({
        getPosts: builder.query <Post[], void>({
-        query: ()=> 'posts',
+        query: ()=> 'post/',
         
 
        }),
        getPost: builder.query<Post, number>({
-        query: (id:number)=>  `posts/${id}`,
+        query: (id:number)=>  `post/${id}`,
        
 
        
