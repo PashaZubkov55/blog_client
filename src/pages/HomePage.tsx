@@ -21,6 +21,7 @@ export const HomePage =()=>{
                 <Post 
                 key = {post.id} 
                 title ={post.title}
+                img = {post.img}
                 id = {post.id}
                 
                 />

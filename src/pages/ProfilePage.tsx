@@ -32,11 +32,12 @@ export const ProfilePage=()=>{
             
             {
             
-            myPost.map((item:any)=>(
+            myPost.map((post:any)=>(
             <Post
-               key = {item.id}
-               title= {item.title}
-               id = {item.id}
+               key = {post.id}
+               title= {post.title}
+               id = {post.id}
+               img= {post.img}
                />
                 
                 
