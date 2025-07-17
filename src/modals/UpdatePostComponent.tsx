@@ -3,17 +3,21 @@ import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
-import { useGetPostQuery } from "../store/posts/PostsSlice";
+import { useGetPostQuery, useUpdateMutation } from "../store/posts/PostsSlice";
 import { Loader } from "../components/Loader";
 import { URL_SERVER } from "../router/Url";
 export const UpdatePostComponent = ()=>{
+    const [update] = useUpdateMutation()
     const dispatch = useDispatch()
     const fileInputRef = useRef(null);
     const [image, setImage] = useState('')
+    const [imageVisible, setImageVisible] = useState('')
+
    const [post,setPost]= useState({})
     const {
         register,
         formState:{errors},
+        setValue,
         handleSubmit
         
 
@@ -25,41 +29,58 @@ export const UpdatePostComponent = ()=>{
     
     }
     
-       
+    const {id} = useParams()
+    const {data = [], isLoading} =  useGetPostQuery(id,{
+        pollingInterval: 3000,
+        refetchOnMountOrArgChange: true,
+        skip: false,
+    })
 
       
       const handleFileChange = (event) => {
         console.log('Выбранный файл:', event.target.files[0].name);
         const selectedFile = event.target.files[0];
-        setImage((URL.createObjectURL(event.target.files[0])))
+       setImage(selectedFile)
+        console.log('file',selectedFile)
+        console.log('data',data.img)
+        setImageVisible((URL.createObjectURL(event.target.files[0])))
         
       
            
       };
-      const {id} = useParams()
-      const {data = [], isLoading} =  useGetPostQuery(id,{
-          pollingInterval: 3000,
-          refetchOnMountOrArgChange: true,
-          skip: false,
-      })
+      
+      useEffect(()=>{
+        setValue('title',data.title)
+        setValue('description',data.description)
+        setValue('img',data.img)
+
+
+
+      },[])
       
 
-     const updatePost=(data)=>{
+     const updatePost = async ()=>{
        //console.log(data.file)
        
-            
-     
-      const  formData = new FormData()
-        formData.append('postTitle',data.PostTitle)
-        formData.append('postText',data.PostText)
-        formData.append('file',  data.file)
-    
-
-        for(let [key, value] of formData.entries()){
-           console.log(`${key}: ${value}`)
+         
+          const  formData = new FormData()
+        formData.append('title',data.title)
+        formData.append('description',data.description)
+        formData.append('img',  image)
+        formData.append('userId', data.id )
+        console.log(data.img)
+        for(let value of formData.entries()){
+          console.log(value)
         }
-
+          await update({id,formData})
+        
+        
+    
+        
       }
+         
+
+      
        
        if (isLoading) {
             return <Loader/>
@@ -79,29 +100,40 @@ export const UpdatePostComponent = ()=>{
                      </div>
                      <div className="modal__input mt-2">
                      <input 
-                     type="text"  id="text" value={data.title}
+                     type="text"  id="text" 
                      
-                     {...register('PostTitle',{
+                     {...register('id',{
                       required: 'Поля обизательное'
                      })}
+                     onChange={(e)=>setValue('id', e.target.value)}
+                     />
+                     </div>
                      
+                     <div className="modal__input mt-2">
+                     <input 
+                     type="text"  id="text" 
+                     
+                     {...register('title',{
+                      required: 'Поля обизательное'
+                     })}
+                     onChange={(e)=>setValue('title', e.target.value)}
                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
                      </div>
-                     <div className = 'input__error mt-2 text-red-600'>{errors?.PostTitle?.message}</div>
+                     <div className = 'input__error mt-2 text-red-600'>{errors?.title?.message}</div>
                      <div className="modal__input mt-2">
-                     <textarea id="description" rows="4" value={data.description}
-                      {...register('PostText',{
+                     <textarea id="description" rows="4" 
+                      {...register('description',{
                         required: 'Поля обизательное'
                        })}
-                     
+                       onChange={(e)=>setValue('description', e.target.value)}
                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                    
                      </div>
-                     <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.PostText?.message}</div>
+                     <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
                      
                      <div className=" person__awatar flex justify-center">
                       {image? 
                        <div className=" h-auto max-w-lg  my-3  ">
-                      <img className=" h-auto max-w-lg rounded-lg" src={image} alt='Woman looking front'/>
+                      <img className=" h-auto max-w-lg rounded-lg" src={imageVisible} alt='Woman looking front'/>
                       </div>
                       :
                       <div className=" h-auto max-w-lg  my-3  ">
@@ -112,7 +144,7 @@ export const UpdatePostComponent = ()=>{
                       </div>
                      <div className="modal__files ">
                      <input type="file" 
-                   {...register('file',{
+                   {...register('img',{
                     required:'файл не выбран'
                    })}
                      className=" modal__file  flex flex-column mt-4 text-white inline-flex w-full justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 "
@@ -122,7 +154,7 @@ export const UpdatePostComponent = ()=>{
                     />
                       
                       
-                      <div className = 'input__error mt-2 text-red-600'>{errors?.file?.message}</div>
+                      <div className = 'input__error mt-2 text-red-600'>{errors?.img?.message}</div>
                       
                      </div>
                     

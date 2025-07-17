@@ -29,10 +29,29 @@ export const postsApi = createApi({
        
 
        
+       }),
+       addPost:builder.mutation({
+        query: (body) => ({
+            url: `post`,
+            method: 'POST',
+            body
+          }),
+       }),
+       
+       update:builder.mutation({
+        query: ({id,post}) => ({
+            url: `post/${id}`,
+            method: 'PUT',
+            body: post,
+          }),
+       })
+       
+
+       
        })
 
     })
 
-})
 
-export const {useGetPostsQuery,useGetPostQuery} = postsApi
+//export const UseUpdateMutation = postsApi.useUpdateMutation();
+export const {useGetPostsQuery,useGetPostQuery,useAddPostMutation, useUpdateMutation} = postsApi

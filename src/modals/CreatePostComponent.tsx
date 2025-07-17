@@ -2,10 +2,14 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
-
+import { useAddPostMutation } from "../store/posts/PostsSlice";
+import { useNavigate } from "react-router";
+import { HOME_ROUTE } from "../router/Url";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const fileInputRef = useRef(null);
+    const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')
    
     const {
@@ -39,18 +43,25 @@ export const CreatePostComponent = ()=>{
            
       };
      
-      const createPost=(data)=>{
+      const createPost= async(data)=>{
        //console.log(data.file)
-        
-      const  formData = new FormData()
-        formData.append('postTitle',data.PostTitle)
-        formData.append('postText',data.PostText)
-        formData.append('file',  data.file)
-    
-
-        for(let [key, value] of formData.entries()){
-           console.log(`${key}: ${value}`)
+        try {
+          const  formData = new FormData()
+          formData.append('title',data.title)
+          formData.append('description',data.description)
+          formData.append('userId', data.id)
+          formData.append('img',  data.file[0])
+      
+          await addPost(formData)
+          for(let [key, value] of formData.entries()){
+             console.log(`${key}: ${value}`)
+          }
+          navigate(HOME_ROUTE)
+          
+        } catch (error) {
+          console.log(error)
         }
+     
 
       }
      
@@ -68,26 +79,40 @@ export const CreatePostComponent = ()=>{
                    <div className=" text-lg font-semibold modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                     Добавить пост
                    </div>
+
                    <div className="modal__input mt-2">
                    <input 
                    type="text"  id="text"
                    
-                   {...register('PostTitle',{
+                   {...register('id',{
                     required: 'Поля обизательное'
                    })}
                    
                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
                    </div>
-                   <div className = 'input__error mt-2 text-red-600'>{errors?.PostTitle?.message}</div>
+                   <div className = 'input__error mt-2 text-red-600'>{errors?.id?.message}</div>
+                
+
+                   <div className="modal__input mt-2">
+                   <input 
+                   type="text"  id="text"
+                   
+                   {...register('title',{
+                    required: 'Поля обизательное'
+                   })}
+                   
+                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
+                   </div>
+                   <div className = 'input__error mt-2 text-red-600'>{errors?.title?.message}</div>
                    <div className="modal__input mt-2">
                    <textarea id="description" rows="4" 
-                    {...register('PostText',{
+                    {...register('description',{
                       required: 'Поля обизательное'
                      })}
                    
                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                    
                    </div>
-                   <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.PostText?.message}</div>
+                   <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
                    
                    <div className=" person__awatar flex justify-center">
                     {image? 
