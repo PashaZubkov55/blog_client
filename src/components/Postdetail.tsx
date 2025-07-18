@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setModal } from "../store/Auth/AuthSlice"
 import { UpdatePostComponent } from "../modals/updatePostComponent"
 import { URL_SERVER } from "../router/Url"
+import { DeletePostComponent } from "../modals/DeletePostComponent"
 
 
 
@@ -47,7 +48,7 @@ export const Postdetail = ()=>{
                 <button type='button' onClick={()=>{dispatch(setModal('updatePost'))}} className="mb-2 block cursor-pointer  bg-green-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-green-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong ">Редактировать</button>
                 </div>
                 <div className="details_button">
-                <button type="button" className="mb-2 block  cursor-pointer bg-red-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-red-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">Удалить</button>
+                <button type="button"  onClick={()=>{dispatch(setModal('deletePost'))}}  className="mb-2 block  cursor-pointer bg-red-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-red-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">Удалить</button>
                 </div>
                 </div>
 
@@ -61,7 +62,10 @@ export const Postdetail = ()=>{
 
             
             
-            />:false}
+            />
+            : modalStatus.payload == 'deletePost'?
+            <DeletePostComponent/>:false
+            }
      </div>
         )
 }
