@@ -8,6 +8,7 @@ import { UpdatePostComponent } from "../modals/updatePostComponent"
 import { URL_SERVER } from "../router/Url"
 
 
+
 export const Postdetail = ()=>{
     const modalStatus = useSelector((state)=> state.auth.modal)
     const {id} = useParams()
@@ -51,7 +52,16 @@ export const Postdetail = ()=>{
                 </div>
 
      </div>
-            {modalStatus.payload =='updatePost'?<UpdatePostComponent/>:false}
+            {modalStatus.payload =='updatePost'?
+            <UpdatePostComponent
+            title = {data.title}
+            description = {data.description}
+            userId = {data.userId}
+            img = {data.img}
+
+            
+            
+            />:false}
      </div>
         )
 }

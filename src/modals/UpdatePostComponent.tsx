@@ -2,18 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router";
-import { useGetPostQuery, useUpdateMutation } from "../store/posts/PostsSlice";
-import { Loader } from "../components/Loader";
-import { URL_SERVER } from "../router/Url";
-export const UpdatePostComponent = ()=>{
+import { useNavigate, useParams } from "react-router";
+import { useUpdateMutation } from "../store/posts/PostsSlice";
+import { HOME_ROUTE, URL_SERVER } from "../router/Url";
+export const UpdatePostComponent = ({title, description, userId, img})=>{
     const [update] = useUpdateMutation()
     const dispatch = useDispatch()
-    const fileInputRef = useRef(null);
-    const [image, setImage] = useState('')
+    const navigate = useNavigate()
+   
     const [imageVisible, setImageVisible] = useState('')
 
-   const [post,setPost]= useState({})
+  
     const {
         register,
         formState:{errors},
@@ -30,19 +29,14 @@ export const UpdatePostComponent = ()=>{
     }
     
     const {id} = useParams()
-    const {data = [], isLoading} =  useGetPostQuery(id,{
-        pollingInterval: 3000,
-        refetchOnMountOrArgChange: true,
-        skip: false,
-    })
+    
 
       
       const handleFileChange = (event) => {
         console.log('Выбранный файл:', event.target.files[0].name);
         const selectedFile = event.target.files[0];
-       setImage(selectedFile)
+      
         console.log('file',selectedFile)
-        console.log('data',data.img)
         setImageVisible((URL.createObjectURL(event.target.files[0])))
         
       
@@ -50,48 +44,51 @@ export const UpdatePostComponent = ()=>{
       };
       
       useEffect(()=>{
-        setValue('title',data.title)
-        setValue('description',data.description)
-        setValue('img',data.img)
+        setValue('title',title)
+        setValue('description',description)
+        setValue('img',img)
 
-
+       
 
       },[])
       
 
-     const updatePost = async ()=>{
+     const updatePost = async (data)=>{
        //console.log(data.file)
-       
-         
+       console.log('file -',data.file[0])
+        try { 
+
           const  formData = new FormData()
-        formData.append('title',data.title)
-        formData.append('description',data.description)
-        formData.append('img',  image)
-        formData.append('userId', data.id )
-        console.log(data.img)
-        for(let value of formData.entries()){
-          console.log(value)
+
+          formData.append('title',data.title)
+          formData.append('description',data.description)
+          if (data.file) {
+            console.log('файл найден -',data.file[0] )
+          }
+          formData.append('img',  data.file[0])
+         
+          formData.append('userId', data.id )
+          await update({id:id, body:formData})
+          navigate(HOME_ROUTE)
+          
+        } catch (error) {
+          console.log(error);
+          
         }
-          await update({id,formData})
+         
         
         
     
         
-      }
-         
-
-      
-       
-       if (isLoading) {
-            return <Loader/>
-       }return(
+      } 
+       return(
         <div className="modal"  onClick={(e)=>{modalClose(e, false)}}>
         <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
          
                   
-                  <form className="modal_body relative px-20 py-5 " onSubmit={handleSubmit(updatePost)}  onClick={(e)=>{e.stopPropagation()}}>
+                  <form className="modal_body relative px-20 py-5 " enctype="multipart/form-data" onSubmit={handleSubmit(updatePost)}  onClick={(e)=>{e.stopPropagation()}}>
                   <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
@@ -131,20 +128,20 @@ export const UpdatePostComponent = ()=>{
                      <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
                      
                      <div className=" person__awatar flex justify-center">
-                      {image? 
+                      {imageVisible? 
                        <div className=" h-auto max-w-lg  my-3  ">
                       <img className=" h-auto max-w-lg rounded-lg" src={imageVisible} alt='Woman looking front'/>
                       </div>
                       :
                       <div className=" h-auto max-w-lg  my-3  ">
-                      <img className=" h-auto max-w-lg rounded-lg" src={URL_SERVER+data.img} alt='Woman looking front'/>
+                      <img className=" h-auto max-w-lg rounded-lg" src={URL_SERVER+img} alt='Woman looking front'/>
                       </div>
                         }
                        
                       </div>
                      <div className="modal__files ">
                      <input type="file" 
-                   {...register('img',{
+                   {...register('file',{
                     required:'файл не выбран'
                    })}
                      className=" modal__file  flex flex-column mt-4 text-white inline-flex w-full justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 "
@@ -154,7 +151,7 @@ export const UpdatePostComponent = ()=>{
                     />
                       
                       
-                      <div className = 'input__error mt-2 text-red-600'>{errors?.img?.message}</div>
+                      <div className = 'input__error mt-2 text-red-600'>{errors?.file?.message}</div>
                       
                      </div>
                     
