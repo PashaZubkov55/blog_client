@@ -2,35 +2,53 @@ import { useEffect } from "react"
 import { Loader } from "../components/Loader"
 import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
+import { NonPostComponent } from "../components/NonPostComponent"
 export const HomePage =()=>{
     const {data=[], isLoading} = useGetPostsQuery()
     useEffect(()=>{
         console.log(data)
     },[])
   
-    if (isLoading) {
+    if (isLoading ) {
         return(
             <Loader/>
         )
-        
+    } 
+    if (!data || data.length === 0) {
+        return <NonPostComponent/>
     }
+       
+       
+
     return(
             
             <div className="postList  ">
-            {data.map(post=>(
-                <Post 
-                key = {post.id} 
-                title ={post.title}
-                img = {post.img}
-                id = {post.id}
+               
                 
-                />
-                ))}
+               {
+                data?
+                data.map(post=>(
+                
+                    <Post 
+                    key = {post.id} 
+                    title ={post.title}
+                    img = {post.img}
+                    id = {post.id}
+                    
+                    />
+                    )):<NonPostComponent/>
+                    
+            
+                }
+           
     
             </div>
             
-    
+            
 )
+            
 }
+
+
         
     

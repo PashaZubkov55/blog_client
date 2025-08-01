@@ -44,6 +44,12 @@ export const postsApi = createApi({
             method: 'PUT',
             body,
           }),
+       }),
+       delete:builder.mutation({
+        query: ( id ) => ({
+            url: `/post/${id}`,
+            method: 'DELETE',
+          }),
        })
        
 
@@ -54,4 +60,4 @@ export const postsApi = createApi({
 
 
 //export const UseUpdateMutation = postsApi.useUpdateMutation();
-export const {useGetPostsQuery,useGetPostQuery,useAddPostMutation, useUpdateMutation} = postsApi
+export const {useGetPostsQuery,useGetPostQuery,useAddPostMutation,useDeleteMutation, useUpdateMutation} = postsApi

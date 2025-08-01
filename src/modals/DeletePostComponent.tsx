@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useNavigate, useParams } from "react-router";
-import { HOME_ROUTE } from "../router/Url";
+import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
+import { useDeleteMutation } from "../store/posts/PostsSlice";
+
 export const DeletePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    const modalClose = (event, status:any)=>{
+    const [deletePost] = useDeleteMutation()
+    const modalClose = ( status:any)=>{
     dispatch(setModal(status))
     
     }
@@ -22,13 +24,17 @@ export const DeletePostComponent = ()=>{
      
       
 
-     const Deletepost = async ()=>{
+     const Deletepost = async (e:any)=>{
        //console.log(data.file)
-       console.log('file -',data.file[0])
+       e.preventDefault()
         try { 
-
          
-          navigate(HOME_ROUTE)
+          await deletePost(id)
+            
+            navigate(HOME_ROUTE)
+          
+           
+          
           
         } catch (error) {
           console.log(error);
@@ -41,13 +47,13 @@ export const DeletePostComponent = ()=>{
         
       } 
        return(
-        <div className="modal"  onClick={(e)=>{modalClose(e, false)}}>
+        <div className="modal"  onClick={(e)=>{modalClose( false)}}>
         <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
          
                   
-                  <form className="modal_body relative px-20 py-5 " enctype="multipart/form-data" onSubmit={Deletepost}  onClick={(e)=>{e.stopPropagation()}}>
+                  <form className="modal_body relative px-20 py-5 " enctype="multipart/form-data" onSubmit={(e)=>{Deletepost(e)}}  onClick={(e)=>{e.stopPropagation()}}>
                   <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
