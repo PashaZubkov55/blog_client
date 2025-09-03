@@ -2,8 +2,10 @@ import {useForm} from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import { LOGUIN_ROUTE } from '../router/Url'
+import { useRegistrationMutation } from '../store/Auth/AuthSlice'
 
 export const Registration = ()=>{
+    const [registration] = useRegistrationMutation()
     const navigate = useNavigate()
     const {
         register,
@@ -11,9 +13,25 @@ export const Registration = ()=>{
         handleSubmit,
 
     } = useForm()
-    const isRegistration=(data)=>{
+    const isRegistration= async(data)=>{
+        try {
+            const formData = new  FormData()
+            formData.append('email', data.email)
+            formData.append('password', data.password)
+            formData.append('role', 'ADMIN') 
+            for(let [key, value] of formData.entries()){
+                console.log(`${key}: ${value}`)
+             }
+                
+            await registration(formData)
+            navigate(LOGUIN_ROUTE)
+        } catch (error) {
+            console.log(error)
+            
+        }
         console.log(data)
-        navigate(LOGUIN_ROUTE)
+
+       
         
     }
     return(
