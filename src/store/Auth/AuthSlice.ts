@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { jwtDecode } from 'jwt-decode'
+//import { Login } from '../../components/Login'
 
 
 export const AuthSlice = createSlice({
@@ -29,15 +31,47 @@ export const authApi = createApi({
           url: 'user/registration',
           method: 'POST',
           body,
-        })
-        
-
+        }),
+        transformResponse: response=>{
+          setStatus(true)
+          localStorage.setItem('token', response.token)
+          //return jwtDecode(response.token)
+          
+            
+        }
        }),
+       LogIn: builder.mutation({
+        query:(body)=>({
+          url: 'user/login',
+          method: 'POST',
+          body
+        }),
+        transformResponse: response=>{
+          localStorage.setItem('token', response.token)
+          return jwtDecode(response.token)
+            
+        }
+       }),
+       Auth:builder.query({
+        query: ()=>({
+          url: 'user/auth',
+          method: 'GET',
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        }),
+
+        transformResponse: response=>{
+          localStorage.setItem('token', response.token)
+          return jwtDecode(response.token)
+            
+        }
+       })
 })
 })
 
 
 // Action creators are generated for each case reducer function
 export const {setStatus, setModal } = AuthSlice.actions
-export const {useRegistrationMutation} = authApi
+export const {useAuthQuery, useRegistrationMutation, useLogInMutation} = authApi
 export default AuthSlice.reducer

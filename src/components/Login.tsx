@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
 import { HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
-import { setStatus } from "../store/Auth/AuthSlice"
+import { setStatus, useLogInMutation } from "../store/Auth/AuthSlice"
 
 
 export const Login = ()=>{
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [logIn] = useLogInMutation()
     const {
         register,
         formState:{errors},
@@ -16,7 +17,23 @@ export const Login = ()=>{
 
     } = useForm()
 
-    const isLogin = (data)=>{
+    const isLogin =  async (data)=>{
+        try {
+            const formData = new  FormData()
+            formData.append('email', data.email)
+            formData.append('password', data.password)
+            //formData.append('role', 'ADMIN') 
+            for(let [key, value] of formData.entries()){
+                console.log(`${key}: ${value}`)
+             }
+                
+            await logIn(formData)
+            await  navigate(HOME_ROUTE)
+        } catch (error) {
+            console.log(error)
+            
+        }
+
         dispatch(setStatus(true))
         navigate(HOME_ROUTE)
         console.log(data.email, data.password)

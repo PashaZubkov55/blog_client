@@ -24,7 +24,7 @@ export const Registration = ()=>{
              }
                 
             await registration(formData)
-            navigate(LOGUIN_ROUTE)
+            await  navigate(LOGUIN_ROUTE)
         } catch (error) {
             console.log(error)
             

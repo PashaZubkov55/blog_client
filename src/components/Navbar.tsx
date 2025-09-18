@@ -5,12 +5,9 @@ import { useEffect, useState } from "react"
 export const Navbar=()=>{
    const [menuList,setMenuList] = useState([])
     const auth = useSelector((state) => state.auth.isAuth)
-    useEffect(()=>{
-        console.log(auth)
-    },[auth])
      return(  
          <nav className="navbar">
-            {auth?
+            {auth ?
                    <ul className="navbar_list list">
                    <NavLink  to={HOME_ROUTE} className='list__item'>Главная </NavLink>
                    <NavLink  to={PROFILE_ROUTE} className='list__item'>Профиль </NavLink>   

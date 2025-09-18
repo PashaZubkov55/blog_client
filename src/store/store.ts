@@ -8,14 +8,14 @@ export const store = configureStore({
   reducer: {
    auth:AuthSlice,
    [postsApi.reducerPath]: postsApi.reducer ,
-   [authApi.reducerPath]:postsApi.reducer
+   [authApi.reducerPath]:authApi.reducer
   },
 
-
   middleware: (getDefaultMiddleware:any) =>
-getDefaultMiddleware().concat(postsApi.middleware),
-
-})
+    getDefaultMiddleware().concat(postsApi.middleware, authApi.middleware)
+    
+    })
+ 
 
 
 
