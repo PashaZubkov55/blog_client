@@ -41,10 +41,10 @@ export const authApi = createApi({
         }
        }),
        LogIn: builder.mutation({
-        query:(body)=>({
+        query: credentials =>({
           url: 'user/login',
           method: 'POST',
-          body
+          body: credentials
         }),
         transformResponse: response=>{
           localStorage.setItem('token', response.token)

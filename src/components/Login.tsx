@@ -18,24 +18,20 @@ export const Login = ()=>{
     } = useForm()
 
     const isLogin =  async (data)=>{
-        try {
-            const formData = new  FormData()
+        const formData = new  FormData()
             formData.append('email', data.email)
             formData.append('password', data.password)
-            //formData.append('role', 'ADMIN') 
-            for(let [key, value] of formData.entries()){
-                console.log(`${key}: ${value}`)
-             }
-                
-            await logIn(formData)
-            await  navigate(HOME_ROUTE)
-        } catch (error) {
-            console.log(error)
-            
-        }
+                try {
+                    await logIn(formData).unwrap();
+                    console.log('Пользователь успешно вошел');
+                    navigate(HOME_ROUTE)
+                    dispatch(setStatus(true))
+                  } catch (err) {
+                   alert('Пользователь не найден');
+                  }
 
-        dispatch(setStatus(true))
-        navigate(HOME_ROUTE)
+       
+       
         console.log(data.email, data.password)
 
     }
