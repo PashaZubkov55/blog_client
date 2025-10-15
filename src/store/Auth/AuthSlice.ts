@@ -48,6 +48,8 @@ export const authApi = createApi({
         }),
         transformResponse: response=>{
           localStorage.setItem('token', response.token)
+          localStorage.setItem('userId', response.id)
+
           return jwtDecode(response.token)
             
         }

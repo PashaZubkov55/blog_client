@@ -1,14 +1,12 @@
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
-import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
 import { HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
-import { setStatus, useLogInMutation } from "../store/Auth/AuthSlice"
+import {  useLogInMutation } from "../store/Auth/AuthSlice"
 
 
 export const Login = ()=>{
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const [logIn] = useLogInMutation()
     const {
         register,
@@ -25,7 +23,6 @@ export const Login = ()=>{
                     await logIn(formData).unwrap();
                     console.log('Пользователь успешно вошел');
                     navigate(HOME_ROUTE)
-                    dispatch(setStatus(true))
                   } catch (err) {
                    alert('Пользователь не найден');
                   }
