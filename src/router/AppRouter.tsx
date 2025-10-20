@@ -5,14 +5,14 @@ import { authRouts, publicRouts } from "./routes";
 import { useEffect } from "react";
 const AppRouter=()=>{
     
-    const auth = useSelector((state) => state.auth.isAuth)
+   // const auth = useSelector((state) => state.auth.isAuth)
     useEffect(()=>{
-        console.log(auth)
+        //console.log(auth)
         
       })
       return(
         <Routes>
-           { auth && authRouts.map(({path, component})=>
+           { localStorage.getItem('token') && authRouts.map(({path, component})=>
         <Route key={path} path={path} Component={component}/>
         )}
           { publicRouts.map(({path, component})=> 
