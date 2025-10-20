@@ -8,11 +8,13 @@ import { SESTTINGS_ROUTE } from "../router/Url"
 import { Loader } from "../components/Loader"
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
 
+
 export const ProfilePage=()=>{
     const navigate = useNavigate()
     //const {data} = useGetPostsQuery()
     const id = localStorage.getItem('userId')
-    const {data = {}, isLoading} = useGetInfoQuery(id)
+    const userInfo = useGetInfoQuery(id)
+    const userPosts = useGetPostsQuery(id)
    
    /* myPost = data.filter((item:any)=>{
         if (item.id<=5) {
@@ -23,22 +25,24 @@ export const ProfilePage=()=>{
         */
     //console.log(myPost)
     useEffect(()=>{
-           if (isLoading) {
+           if (userInfo.isLoading && userPosts.isLoading) {
             console.log('загрузка...')
            }
-           console.log('данные', data)
-    },[isLoading])
+           console.log('данные пользователя - ', userInfo.data)
+           console.log('данные постов пользователя - ', userPosts.data)
+
+    },[userInfo.isLoading])
     return(
       
         <div className="profile">
         <div className="profile__person">
         {
-                isLoading? 
+                userInfo.isLoading? 
                 <Loader/>:
                 <Person
-                    id = {data.id}
-                    name= {data.name}
-                    img= {data.img}
+                    id = {userInfo.data.id}
+                    name= {userInfo.data.name}
+                    img= {userInfo.data.img}
 
                 
                 />
@@ -53,6 +57,20 @@ export const ProfilePage=()=>{
             </div>
             
             <div className="profile_posts">
+                {
+                    userPosts.data?
+                    userPosts.data.map(post=>(
+                        <Post
+                            key={post.id}
+                            id={post.id}
+                            title= {post.title}
+                            img={post.img}
+                        
+                        />
+                    )): <Loader/>
+
+                
+                }
            
             </div>
             

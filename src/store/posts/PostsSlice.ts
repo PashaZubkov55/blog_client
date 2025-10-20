@@ -30,6 +30,9 @@ export const postsApi = createApi({
 
        
        }),
+       getUserPosts:builder.query<Post[], number>({
+        query: (userId:number)=>  `post/${userId}/userPosts`,
+       }),
        addPost:builder.mutation({
         query: (body) => ({
             url: `post`,
@@ -60,4 +63,4 @@ export const postsApi = createApi({
 
 
 //export const UseUpdateMutation = postsApi.useUpdateMutation();
-export const {useGetPostsQuery,useGetPostQuery,useAddPostMutation,useDeleteMutation, useUpdateMutation} = postsApi
+export const {useGetPostsQuery,useGetPostQuery,useAddPostMutation,useDeleteMutation, useUpdateMutation, useGetUserPostsQuery} = postsApi
