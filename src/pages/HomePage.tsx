@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Loader } from "../components/Loader"
 import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
-import { NonPostComponent } from "../components/NonPostComponent"
+import { NonDataComponent } from "../components/NonDataComponent"
 export const HomePage =()=>{
     const {data=[], isLoading} = useGetPostsQuery()
     useEffect(()=>{
@@ -15,7 +15,10 @@ export const HomePage =()=>{
         )
     } 
     if (!data || data.length === 0) {
-        return <NonPostComponent/>
+        return <NonDataComponent
+        message ='постов'
+        modal ='post'
+        />
     }
        
        
@@ -36,7 +39,8 @@ export const HomePage =()=>{
                     id = {post.id}
                     
                     />
-                    )):<NonPostComponent/>
+                    ))
+                    : false
                     
             
                 }

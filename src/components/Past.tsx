@@ -5,16 +5,7 @@ import { useGetPostsQuery } from "../store/posts/PostsSlice";
 
 export const Post = ({title, img, id})=>{
     const navigate = useNavigate()
-    if (!title&&!img) {
-        return (
-            <div className="flex flex-col justify-center items-center  mb-25 mt-10  w-full">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
-                <h1>Пока сдесь нет постов!</h1>
-        </div>
-        </div>
-        )
-        
-    } else{
+   
         return(
             <div className="post  ">
             <div className="flex flex-col justify-center items-center  mb-25 mt-10  w-full">
@@ -38,4 +29,4 @@ export const Post = ({title, img, id})=>{
         )
 
 }
-}
+

@@ -7,6 +7,7 @@ import { SESTTINGS_ROUTE } from "../router/Url"
 
 import { Loader } from "../components/Loader"
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
+import { NonDataComponent } from "../components/NonDataComponent"
 
 
 export const ProfilePage=()=>{
@@ -31,24 +32,28 @@ export const ProfilePage=()=>{
            console.log('данные пользователя - ', userInfo.data)
            console.log('данные постов пользователя - ', userPosts.data)
 
-    },[userInfo.isLoading])
+    },[userInfo.isLoading, userPosts.isLoading])
+      
     return(
       
         <div className="profile">
         <div className="profile__person">
         {
-                userInfo.isLoading? 
-                <Loader/>:
+                userInfo.data? 
                 <Person
-                    id = {userInfo.data.id}
-                    name= {userInfo.data.name}
-                    img= {userInfo.data.img}
+                   userImg={userInfo.data.img}
+                   userName={userInfo.data.name}
+                  
 
                 
-                />
-            }
-      
+                />: <NonDataComponent
+                
+                message='данных'
+                modal='post'
+            />
+        }
         </div>
+       
 
         <div className="profile__body">
            <div className="profile__posts">
@@ -56,8 +61,8 @@ export const ProfilePage=()=>{
                 <h1 className="text-2xl font-semibold mt-4 pl-15">Мои Посты</h1>
             </div>
             
-            <div className="profile_posts">
-                {
+          
+            {
                     userPosts.data?
                     userPosts.data.map(post=>(
                         <Post
@@ -67,19 +72,20 @@ export const ProfilePage=()=>{
                             img={post.img}
                         
                         />
-                    )): <Loader/>
-
+                    )):  <NonDataComponent
+                    message='постов'
+                    modal='post'
+                    />
                 
                 }
-           
+        
             </div>
             
            
-                
-        
+           
         </div>
         </div>
-        </div>
+       
 
      
     )
