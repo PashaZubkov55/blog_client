@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setModal } from "../store/Auth/AuthSlice"
 import { CreatePostComponent } from "../modals/CreatePostComponent"
+import { useNavigate } from "react-router"
+import { SESTTINGS_ROUTE } from "../router/Url"
 
 
 
 export const NonDataComponent = ({message, modal})=>{
     const modalStatus = useSelector((state)=> state.auth.modal)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
   
         return(
             <div className=" flex justify-center   ">    
@@ -17,7 +20,9 @@ export const NonDataComponent = ({message, modal})=>{
                         </div>
                    
                     <div className="details_button">
-                    <button type='button' onClick={()=>{dispatch(setModal(modal))}} className="mb-2 mt-2 block cursor-pointer  bg-green-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-green-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong ">Добавить</button>
+                    <button type='button' onClick={()=>{navigate(SESTTINGS_ROUTE)}} className="mb-2 mt-2 block cursor-pointer  bg-green-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-green-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong ">
+                    Добавить
+                    </button>
                     </div>
                     </div>
                     { modalStatus.payload == 'post'? <CreatePostComponent/>:false}
