@@ -6,6 +6,7 @@ export const Navbar=()=>{
     
     const logOut = ()=>{
         localStorage.removeItem('token')
+        localStorage.removeItem('userId')
         navigate(HOME_ROUTE)
         //window.location.reload()
         console.log('Вы вышли !')

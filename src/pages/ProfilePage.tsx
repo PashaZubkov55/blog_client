@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Post } from "../components/Past"
 import {Person} from '../components/Person'
-import { useGetPostsQuery } from "../store/posts/PostsSlice"
+import { useGetPostsQuery, useGetUserPostsQuery } from "../store/posts/PostsSlice"
 import { useNavigate } from "react-router"
 import { SESTTINGS_ROUTE } from "../router/Url"
 
@@ -15,7 +15,7 @@ export const ProfilePage=()=>{
     //const {data} = useGetPostsQuery()
     const id = localStorage.getItem('userId')
     const userInfo = useGetInfoQuery(id)
-    const userPosts = useGetPostsQuery(id)
+    const userPosts = useGetUserPostsQuery(id)
    
    /* myPost = data.filter((item:any)=>{
         if (item.id<=5) {
