@@ -8,10 +8,9 @@ import { HOME_ROUTE } from "../router/Url";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const fileInputRef = useRef(null);
     const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')
-   
+    const userId = localStorage.getItem('userId')
     const {
         register,
         formState:{errors},
@@ -25,18 +24,9 @@ export const CreatePostComponent = ()=>{
     dispatch(setModal(status))
     
     }
-     const selectAvatar = (event) => {
-        // Вызываем метод click() у input элемента, чтобы открыть диалог выбора файла
-        if (fileInputRef.current) {
-          fileInputRef.current.click();
-         
-        }
-      
-      };
-      
+   
       const handleFileChange = (event) => {
         console.log('Выбранный файл:', event.target.files[0].name);
-        const selectedFile = event.target.files[0];
         setImage((URL.createObjectURL(event.target.files[0])))
         
       
@@ -49,7 +39,7 @@ export const CreatePostComponent = ()=>{
           const  formData = new FormData()
           formData.append('title',data.title)
           formData.append('description',data.description)
-          formData.append('userId', data.id)
+          formData.append('userId', userId)
           formData.append('img',  data.file[0])
       
           await addPost(formData)
@@ -80,16 +70,10 @@ export const CreatePostComponent = ()=>{
                     Добавить пост
                    </div>
 
-                   <div className="modal__input mt-2">
-                   <input 
-                   type="text"  id="text"
+                
                    
-                   {...register('id',{
-                    required: 'Поля обизательное'
-                   })}
-                   
-                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
-                   </div>
+                 
+              
                    <div className = 'input__error mt-2 text-red-600'>{errors?.id?.message}</div>
                 
 
