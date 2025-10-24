@@ -34,59 +34,32 @@ export const ProfilePage=()=>{
 
     },[userInfo.isLoading, userPosts.isLoading])
       
-    return(
-      
+    return (
         <div className="profile">
-        <div className="profile__person">
-        {
-                userInfo.data? 
-                <Person
-                   userImg={userInfo.data.img}
-                   userName={userInfo.data.name}
-                  
-
-                
-                />: <NonDataComponent
-                
-                message='данных'
-                modal='post'
-            />
-        }
+          {/* Блок с информацией о пользователе */}
+          <div className="profile__person">
+            {userInfo && userInfo.data ? (
+              <Person userImg={userInfo.data.img} userName={userInfo.data.name} />
+            ) : (
+              <NonDataComponent message="Нет данных о пользователе" modal="user" />
+            )}
+          </div>
+      
+          {/* Постоянный блок с постами, который всегда отображается */}
+          <div className="profile__posts">
+            {userPosts && userPosts.data && userPosts.data.length > 0 ? (
+              userPosts.data.map((post) => (
+                <Post
+                  key={post.id}
+                  title={post.title}
+                  img={post.img}
+                  id={post.id}
+                />
+              ))
+            ) : (
+              <NonDataComponent message="Нет постов" modal="post" />
+            )}
+          </div>
         </div>
-       
-
-        <div className="profile__body">
-           <div className="profile__posts">
-            <div className="profile__title">
-                <h1 className="text-2xl font-semibold mt-4 pl-15">Мои Посты</h1>
-            </div>
-            
-          
-            {
-                    userPosts.data?
-                    userPosts.data.map(post=>(
-                        <Post
-                            key={post.id}
-                            id={post.id}
-                            title= {post.title}
-                            img={post.img}
-                        
-                        />
-                    )):  <NonDataComponent
-                    message='постов'
-                    modal='post'
-                    />
-                
-                }
-        
-            </div>
-            
-           
-           
-        </div>
-        </div>
-       
-
-     
-    )
+      );
 }
