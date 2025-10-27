@@ -46,6 +46,7 @@ export const CreatePostComponent = ()=>{
           for(let [key, value] of formData.entries()){
              console.log(`${key}: ${value}`)
           }
+          dispatch(setModal(false))
           navigate(HOME_ROUTE)
           
         } catch (error) {

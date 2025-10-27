@@ -6,7 +6,7 @@ import { NonDataComponent } from "../components/NonDataComponent"
 export const HomePage =()=>{
     const {data=[], isLoading} = useGetPostsQuery()
     useEffect(()=>{
-        console.log(data)
+      console.log(data)
     },[])
   
     if (isLoading ) {

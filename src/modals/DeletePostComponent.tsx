@@ -5,36 +5,28 @@ import { useNavigate, useParams } from "react-router";
 import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
 import { useDeleteMutation } from "../store/posts/PostsSlice";
+import { useGetPostsQuery } from "../store/posts/PostsSlice";
+
 
 export const DeletePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [deletePost] = useDeleteMutation()
+    const {refetch} = useGetPostsQuery()
+
     const modalClose = ( status:any)=>{
     dispatch(setModal(status))
     
     }
     
     const {id} = useParams()
-    
-
-      
-     
-      
-     
-      
-
      const Deletepost = async (e:any)=>{
-       //console.log(data.file)
        e.preventDefault()
         try { 
-         
           await deletePost(id)
-            
+          await refetch()
+          
             navigate(HOME_ROUTE)
-          
-           
-          
           
         } catch (error) {
           console.log(error);
@@ -62,23 +54,26 @@ export const DeletePostComponent = ()=>{
                      </div>
                      
                      <div className="modal__sucsess mt-2">
-                     <button  type="submit"  className="  cursor-pointer  text-white inline-flex w-full justify-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-red-800">
+                     <button  type="submit" className="  cursor-pointer  text-white inline-flex w-full justify-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-red-800">
                      Удалить пост
                   </button>
+                  </div>
+                  
                   <div className="detail_button mt-2">
-                <button type='button'  onClick={(e)=>{modalClose(e, false)}} className=" cursor-pointer mb-2 block cursor-pointer  bg-green-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-green-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong ">
+                <button type='button'  onClick={()=>{modalClose(false)}} className=" cursor-pointer mb-2 block cursor-pointer  bg-green-700 w-full rounded  text-white px-6 pb-2 pt-2.5 text-xs hover:bg-green-800  font-medium uppercase leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong ">
                     Оставить
                     </button>
                 </div>
+                </form>
                      </div>
                     
                     
                    
-                  </form>
+                 
                   </div>
                   </div>
                   </div>
-                  </div>
+                 
        )
     }
 
