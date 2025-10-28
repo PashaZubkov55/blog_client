@@ -25,9 +25,19 @@ export const userInfoApi = createApi({
         
 
        }),
+       creteInfo: builder.mutation({
+       query:(body)=>({
+        url: 'userInfo',
+        method: 'POST',
+        body
+       }
+
+       )
+        
+       })
 
     })
       
     })
  
-export const {useGetInfoQuery} = userInfoApi
+export const {useGetInfoQuery, useCreteInfoMutation} = userInfoApi

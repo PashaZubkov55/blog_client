@@ -2,6 +2,10 @@ import { useForm } from "react-hook-form"
 import { setModal } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
+import { useCreteInfoMutation } from "../store/userInfo/userInfoApi"
+import {  useNavigate } from "react-router"
+import { HOME_ROUTE } from "../router/Url"
+import { useGetInfoQuery } from "../store/userInfo/userInfoApi" 
 
 export const CreateUserInfo = ()=>{
     const {
@@ -9,9 +13,13 @@ export const CreateUserInfo = ()=>{
         formState:{errors},
         handleSubmit, 
     } = useForm()
+   
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [image,setImage] = useState('')
     const userId = localStorage.getItem('userId')
+    const {refetch} = useGetInfoQuery(userId)
+    const [createInfo] = useCreteInfoMutation()
     const modalClose=(status: boolean)=>{
         dispatch(setModal(status))
         
@@ -20,14 +28,25 @@ export const CreateUserInfo = ()=>{
         console.log('Выбранный файл:', event.target.files[0].name);
         setImage(URL.createObjectURL(event.target.files[0]))
     }
-    const createUserInfo=(data)=>{
-        const formData = new FormData()
-        formData.append('name', data.name)
-        formData.append('userId', userId)
-        formData.append('img', data.file[0])
-        for(let [key, value] of formData.entries()){
-            console.log(`${key}: ${value}`)
-         }
+    const createUserInfo = async (data)=>{
+        try {
+            const formData = new FormData()
+            formData.append('name', data.name)
+            formData.append('userId', userId)
+            formData.append('img', data.file[0])
+            await createInfo(formData)
+            for(let [key, value] of formData.entries()){
+                console.log(`${key}: ${value}`)
+             }
+            modalClose(false)
+            refetch()
+            navigate(HOME_ROUTE)
+        } catch (error) {
+            console.log(error)
+            
+        }
+       
+
 
     }
     return(
