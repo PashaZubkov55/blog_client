@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form"
 import { setModal } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { URL_SERVER } from "../router/Url"
-export const UpdateUserInfoComponent =({name, img})=>{
+import { useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
+export const UpdateUserInfoComponent =({name, img, userId})=>{
     const dispatch = useDispatch()
+    const [updateInfo] = useUpdateInfoMutation()
     const [imageVisible, setImageVisible] = useState('')
     const {
         register,
@@ -29,8 +31,15 @@ export const UpdateUserInfoComponent =({name, img})=>{
       setImageVisible(URL.createObjectURL(event.target.files[0]))
     }
 
-const updateUserInfo =()=>{
-  
+const updateUserInfo = async(data)=>{
+    const formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('name', data.file[0])
+    formData.append('userId',userId)
+    await updateInfo({id:userId, body: formData})
+
+
+
 
 }
     return(
