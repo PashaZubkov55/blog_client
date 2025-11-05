@@ -8,7 +8,7 @@ import { UpdateUserInfoComponent } from "../modals/UpdateUserInfoComponent";
 export const SettingsPage = ()=>{
     const modalStatus = useSelector((state)=> state.auth.modal)
     const dispatch = useDispatch()
-    const id = localStorage.getItem('userId')
+    const id = Number(localStorage.getItem('userId'))
     const {data= []} = useGetInfoQuery(id)
     useEffect(()=>{
         console.log('data-',data)
@@ -63,7 +63,7 @@ export const SettingsPage = ()=>{
             : modalStatus.payload == 'updateInfo'? <UpdateUserInfoComponent
                 name = {data.name}
                 img = {data.img}
-                userId = {id}
+                userId = {String(data.userId)}
 
             />:false
             }

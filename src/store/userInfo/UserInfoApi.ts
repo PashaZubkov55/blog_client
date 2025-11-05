@@ -34,8 +34,8 @@ export const userInfoApi = createApi({
         
        }),
        updateInfo: builder.mutation({
-        query: ({ UserId, body })=>({
-            url: `userInfo/${UserId}`,
+        query: ({userId, body})=>({
+            url: `userInfo/${userId}`,
             method: 'PUT',
             body: body
 

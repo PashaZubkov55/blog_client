@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form"
 import { setModal } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { URL_SERVER } from "../router/Url"
-import { useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
+import { useGetInfoQuery, useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
 export const UpdateUserInfoComponent =({name, img, userId})=>{
     const dispatch = useDispatch()
     const [updateInfo] = useUpdateInfoMutation()
+    const {refetch} = useGetInfoQuery(userId)
     const [imageVisible, setImageVisible] = useState('')
     const {
         register,
@@ -24,6 +25,7 @@ export const UpdateUserInfoComponent =({name, img, userId})=>{
     useEffect(()=>{
         setValue('name', name)
         setValue('img', img)
+        console.log('user-id-- ', userId)
 
     },[])
     const handleFileChange =(event)=>{
@@ -32,11 +34,20 @@ export const UpdateUserInfoComponent =({name, img, userId})=>{
     }
 
 const updateUserInfo = async(data)=>{
-    const formData = new FormData()
-    formData.append('name', data.name)
-    formData.append('name', data.file[0])
-    formData.append('userId',userId)
-    await updateInfo({id:userId, body: formData})
+   
+    try {
+      const formData = new FormData()
+      formData.append('name', data.name)
+      formData.append('img', data.file[0])
+      formData.append('userId',userId)
+      console.log('userId -',userId)
+      await updateInfo({userId, body:formData})
+      modalClose(false)
+      refetch()
+    } catch (error) {
+      console.log(error)
+    }
+   
 
 
 

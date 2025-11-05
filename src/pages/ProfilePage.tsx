@@ -16,7 +16,6 @@ export const ProfilePage=()=>{
     const id = localStorage.getItem('userId')
     const userInfo = useGetInfoQuery(id)
     const userPosts = useGetPostsQuery(id)
-   
    /* myPost = data.filter((item:any)=>{
         if (item.id<=5) {
             return item
