@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
-import { useAddPostMutation } from "../store/posts/PostsSlice";
+import { useAddPostMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
 import { useNavigate } from "react-router";
 import { HOME_ROUTE } from "../router/Url";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {refetch} = useGetPostsQuery()
     const fileInputRef = useRef(null);
     const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')
@@ -44,18 +45,20 @@ export const CreatePostComponent = ()=>{
       };
      
       const createPost= async(data)=>{
+        const  userId = localStorage.getItem('userId')
        //console.log(data.file)
         try {
           const  formData = new FormData()
           formData.append('title',data.title)
           formData.append('description',data.description)
-          formData.append('userId', data.id)
+          formData.append('userId', userId)
           formData.append('img',  data.file[0])
       
           await addPost(formData)
           for(let [key, value] of formData.entries()){
              console.log(`${key}: ${value}`)
           }
+          refetch()
           navigate(HOME_ROUTE)
           
         } catch (error) {
@@ -80,18 +83,7 @@ export const CreatePostComponent = ()=>{
                     Добавить пост
                    </div>
 
-                   <div className="modal__input mt-2">
-                   <input 
-                   type="text"  id="text"
-                   
-                   {...register('id',{
-                    required: 'Поля обизательное'
-                   })}
-                   
-                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
-                   </div>
-                   <div className = 'input__error mt-2 text-red-600'>{errors?.id?.message}</div>
-                
+                  
 
                    <div className="modal__input mt-2">
                    <input 

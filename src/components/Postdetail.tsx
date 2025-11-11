@@ -60,7 +60,6 @@ export const Postdetail = ()=>{
             <UpdatePostComponent
             title = {data.title}
             description = {data.description}
-            userId = {data.userId}
             img = {data.img}
 
             

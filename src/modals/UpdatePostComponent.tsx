@@ -3,15 +3,16 @@ import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
-import { useUpdateMutation } from "../store/posts/PostsSlice";
+import { useGetPostsQuery, useUpdateMutation } from "../store/posts/PostsSlice";
 import { HOME_ROUTE, URL_SERVER } from "../router/Url";
-export const UpdatePostComponent = ({title, description, userId, img})=>{
+export const UpdatePostComponent = ({title, description,  img})=>{
     const [update] = useUpdateMutation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-   
-    const [imageVisible, setImageVisible] = useState('')
 
+    const {refetch} = useGetPostsQuery()
+    const [imageVisible, setImageVisible] = useState('')
+    const userId:number  =  Number(localStorage.getItem('userId'))
   
     const {
         register,
@@ -54,21 +55,24 @@ export const UpdatePostComponent = ({title, description, userId, img})=>{
       
 
      const updatePost = async (data)=>{
+
+      
        //console.log(data.file)
        console.log('file -',data.file[0])
         try { 
 
           const  formData = new FormData()
-
+          formData.append('id', Number(id))
           formData.append('title',data.title)
           formData.append('description',data.description)
           if (data.file) {
             console.log('файл найден -',data.file[0] )
           }
-          formData.append('img',  data.file[0])
+          formData.append('img', data.file[0])
          
-          formData.append('userId', data.id )
+          formData.append('userId', userId )
           await update({id:id, body:formData})
+          refetch()
           navigate(HOME_ROUTE)
           
         } catch (error) {
@@ -95,16 +99,7 @@ export const UpdatePostComponent = ({title, description, userId, img})=>{
                      <div className=" text-lg font-semibold modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                       Изменить  пост
                      </div>
-                     <div className="modal__input mt-2">
-                     <input 
-                     type="text"  id="text" 
-                     
-                     {...register('id',{
-                      required: 'Поля обизательное'
-                     })}
-                     onChange={(e)=>setValue('id', e.target.value)}
-                     />
-                     </div>
+                    
                      
                      <div className="modal__input mt-2">
                      <input 

@@ -4,12 +4,13 @@ import { setModal } from "../store/Auth/AuthSlice";
 import { useNavigate, useParams } from "react-router";
 import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
-import { useDeleteMutation } from "../store/posts/PostsSlice";
+import { useDeleteMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
 
 export const DeletePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [deletePost] = useDeleteMutation()
+    const {refetch} = useGetPostsQuery()
     const modalClose = ( status:any)=>{
     dispatch(setModal(status))
     
@@ -30,7 +31,8 @@ export const DeletePostComponent = ()=>{
         try { 
          
           await deletePost(id)
-            
+
+           await refetch()
             navigate(HOME_ROUTE)
           
            
