@@ -5,14 +5,14 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { useGetPostsQuery, useUpdateMutation } from "../store/posts/PostsSlice";
 import { HOME_ROUTE, URL_SERVER } from "../router/Url";
-export const UpdatePostComponent = ({ title, description, img,})=>{
+export const UpdatePostComponent = ({title, description,  img})=>{
     const [update] = useUpdateMutation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const {refetch} = useGetPostsQuery()
     const [imageVisible, setImageVisible] = useState('')
-    const {id} = useParams()
-    const userId = Number( localStorage.getItem('userId'))
+    const userId:number  =  Number(localStorage.getItem('userId'))
   
     const {
         register,
@@ -29,7 +29,7 @@ export const UpdatePostComponent = ({ title, description, img,})=>{
     
     }
     
-   
+   const {id} = useParams()
     
 
       
@@ -55,21 +55,23 @@ export const UpdatePostComponent = ({ title, description, img,})=>{
       
 
      const updatePost = async (data)=>{
+
+      
        //console.log(data.file)
        console.log('file -',data.file[0])
         try { 
 
           const  formData = new FormData()
-          formData.append('id',id)
+          formData.append('id', Number(id))
           formData.append('title',data.title)
           formData.append('description',data.description)
           if (data.file) {
             console.log('файл найден -',data.file[0] )
           }
-          formData.append('img',  data.file[0])
+          formData.append('img', data.file[0])
          
           formData.append('userId', userId )
-          await update({id, body:formData})
+          await update({id:id, body:formData})
           refetch()
           navigate(HOME_ROUTE)
           
@@ -97,6 +99,8 @@ export const UpdatePostComponent = ({ title, description, img,})=>{
                      <div className=" text-lg font-semibold modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                       Изменить  пост
                      </div>
+                    
+                     
                      <div className="modal__input mt-2">
                      <input 
                      type="text"  id="text" 

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { Post } from "../components/Past"
 import {Person} from '../components/Person'
-import { useGetPostsQuery, useGetUserPostsQuery } from "../store/posts/PostsSlice"
+import { useGetUserPostsQuery } from "../store/posts/PostsSlice"
 import { useNavigate } from "react-router"
-import { SESTTINGS_ROUTE } from "../router/Url"
 
 import { Loader } from "../components/Loader"
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
@@ -12,19 +11,11 @@ import { NonDataComponent } from "../components/NonDataComponent"
 
 export const ProfilePage=()=>{
     const navigate = useNavigate()
-    //const {data} = useGetPostsQuery()
-    const id = localStorage.getItem('userId')
-    const userInfo = useGetInfoQuery(id)
-    const userPosts = useGetUserPostsQuery(id)
-   
-   /* myPost = data.filter((item:any)=>{
-        if (item.id<=5) {
-            return item
-            
-        }
-    })
-        */
-    //console.log(myPost)
+    const userId =Number( localStorage.getItem('userId'))
+    const userInfo = useGetInfoQuery(userId)
+    const userPosts = useGetUserPostsQuery(userId)
+
+
     useEffect(()=>{
            if (userInfo.isLoading && userPosts.isLoading) {
             console.log('загрузка...')

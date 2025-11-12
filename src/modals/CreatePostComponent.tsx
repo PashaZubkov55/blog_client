@@ -2,12 +2,14 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
-import { useAddPostMutation } from "../store/posts/PostsSlice";
+import { useAddPostMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
 import { useNavigate } from "react-router";
 import { HOME_ROUTE } from "../router/Url";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {refetch} = useGetPostsQuery()
+    const fileInputRef = useRef(null);
     const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')
     const userId = localStorage.getItem('userId')
@@ -19,7 +21,7 @@ export const CreatePostComponent = ()=>{
 
     } = useForm()
 
-   const modalClose = (event, status:any)=>{
+   const modalClose = ( status:boolean)=>{
    
     dispatch(setModal(status))
     
@@ -34,6 +36,7 @@ export const CreatePostComponent = ()=>{
       };
      
       const createPost= async(data)=>{
+        const  userId = localStorage.getItem('userId')
        //console.log(data.file)
         try {
           const  formData = new FormData()
@@ -46,7 +49,7 @@ export const CreatePostComponent = ()=>{
           for(let [key, value] of formData.entries()){
              console.log(`${key}: ${value}`)
           }
-          dispatch(setModal(false))
+          refetch()
           navigate(HOME_ROUTE)
           
         } catch (error) {
@@ -57,7 +60,7 @@ export const CreatePostComponent = ()=>{
       }
      
     return(
-      <div className="modal"  onClick={(e)=>{modalClose(e, false)}}>
+      <div className="modal"  onClick={(e)=>{modalClose( false)}}>
       <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -71,12 +74,7 @@ export const CreatePostComponent = ()=>{
                     Добавить пост
                    </div>
 
-                
-                   
-                 
-              
-                   <div className = 'input__error mt-2 text-red-600'>{errors?.id?.message}</div>
-                
+                  
 
                    <div className="modal__input mt-2">
                    <input 
