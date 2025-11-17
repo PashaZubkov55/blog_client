@@ -63,7 +63,6 @@ export const SettingsPage = ()=>{
             : modalStatus.payload == 'updateInfo'? <UpdateUserInfoComponent
                 name = {data.name}
                 img = {data.img}
-                userId = {String(data.userId)}
 
             />:false
             }

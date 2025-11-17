@@ -4,11 +4,13 @@ import { setModal } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { URL_SERVER } from "../router/Url"
 import { useGetInfoQuery, useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
-export const UpdateUserInfoComponent =({name, img, userId})=>{
+export const UpdateUserInfoComponent =({name, img })=>{
     const dispatch = useDispatch()
     const [updateInfo] = useUpdateInfoMutation()
-    const {refetch} = useGetInfoQuery(userId)
+    
     const [imageVisible, setImageVisible] = useState('')
+    const userId = Number(localStorage.getItem('userId'))
+    const {refetch} = useGetInfoQuery(userId)
     const {
         register,
         formState:{errors},
