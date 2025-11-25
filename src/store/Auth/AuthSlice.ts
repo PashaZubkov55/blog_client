@@ -34,8 +34,7 @@ export const authApi = createApi({
         }),
         transformResponse: response=>{
           setStatus(true)
-          localStorage.setItem('token', response.token)
-          //return jwtDecode(response.token)
+          return jwtDecode(response.token)
           
             
         }
@@ -68,6 +67,12 @@ export const authApi = createApi({
           return jwtDecode(response.token)
             
         }
+       }),
+       deleteUser:builder.mutation({
+          query:(id:number)=>({
+            url: `user/${id}`,
+            method: 'DELETE'
+          })
        })
 })
 })
@@ -75,5 +80,5 @@ export const authApi = createApi({
 
 // Action creators are generated for each case reducer function
 export const {setStatus, setModal } = AuthSlice.actions
-export const {useAuthQuery, useRegistrationMutation, useLogInMutation} = authApi
+export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation} = authApi
 export default AuthSlice.reducer

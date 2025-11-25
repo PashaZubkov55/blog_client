@@ -6,10 +6,11 @@ import { URL_SERVER } from "../router/Url"
 import { useGetInfoQuery, useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
 export const UpdateUserInfoComponent =({name, img })=>{
     const dispatch = useDispatch()
+    const userId = Number( localStorage.getItem('userId'))
     const [updateInfo] = useUpdateInfoMutation()
     
     const [imageVisible, setImageVisible] = useState('')
-    const userId = Number(localStorage.getItem('userId'))
+   
     const {refetch} = useGetInfoQuery(userId)
     const {
         register,
@@ -44,8 +45,9 @@ const updateUserInfo = async(data)=>{
       formData.append('userId',userId)
       console.log('userId -',userId)
       await updateInfo({userId, body:formData})
+      await refetch()
       modalClose(false)
-      refetch()
+     
     } catch (error) {
       console.log(error)
     }

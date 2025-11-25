@@ -17,7 +17,7 @@ export const CreateUserInfo = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [image,setImage] = useState('')
-    const userId = localStorage.getItem('userId')
+    const userId = Number( localStorage.getItem('userId'))
     const {refetch} = useGetInfoQuery(userId)
     const [createInfo] = useCreteInfoMutation()
     const modalClose=(status: boolean)=>{
@@ -38,8 +38,9 @@ export const CreateUserInfo = ()=>{
             for(let [key, value] of formData.entries()){
                 console.log(`${key}: ${value}`)
              }
-            modalClose(false)
-            refetch()
+            
+           await refetch()
+           modalClose(false)
             navigate(HOME_ROUTE)
         } catch (error) {
             console.log(error)

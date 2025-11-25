@@ -72,7 +72,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
          
           formData.append('userId', userId )
           await update({id:id, body:formData})
-          refetch()
+          await refetch()
           navigate(HOME_ROUTE)
           
         } catch (error) {

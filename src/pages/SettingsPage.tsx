@@ -5,6 +5,7 @@ import { setModal } from "../store/Auth/AuthSlice";
 import { CreateUserInfo } from "../modals/CreateUserInfoComponent";
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi";
 import { UpdateUserInfoComponent } from "../modals/UpdateUserInfoComponent";
+import { DeleteUserComponent } from "../modals/DeleteUserComponent";
 export const SettingsPage = ()=>{
     const modalStatus = useSelector((state)=> state.auth.modal)
     const dispatch = useDispatch()
@@ -64,7 +65,7 @@ export const SettingsPage = ()=>{
                 name = {data.name}
                 img = {data.img}
 
-            />:false
+            />:modalStatus.payload == 'delete'? <DeleteUserComponent/>:false
             }
             </div>
         
