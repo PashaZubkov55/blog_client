@@ -19,7 +19,7 @@ export const Navbar=()=>{
     }
      return(  
          <nav className="navbar">
-            {user.payload == true?
+            {user.payload === true?
                    <ul className="navbar_list list">
                    <NavLink  to={HOME_ROUTE} className='list__item'>Главная </NavLink>
                    <NavLink  to={PROFILE_ROUTE} className='list__item'>Профиль </NavLink>   

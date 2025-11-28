@@ -17,20 +17,15 @@ function App() {
  
   
 
-  useEffect(() => {
-    refetch().then(()=>{
-        dispatch(setUser(true))
-       
-
-    }).catch(e=>{
-      alert(e.message)
-    })
-
-    /* 
+  useEffect( () => { 
     if (!isLoading && !error) {
       console.log('Получены данные:', data);
+      dispatch(setUser(true))
+    }else{
+      console.log(error)
     }
-      */
+   
+      
   }, []);
 
   return (

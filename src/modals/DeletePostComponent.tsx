@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setModal } from "../store/Auth/AuthSlice";
+import { setModal, setUser } from "../store/Auth/AuthSlice";
 import { useNavigate, useParams } from "react-router";
 import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
@@ -20,9 +20,10 @@ export const DeletePostComponent = ()=>{
      const Deletepost = async (e:any)=>{
        e.preventDefault()
         try { 
+          
           await deletePost(id)
-
            await refetch()
+           
             navigate(HOME_ROUTE)
           
         } catch (error) {

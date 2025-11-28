@@ -38,7 +38,6 @@ export const authApi = createApi({
           body,
         }),
         transformResponse: response=>{
-          setStatus(true)
           return jwtDecode(response.token)
           
             

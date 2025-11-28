@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { setModal, useDeleteUserMutation } from "../store/Auth/AuthSlice"
+import { setModal, setUser, useDeleteUserMutation } from "../store/Auth/AuthSlice"
 import { useNavigate } from "react-router"
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
 import { useGetPostsQuery, useGetUserPostsQuery } from "../store/posts/PostsSlice"
@@ -30,8 +30,7 @@ export  const  DeleteUserComponent = ()=>{
                 await userInfo.refetch(),
                 await userPosts.refetch(),
                
-                
-                
+                dispatch(setUser(false))
                 localStorage.clear()
                 navigate(HOME_ROUTE)
             } catch (error) {

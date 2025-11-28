@@ -22,12 +22,10 @@ export const Login = ()=>{
             formData.append('email', data.email)
             formData.append('password', data.password)
                 try {
-                    await logIn(formData).then(()=>{
-                        dispatch(setUser(true))
-                        navigate(HOME_ROUTE)
-                    })
-
-                   
+                    await logIn(formData).unwrap();
+                    console.log('Пользователь успешно вошел');
+                    dispatch(setUser(true))
+                    navigate(HOME_ROUTE)
                   } catch (err) {
                    alert('Пользователь не найден');
                   }
