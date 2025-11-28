@@ -9,11 +9,16 @@ export const AuthSlice = createSlice({
   initialState:{
     isAuth: false,
     modal: false,
+    user: ''
   },
   reducers: {
-    setStatus(state, auth){
-       state.isAuth = auth
+    setAuth(state, payload){
+      state.isAuth = payload
     },
+    setUser(state, status){
+      state.user = status
+    },
+    
     setModal(state, status){
       state.modal = status
     }
@@ -79,6 +84,6 @@ export const authApi = createApi({
 
 
 // Action creators are generated for each case reducer function
-export const {setStatus, setModal } = AuthSlice.actions
+export const {setAuth,  setUser, setModal } = AuthSlice.actions
 export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation} = authApi
 export default AuthSlice.reducer

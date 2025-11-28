@@ -6,17 +6,11 @@ import { useEffect, useState } from "react";
 import { NotFaundPage } from "../pages/NotFaundPage";
 const AppRouter=()=>{
     const [auth, setAuth] = useState(false)
-   // const auth = useSelector((state) => state.auth.isAuth)
-   const token =localStorage.getItem('token') 
-   useEffect(()=>{
-       if (token) {
-        setAuth(true)
-        
-       }else{setAuth(false)}
-      },[token])
+    const user = useSelector((state) => state.auth.user)
+
       return(
         <Routes>
-         { auth && authRouts.map(({path, component})=>
+         { user.payload === true  &&  authRouts.map(({path, component})=>
         <Route key={path} path={path} Component={component}/>
         )}
           { publicRouts.map(({path, component})=> 

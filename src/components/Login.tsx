@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router"
 import { HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
-import {  useLogInMutation } from "../store/Auth/AuthSlice"
+import {  setUser, useLogInMutation } from "../store/Auth/AuthSlice"
+import { useDispatch } from "react-redux"
 
 
 export const Login = ()=>{
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [logIn] = useLogInMutation()
     const {
         register,
@@ -20,9 +22,12 @@ export const Login = ()=>{
             formData.append('email', data.email)
             formData.append('password', data.password)
                 try {
-                    await logIn(formData).unwrap();
-                    console.log('Пользователь успешно вошел');
-                    navigate(HOME_ROUTE)
+                    await logIn(formData).then(()=>{
+                        dispatch(setUser(true))
+                        navigate(HOME_ROUTE)
+                    })
+
+                   
                   } catch (err) {
                    alert('Пользователь не найден');
                   }
