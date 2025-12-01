@@ -42,6 +42,7 @@ export const CreatePostComponent = ()=>{
           const  formData = new FormData()
           formData.append('title',data.title)
           formData.append('description',data.description)
+          console.log(data.description)
           formData.append('userId', userId)
           formData.append('img',  data.file[0])
       
