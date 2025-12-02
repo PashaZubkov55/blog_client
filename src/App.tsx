@@ -6,6 +6,7 @@ import {Header} from './components/Header'
 import { Footer } from './components/Footer'
 import { useAuthQuery, setAuth, setUser} from './store/Auth/AuthSlice'
 import { useEffect } from 'react'
+import { ArrowTop } from './components/ArrowTop'
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
     
       <Header/>
       <AppRouter />
-      
+        <ArrowTop/>
         <Footer/>
      </BrowserRouter>
      

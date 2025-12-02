@@ -23,7 +23,7 @@ export const Navbar=()=>{
                    <ul className="navbar_list list">
                    <NavLink  to={HOME_ROUTE} className='list__item'>Главная </NavLink>
                    <NavLink  to={PROFILE_ROUTE} className='list__item'>Профиль </NavLink>   
-                   <span onClick={()=>{logOut()}}className='list__item' >Выйти </span>  
+                   <span onClick={()=>{logOut()}}className='list__item  cursor-pointer' >Выйти </span>  
                         </ul>
                         : 
                         <ul className="navbar_list list">
