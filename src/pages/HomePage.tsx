@@ -3,6 +3,7 @@ import { Loader } from "../components/Loader"
 import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 import { NonDataComponent } from "../components/NonDataComponent"
+import { Search } from "../components/Search"
 export const HomePage =()=>{
     const {data=[], isLoading} = useGetPostsQuery()
     useEffect(()=>{
@@ -24,8 +25,10 @@ export const HomePage =()=>{
        
 
     return(
+
             
-            <div className="postList  ">
+            <div className="postList ">
+                <Search/>
                
                 
                {
