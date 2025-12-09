@@ -12,7 +12,7 @@ export const NonDataComponent = ({message, modal})=>{
     const navigate = useNavigate()
   
         return(
-            <div className=" flex justify-center   ">    
+            <div className=" flex justify-center  mt-20  ">    
             <div className="detail bg-white  overflow-hidden  max-w-200 mb-18 pb-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-sm    ">
             
                     <div className="detail__title px-8 ">

@@ -28,6 +28,7 @@ export const UpdateUserInfoComponent =({name, img })=>{
     useEffect(()=>{
         setValue('name', name)
         setValue('img', img)
+        
         console.log('user-id-- ', userId)
 
     },[])
@@ -99,7 +100,7 @@ const updateUserInfo = async(data)=>{
                        
                       </div>
                      <div className="modal__files ">
-                     <input type="file" 
+                     <input type="file"
                    {...register('file',{
                     required:'файл не выбран'
                    })}

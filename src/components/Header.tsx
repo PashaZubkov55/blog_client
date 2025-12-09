@@ -12,6 +12,7 @@ export const Header =()=>{
                     <Navbar/>
                 </div>
                 </div>
+                
             </header>
 
         

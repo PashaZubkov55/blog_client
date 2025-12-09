@@ -20,7 +20,9 @@ export const postsApi = createApi({
     keepUnusedDataFor: 10,
     endpoints: (builder) => ({
        getPosts: builder.query <Post[], void>({
-        query: ()=> 'post/',
+        
+        query: (title)=>  `post/${title}/all`
+        
         
 
        }),
@@ -34,10 +36,10 @@ export const postsApi = createApi({
         query: (userId:string)=>  `post/${userId}/userPosts`,
        }),
        addPost:builder.mutation({
-        query: (body) => ({
+        query: (title) => ({
             url: `post`,
             method: 'POST',
-            body
+            body: title
           }),
        }),
        
