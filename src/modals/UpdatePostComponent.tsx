@@ -23,7 +23,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
 
     } = useForm()
 
-   const modalClose = (event, status:any)=>{
+   const modalClose = (status:boolean)=>{
    
     dispatch(setModal(status))
     
@@ -74,6 +74,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
           await update({id:id, body:formData})
           await refetch()
           navigate(HOME_ROUTE)
+          modalClose(false)
           
         } catch (error) {
           console.log(error);
@@ -86,7 +87,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
         
       } 
        return(
-        <div className="modal"  onClick={(e)=>{modalClose(e, false)}}>
+        <div className="modal"  onClick={()=>{modalClose(false)}}>
         <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -120,7 +121,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
                        onChange={(e)=>setValue('description', e.target.value)}
                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                    
                      </div>
-                     <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
+                     <div className = 'whitespace-pre-line input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
                      
                      <div className=" person__awatar flex justify-center">
                       {imageVisible? 

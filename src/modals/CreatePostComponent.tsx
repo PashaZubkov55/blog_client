@@ -39,6 +39,7 @@ export const CreatePostComponent = ()=>{
         const  userId = localStorage.getItem('userId')
        //console.log(data.file)
         try {
+
           const  formData = new FormData()
           formData.append('title',data.title)
           formData.append('description',data.description)
@@ -52,6 +53,7 @@ export const CreatePostComponent = ()=>{
           }
           refetch()
           navigate(HOME_ROUTE)
+          modalClose(false)
           
         } catch (error) {
           console.log(error)
@@ -96,7 +98,7 @@ export const CreatePostComponent = ()=>{
                       required: 'Поля обизательное'
                      })}
                    
-                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                   
+                   className="  whitespace-pre-line block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                   
                    </div>
                    <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
                    

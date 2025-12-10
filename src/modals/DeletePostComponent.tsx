@@ -10,7 +10,7 @@ export const DeletePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [deletePost] = useDeleteMutation()
-    const {refetch} = useGetPostsQuery()
+    const {refetch} = useGetPostsQuery('')
     const modalClose = ( status:any)=>{
     dispatch(setModal(status))
     
