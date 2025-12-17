@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { setModal } from "../store/Auth/AuthSlice"
+import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
 import { useCreteInfoMutation } from "../store/userInfo/userInfoApi"
@@ -35,6 +35,9 @@ export const CreateUserInfo = ()=>{
             formData.append('userId', userId)
             formData.append('img', data.file[0])
             await createInfo(formData)
+            dispatch(setStatusMessage(true))
+            dispatch(setTextMessage('Добавлена Информация о вас !'))
+            dispatch(setColorMessage('bg-green-500'))
             for(let [key, value] of formData.entries()){
                 console.log(`${key}: ${value}`)
              }

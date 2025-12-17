@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setModal } from "../store/Auth/AuthSlice";
+import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
 import { useAddPostMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
 import { useNavigate } from "react-router";
@@ -48,6 +48,10 @@ export const CreatePostComponent = ()=>{
           formData.append('img',  data.file[0])
       
           await addPost(formData)
+          dispatch(setStatusMessage(true))
+          dispatch(setTextMessage('Пост создан !'))
+          dispatch(setColorMessage('bg-green-500'))
+
           for(let [key, value] of formData.entries()){
              console.log(`${key}: ${value}`)
           }

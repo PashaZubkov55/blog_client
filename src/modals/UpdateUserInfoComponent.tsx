@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { setModal } from "../store/Auth/AuthSlice"
+import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { URL_SERVER } from "../router/Url"
 import { useGetInfoQuery, useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
@@ -46,6 +46,9 @@ const updateUserInfo = async(data)=>{
       formData.append('userId',userId)
       console.log('userId -',userId)
       await updateInfo({userId, body:formData})
+      dispatch(setStatusMessage(true))
+      dispatch(setTextMessage('Ваша информация изменена!'))
+      dispatch(setColorMessage('bg-green-500'))
       await refetch()
       modalClose(false)
      

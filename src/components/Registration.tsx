@@ -2,9 +2,11 @@ import {useForm} from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import { LOGUIN_ROUTE } from '../router/Url'
-import { useRegistrationMutation } from '../store/Auth/AuthSlice'
+import { setColorMessage, setStatusMessage, setTextMessage, useRegistrationMutation } from '../store/Auth/AuthSlice'
+import { useDispatch } from 'react-redux'
 
 export const Registration = ()=>{
+    const dispatch =useDispatch()
     const [registration] = useRegistrationMutation()
     const navigate = useNavigate()
     const {
@@ -23,11 +25,16 @@ export const Registration = ()=>{
                 console.log(`${key}: ${value}`)
              }
                 
-            await registration(formData)
-            await  navigate(LOGUIN_ROUTE)
+            await registration(formData).unwrap()
+            dispatch(setStatusMessage(true))
+            dispatch(setTextMessage('Вы Зарегистрированы !'))
+            dispatch(setColorMessage('bg-green-500'))
+            navigate(LOGUIN_ROUTE)
         } catch (error) {
-            console.log(error)
             
+            dispatch(setTextMessage('Такой аккаунт уже существует!'))
+            dispatch(setStatusMessage(true))
+            dispatch(setColorMessage('bg-red-700'))
         }
         console.log(data)
 

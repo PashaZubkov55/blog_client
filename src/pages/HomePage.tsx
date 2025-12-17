@@ -4,6 +4,7 @@ import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 import { NonDataComponent } from "../components/NonDataComponent"
 import { useDebounce } from "../hooks/useDebounce"
+import { Message } from "../components/Message"
 export const HomePage =()=>{
    
    
@@ -69,6 +70,7 @@ export const HomePage =()=>{
 */
 return(
     <div className="post">
+           
             <div className="search">
             <div className="search">
         <div className="search bg-green-700   pt-5 pb-5">

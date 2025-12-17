@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setModal, setUser } from "../store/Auth/AuthSlice";
+import { setColorMessage, setModal, setStatusMessage, setTextMessage, setUser } from "../store/Auth/AuthSlice";
 import { useNavigate, useParams } from "react-router";
 import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
@@ -22,6 +22,9 @@ export const DeletePostComponent = ()=>{
         try { 
           
           await deletePost(id)
+          dispatch(setStatusMessage(true))
+          dispatch(setTextMessage('Пост Удален!'))
+          dispatch(setColorMessage('bg-green-500'))
            await refetch()
            
             navigate(HOME_ROUTE)

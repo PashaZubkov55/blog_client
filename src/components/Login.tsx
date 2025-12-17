@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router"
 import { HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
-import {  setUser, useLogInMutation } from "../store/Auth/AuthSlice"
-import { useDispatch } from "react-redux"
+import {  setColorMessage, setStatusMessage, setTextMessage, setUser, useLogInMutation } from "../store/Auth/AuthSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 
 export const Login = ()=>{
+    const statusMessage = useSelector((state)=>state.auth.statusMessage)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [logIn] = useLogInMutation()
@@ -23,11 +24,21 @@ export const Login = ()=>{
             formData.append('password', data.password)
                 try {
                     await logIn(formData).unwrap();
-                    console.log('Пользователь успешно вошел');
                     dispatch(setUser(true))
+                    dispatch(setStatusMessage(true))
+                    dispatch(setTextMessage('Вы вошли в акаунт'))
+                    dispatch(setColorMessage('bg-green-500'))
+
                     navigate(HOME_ROUTE)
                   } catch (err) {
-                   alert('Пользователь не найден');
+                    dispatch(setTextMessage('Пользователь не найден !'))
+                    dispatch(setStatusMessage(true))
+                    dispatch(setColorMessage('bg-red-700'))
+
+
+                    console.log(err)
+                    //alert('Пользователь не найден');
+
                   }
 
        

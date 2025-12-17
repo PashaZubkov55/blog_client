@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setModal } from "../store/Auth/AuthSlice";
+import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { useGetPostsQuery, useUpdateMutation } from "../store/posts/PostsSlice";
@@ -72,6 +72,9 @@ export const UpdatePostComponent = ({title, description,  img})=>{
          
           formData.append('userId', userId )
           await update({id:id, body:formData})
+          dispatch(setStatusMessage(true))
+          dispatch(setTextMessage('Пост изменен !'))
+          dispatch(setColorMessage('bg-green-500'))
           await refetch()
           navigate(HOME_ROUTE)
           modalClose(false)

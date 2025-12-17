@@ -9,6 +9,9 @@ export const AuthSlice = createSlice({
   initialState:{
     isAuth: false,
     modal: false,
+    statusMessage:true,
+    textMessage: 'message',
+    colorMessage: '',
     user: ''
   },
   reducers: {
@@ -21,6 +24,15 @@ export const AuthSlice = createSlice({
     
     setModal(state, status){
       state.modal = status
+    }, 
+    setStatusMessage(state, status){
+      state.statusMessage = status
+    },
+    setTextMessage(state, status){
+      state.textMessage = status
+    },
+    setColorMessage(state, status){
+      state.colorMessage = status
     }
   },
 })
@@ -83,6 +95,6 @@ export const authApi = createApi({
 
 
 // Action creators are generated for each case reducer function
-export const {setAuth,  setUser, setModal } = AuthSlice.actions
+export const {setAuth,  setUser, setModal, setStatusMessage, setTextMessage, setColorMessage } = AuthSlice.actions
 export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation} = authApi
 export default AuthSlice.reducer
