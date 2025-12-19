@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router"
-import { HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
+import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE, REGISTRATION_ROUTE, RESTORATION_MESSAG_ROUTE } from "../router/Url"
 import {  setColorMessage, setStatusMessage, setTextMessage, setUser, useLogInMutation } from "../store/Auth/AuthSlice"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -84,10 +84,11 @@ export const Login = ()=>{
    <div className="input__error text-red-600">{errors?.password?.message}</div>
 
   </div>
-  <div className="flex items-start mb-5">
+  <div className="mb-5">
+    <NavLink to={FORGOT_PASSWORD_ROUTE} className='text-green-600' > Забыли пароль ? </NavLink>
   </div>
   <button type='submit' className="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Войти</button>
-    <div className="form__submit mt-5  ">Нет акаунта ? <NavLink className='text-green-800' to={REGISTRATION_ROUTE}>Зарегистрируйтесь</NavLink></div>
+    <div className="form__submit mt-5">Нет акаунта ? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйтесь</NavLink></div>
 </form>
 
 
