@@ -10,10 +10,8 @@ export  const RestorationPage = ()=>{
     if (location.pathname == FORGOT_PASSWORD_ROUTE) {
         return <ForgotPassword/>
         
-    } else if(location.pathname == RESTORATION_MESSAGE_ROUTE){
+    } else{
         return <RestorationMessage/>
-    }else if (location.pathname = RESTORATION_PASSWORD_ROUTE){
-      return   <RestorationPassword/>
     }
 
 }

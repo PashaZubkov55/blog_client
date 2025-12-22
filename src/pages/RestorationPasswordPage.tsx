@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router'
-export const RestorationPassword = ()=>{
+export const RestorationPasswordPage = ()=>{
     const {
         register,
         formState: {errors},

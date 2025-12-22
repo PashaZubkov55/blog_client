@@ -5,6 +5,7 @@ import { ProfilePage } from "../pages/ProfilePage";
 import { SettingsPage } from "../pages/SettingsPage";
 import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE, LOGUIN_ROUTE, POST_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, RESTORATION_MESSAGE_ROUTE, RESTORATION_PASSWORD_ROUTE, SESTTINGS_ROUTE } from "./Url";
 import { RestorationPage } from "../pages/RestorationPage";
+import { RestorationPasswordPage } from "../pages/RestorationPasswordPage";
 
 
 
@@ -38,8 +39,8 @@ export const publicRouts =[
 
     },
     {
-        path: RESTORATION_PASSWORD_ROUTE,
-        component: RestorationPage
+        path: RESTORATION_PASSWORD_ROUTE+':token',
+        component: RestorationPasswordPage
 
     },
     {
