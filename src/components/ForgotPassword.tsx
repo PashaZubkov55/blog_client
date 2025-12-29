@@ -1,9 +1,14 @@
 import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { RESTORATION_MESSAGE_ROUTE } from '../router/Url'
+import { setColorMessage, setStatusMessage, setTextMessage, useForgotMutation } from '../store/Auth/AuthSlice'
+import { useDispatch } from 'react-redux'
+
 
 export const ForgotPassword = ()=>{
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [forgotPassword] = useForgotMutation()
     const {
         register,
         formState:{errors},
@@ -11,8 +16,20 @@ export const ForgotPassword = ()=>{
 
     } = useForm()
 
-   const  forgot =()=>{
+   const  forgot = async (data)=>{
+    try {
+        const formData = new FormData()
+        formData.append('email',data.email)
+        await forgotPassword(formData).unwrap()
+        localStorage.setItem('email', data.email)
         navigate(RESTORATION_MESSAGE_ROUTE)
+    } catch (error) {
+        dispatch(setTextMessage('Пользователь не найден !'))
+        dispatch(setStatusMessage(true))
+        dispatch(setColorMessage('bg-red-700'))
+    }
+       
+
    }
 
     return(
@@ -37,7 +54,7 @@ export const ForgotPassword = ()=>{
             />
             <div className="input__error text-red-600">{errors?.email?.message}</div>
           </div>
-          <button type='submit' className="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Войти</button>
+          <button type='submit' className="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Отправить</button>
 
     </form>
         

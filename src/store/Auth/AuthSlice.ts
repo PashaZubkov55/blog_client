@@ -69,6 +69,7 @@ export const authApi = createApi({
             
         }
        }),
+     
        Auth:builder.query({
         query: ()=>({
           url: 'user/auth',
@@ -89,6 +90,13 @@ export const authApi = createApi({
             url: `user/${id}`,
             method: 'DELETE'
           })
+       }),
+       forgot:builder.mutation({
+        query:(body)=>({
+          url: 'user/forgot-password',
+           method: 'POST',
+            body
+        })
        })
 })
 })
@@ -96,5 +104,5 @@ export const authApi = createApi({
 
 // Action creators are generated for each case reducer function
 export const {setAuth,  setUser, setModal, setStatusMessage, setTextMessage, setColorMessage } = AuthSlice.actions
-export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation} = authApi
+export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation, useForgotMutation} = authApi
 export default AuthSlice.reducer

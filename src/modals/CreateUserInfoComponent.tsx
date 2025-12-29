@@ -34,7 +34,7 @@ export const CreateUserInfo = ()=>{
             formData.append('name', data.name)
             formData.append('userId', userId)
             formData.append('img', data.file[0])
-            await createInfo(formData)
+            await createInfo(formData).unwrap()
             dispatch(setStatusMessage(true))
             dispatch(setTextMessage('Добавлена Информация о вас !'))
             dispatch(setColorMessage('bg-green-500'))
