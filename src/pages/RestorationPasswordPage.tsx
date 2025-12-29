@@ -1,14 +1,44 @@
 import {useForm} from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import {  useNavigate, useParams } from 'react-router'
+import { setColorMessage, setStatusMessage, setTextMessage, useResetPasswordMutation } from '../store/Auth/AuthSlice'
+import { useDispatch } from 'react-redux'
+import { LOGUIN_ROUTE } from '../router/Url'
 export const RestorationPasswordPage = ()=>{
+    const [resetPassword] = useResetPasswordMutation()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {token} = useParams()
     const {
         register,
         formState: {errors},
         handleSubmit
     } = useForm()
-    const navigate = useNavigate()
-    const restorationAccount = ()=>{
-            alert('акаут восоновлен ')
+   
+    const restorationAccount = async (data)=>{
+       
+       
+           
+          
+           if (data.password !== data.repeatPassword ) {
+            dispatch(setTextMessage('Пароль не совподает'))
+            dispatch(setStatusMessage(true))
+            dispatch(setColorMessage('bg-red-700')) 
+           } else{
+            try {
+                const formData = new FormData()
+                formData.append('newPassword', data.password)
+                await resetPassword({token, body: formData}).unwrap()
+                dispatch(setStatusMessage(true))
+                dispatch(setTextMessage('Акаут востановлен !'))
+                dispatch(setColorMessage('bg-green-500'))
+                navigate(LOGUIN_ROUTE)
+            } catch (error) {
+                console.log(error)
+            }
+          
+           }
+       
+
     }
     return (
         <div className="restoration">
@@ -52,7 +82,7 @@ export const RestorationPasswordPage = ()=>{
           </div>
           <div className="flex items-start mb-5">
           </div>
-          <button type='submit' className="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Войти</button>
+          <button type='submit' className="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Востановить</button>
 
         </form>
         

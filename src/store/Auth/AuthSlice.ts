@@ -97,6 +97,13 @@ export const authApi = createApi({
            method: 'POST',
             body
         })
+       }),
+       resetPassword:builder.mutation({
+          query:({token,body}) =>({
+            url: `user/reset-password/${token}`,
+            method: 'PUT',
+            body,
+          })
        })
 })
 })
@@ -104,5 +111,5 @@ export const authApi = createApi({
 
 // Action creators are generated for each case reducer function
 export const {setAuth,  setUser, setModal, setStatusMessage, setTextMessage, setColorMessage } = AuthSlice.actions
-export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation, useForgotMutation} = authApi
+export const {useAuthQuery, useRegistrationMutation, useLogInMutation, useDeleteUserMutation, useResetPasswordMutation, useForgotMutation} = authApi
 export default AuthSlice.reducer
