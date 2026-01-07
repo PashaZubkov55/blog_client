@@ -12,3 +12,14 @@
 .arrow__top:hover{
     cursor: pointer;
 }
+
+.mwenu__mobile{
+    position: fixed;
+    width: 100%;
+    padding: 15px;
+    height: 100%;
+    background: green;
+    top: 0;
+    left: 0;
+    z-index: 15000000000000000000000;
+}

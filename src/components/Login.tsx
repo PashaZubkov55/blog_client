@@ -88,7 +88,7 @@ export const Login = ()=>{
     <NavLink to={FORGOT_PASSWORD_ROUTE} className='text-green-600' > Забыли пароль ? </NavLink>
   </div>
   <button type='submit' className="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Войти</button>
-    <div className="form__submit mt-5">Нет акаунта ? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйтесь</NavLink></div>
+    <div className="form__submit mt-5">Нет акаунта ? <NavLink to={REGISTRATION_ROUTE} className='text-green-800'>Зарегистрируйтесь</NavLink></div>
 </form>
 
 

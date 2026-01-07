@@ -9,7 +9,10 @@ export const Header =()=>{
                 <div className="header__wrapper flex justify-between items-center pt-4 items-center text-white  text-2xl" >
                 
                     <NavLink className='header__logo' to={HOME_ROUTE}>Blog</NavLink>
+                    
                     <Navbar/>
+                    
+                  
                 </div>
                 </div>
                 

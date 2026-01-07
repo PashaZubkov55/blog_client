@@ -129,11 +129,11 @@ export const UpdatePostComponent = ({title, description,  img})=>{
                      <div className=" person__awatar flex justify-center">
                       {imageVisible? 
                        <div className=" h-auto max-w-lg  my-3  ">
-                      <img className=" h-auto max-w-lg rounded-lg" src={imageVisible} alt='Woman looking front'/>
+                      <img className=" sm:w-16 h-auto max-w-lg rounded-lg   sm: w-32 md:w-100" src={imageVisible} alt='Woman looking front'/>
                       </div>
                       :
-                      <div className=" h-auto max-w-lg  my-3  ">
-                      <img className=" h-auto max-w-lg rounded-lg" src={URL_SERVER+img} alt='Woman looking front'/>
+                      <div className="  md:h-auto max-w-lg  my-3  ">
+                      <img className=" h-auto max-w-lg rounded-lg  sm: w-32 md:w-100 " src={URL_SERVER+img} alt='Woman looking front'/>
                       </div>
                         }
                        
