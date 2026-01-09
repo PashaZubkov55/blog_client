@@ -42,7 +42,7 @@ export const CreateUserInfo = ()=>{
                 console.log(`${key}: ${value}`)
              }
             
-           await refetch()
+           await refetch().unwrap()
            modalClose(false)
             navigate(HOME_ROUTE)
         } catch (error) {

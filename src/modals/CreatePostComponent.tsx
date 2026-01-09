@@ -47,7 +47,7 @@ export const CreatePostComponent = ()=>{
           formData.append('userId', userId)
           formData.append('img',  data.file[0])
       
-          await addPost(formData)
+          await addPost(formData).unwrap()
           dispatch(setStatusMessage(true))
           dispatch(setTextMessage('Пост создан !'))
           dispatch(setColorMessage('bg-green-500'))
@@ -55,7 +55,7 @@ export const CreatePostComponent = ()=>{
           for(let [key, value] of formData.entries()){
              console.log(`${key}: ${value}`)
           }
-          refetch()
+         await refetch().unwrap()
           navigate(HOME_ROUTE)
           modalClose(false)
           
@@ -109,7 +109,7 @@ export const CreatePostComponent = ()=>{
                    <div className=" person__awatar flex justify-center">
                     {image? 
                      <div className=" h-auto max-w-lg  my-3  ">
-                    <img className=" h-auto max-w-lg rounded-lg" src={image} alt='Woman looking front'/>
+                    <img className=" h-auto max-w-lg rounded-lg sm: w-32 md:w-100" src={image} alt='Woman looking front'/>
                     </div>
                     :<></>
                       }

@@ -71,11 +71,11 @@ export const UpdatePostComponent = ({title, description,  img})=>{
           formData.append('img', data.file[0])
          
           formData.append('userId', userId )
-          await update({id:id, body:formData})
+          await update({id:id, body:formData}).unwrap()
           dispatch(setStatusMessage(true))
           dispatch(setTextMessage('Пост изменен !'))
           dispatch(setColorMessage('bg-green-500'))
-          await refetch()
+          await refetch().unwrap()
           navigate(HOME_ROUTE)
           modalClose(false)
           

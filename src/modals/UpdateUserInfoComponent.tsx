@@ -45,11 +45,11 @@ const updateUserInfo = async(data)=>{
       formData.append('img', data.file[0])
       formData.append('userId',userId)
       console.log('userId -',userId)
-      await updateInfo({userId, body:formData})
+      await updateInfo({userId, body:formData}).unwrap()
       dispatch(setStatusMessage(true))
       dispatch(setTextMessage('Ваша информация изменена!'))
       dispatch(setColorMessage('bg-green-500'))
-      await refetch()
+      await refetch().unwrap()
       modalClose(false)
      
     } catch (error) {

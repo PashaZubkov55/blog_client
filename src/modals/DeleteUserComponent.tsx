@@ -26,9 +26,9 @@ export  const  DeleteUserComponent = ()=>{
                
                 e.preventDefault()
                 await Userdelete(id)
-                await posts.refetch(),
-                await userInfo.refetch(),
-                await userPosts.refetch(),
+                await posts.refetch().unwrap()
+                await userInfo.refetch().unwrap()
+                await userPosts.refetch().unwrap()
                 dispatch(setStatusMessage(true))
                 dispatch(setTextMessage('Аккаунт Удален!'))
                 dispatch(setColorMessage('bg-green-500'))

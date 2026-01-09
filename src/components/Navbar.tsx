@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import {useDispatch, useSelector } from "react-redux"
 import { HOME_ROUTE, LOGUIN_ROUTE, PROFILE_ROUTE } from "../router/Url" 
-import { setUser } from "../store/Auth/AuthSlice"
+import { setColorMessage, setStatusMessage, setTextMessage, setUser } from "../store/Auth/AuthSlice"
 import { NavbarMobile } from "./NavbarMobile"
 import { useState } from "react"
 export const Navbar=()=>{
@@ -25,10 +25,10 @@ export const Navbar=()=>{
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
         dispatch(setUser(false))
-       
+        dispatch(setStatusMessage(true))
+        dispatch(setTextMessage('вы вышли!'))
+        dispatch(setColorMessage('bg-green-500'))
         navigate(HOME_ROUTE)
-        //window.location.reload()
-        console.log('Вы вышли !')
         
     }
      return( 

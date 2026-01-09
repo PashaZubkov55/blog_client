@@ -33,10 +33,10 @@ export const Postdetail = ()=>{
             
         }
         return(
-            <div className=" flex justify-center   ">    
-            <div className="detail bg-white  overflow-hidden  max-w-200 mb-18 pb-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-sm    ">
+            <div className="   flex justify-center  ">    
+            <div className="detail pl-3 pr-3  bg-white  overflow-hidden  max-w-200 mb-18 pb-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-sm    ">
             <div className="detail__header ">
-            <img className= 'object-cover  bg-center h-100 w-400 ' src={URL_SERVER + data.img} alt="detail"/>
+            <img className= 'md:object-cover  bg-center h-100 w-400 ' src={URL_SERVER + data.img} alt="detail"/>
               </div>      
               
                     <div className="detail__title px-8 ">

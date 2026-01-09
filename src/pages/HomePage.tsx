@@ -14,6 +14,7 @@ export const HomePage =()=>{
 
     useEffect(()=>{
       console.log(data)
+      refetch()
 
     },[])
     const formPrevent =(e)=>{
@@ -80,7 +81,7 @@ return(
             onChange={e=> setSearchValue(e.target.value)}
             value={searchValue}
             type="text"
-            className=" w-100 h-10 m-0 block  flex-auto rounded  border  border-solid border-green-700 bg-red-50  bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
+            className="w-80 md:w-100 h-10 m-0 block  flex-auto rounded  border  border-solid border-green-700 bg-red-50  bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
             placeholder="&#128270; Найти пост"
             aria-label="Search"
             id="exampleFormControlInput2"

@@ -10,7 +10,7 @@ export const DeletePostComponent = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [deletePost] = useDeleteMutation()
-    const {refetch} = useGetPostsQuery('')
+    const {refetch} = useGetPostsQuery()
     const modalClose = ( status:any)=>{
     dispatch(setModal(status))
     
@@ -21,13 +21,13 @@ export const DeletePostComponent = ()=>{
        e.preventDefault()
         try { 
           
-          await deletePost(id)
+          await deletePost(id).unwrap()
+          await refetch().unwrap()
           dispatch(setStatusMessage(true))
           dispatch(setTextMessage('Пост Удален!'))
           dispatch(setColorMessage('bg-green-500'))
-           await refetch()
-           
-            navigate(HOME_ROUTE)
+          modalClose(false)
+          navigate(HOME_ROUTE)
           
         } catch (error) {
           console.log(error);
