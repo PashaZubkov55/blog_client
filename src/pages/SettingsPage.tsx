@@ -64,14 +64,14 @@ export const SettingsPage = ()=>{
                 
                 
                 </div>
-               { modalStatus.payload == 'post'?
+               { modalStatus == 'post'?
             <CreatePostComponent/> 
-            :modalStatus.payload == 'createUnfo'? <CreateUserInfo/>
-            : modalStatus.payload == 'updateInfo'? <UpdateUserInfoComponent
+            :modalStatus == 'createUnfo'? <CreateUserInfo/>
+            : modalStatus == 'updateInfo'? <UpdateUserInfoComponent
                 name = {data.name}
                 img = {data.img}
 
-            />:modalStatus.payload == 'delete'? <DeleteUserComponent/>:false
+            />:modalStatus == 'delete'? <DeleteUserComponent/>:false
             }
             </div>
         

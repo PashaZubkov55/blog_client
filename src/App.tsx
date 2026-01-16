@@ -41,7 +41,7 @@ function App() {
     <BrowserRouter>
     
       <Header/>
-    {message.payload == true? <Message/>: false}
+    {message == true? <Message/>: false}
      
       <AppRouter />
         <ArrowTop/>

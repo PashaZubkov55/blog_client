@@ -20,9 +20,9 @@ export const Message = ()=>{
        return ()=>{clearTimeout(timer)}
     },[statusMessage])
     return(
-        <div className={ `fixed flex  items-center  ${colorMessage.payload} text-white text-sm font-bold  top-5 left-10 px-4 py-3`} role="alert">
+        <div className={ `fixed flex  items-center  ${colorMessage} text-white text-sm font-bold  top-5 left-10 px-4 py-3`} role="alert">
    
-    <p>{textMessage.payload}</p> 
+    <p>{textMessage}</p> 
 </div>
     )
 }

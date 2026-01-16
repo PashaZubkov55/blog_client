@@ -10,7 +10,7 @@ const AppRouter=()=>{
 
       return(
         <Routes>
-         { user.payload == true  &&  authRouts.map(({path, component})=>
+         { user == true  &&  authRouts.map(({path, component})=>
         <Route key={path} path={path} Component={component}/>
         )}
           { publicRouts.map(({path, component})=> 

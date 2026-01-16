@@ -10,7 +10,14 @@ interface Userinfo{
     
 }
 
+type getInfoArgs = Pick<Userinfo, 'userId'>
+type createInfoArgs =  Omit<Userinfo, 'id'> & Partial<Pick<Userinfo, 'id'>>
 
+type UpdateInfoArgs=  {
+    userId: string;
+    body: Required<Omit<Userinfo, 'id'| 'userId'>> & Partial<Pick<Userinfo,  'id'|'userId'>>;
+    
+}
 
 export const userInfoApi = createApi({
     reducerPath: 'userInfoApi',
@@ -20,12 +27,12 @@ export const userInfoApi = createApi({
     }),
    
     endpoints: (builder) => ({
-       getInfo: builder.query <Userinfo[], void> ({
+       getInfo: builder.query <Userinfo, getInfoArgs> ({
         query: (userid)=> `userInfo/${userid}`,
         
 
        }),
-       creteInfo: builder.mutation({
+       creteInfo: builder.mutation<Userinfo, createInfoArgs>({
        query:(body)=>({
         url: 'userInfo',
         method: 'POST',
@@ -33,7 +40,7 @@ export const userInfoApi = createApi({
        })
         
        }),
-       updateInfo: builder.mutation({
+       updateInfo: builder.mutation<Userinfo,UpdateInfoArgs>({
         query: ({userId, body})=>({
             url: `userInfo/${userId}`,
             method: 'PUT',

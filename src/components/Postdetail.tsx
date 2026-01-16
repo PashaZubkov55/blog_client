@@ -21,6 +21,7 @@ export const Postdetail = ()=>{
     const dispatch = useDispatch()
     useEffect(()=>{
         console.log(id, data)
+        console.log(modalStatus)
 
     },[])
 
@@ -69,7 +70,7 @@ export const Postdetail = ()=>{
 
 
         
-            {modalStatus.payload =='updatePost'?
+            {modalStatus =='updatePost'?
             <UpdatePostComponent
             title = {data.title}
             description = {data.description}
@@ -79,7 +80,7 @@ export const Postdetail = ()=>{
             
             
             />
-            : modalStatus.payload == 'deletePost'?
+            : modalStatus == 'deletePost'?
             <DeletePostComponent/>:false
             }
      </div>

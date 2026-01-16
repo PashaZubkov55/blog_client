@@ -1,38 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, isAction, PayloadAction } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { jwtDecode } from 'jwt-decode'
 //import { Login } from '../../components/Login'
 
+interface AutchState{
+  isAuth: boolean,
+  modal: string,
+  statusMessage: boolean,
+  textMessage: string,
+  colorMessage: string,
+  user: boolean
+}
+interface User{
+  id: number
+  email: string,
+  password: string
+}
+type userArgs = Required<User>
+type deleteUserArgs = Pick<User,'id'>
+type forgotPasswordArgs = Pick<User,'email'>
+type resetPasswordArgs = {
+  token:string
+  body:User
+}
 
+const initialState: AutchState= {
+  isAuth: false,
+  modal: '',
+  statusMessage:true,
+  textMessage: 'message',
+  colorMessage: '',
+  user: false
+}
 export const AuthSlice = createSlice({
   name: 'auth',
-  initialState:{
-    isAuth: false,
-    modal: false,
-    statusMessage:true,
-    textMessage: 'message',
-    colorMessage: '',
-    user: ''
-  },
+  initialState,
   reducers: {
-    setAuth(state, payload){
-      state.isAuth = payload
+    setAuth(state, action: PayloadAction<boolean>){
+      state.isAuth = action.payload
     },
-    setUser(state, status){
-      state.user = status
+    setUser(state, action: PayloadAction<boolean>){
+      state.user = action.payload
     },
     
-    setModal(state, status){
-      state.modal = status
+    setModal(state, action: PayloadAction<string>){
+      state.modal = action.payload
     }, 
-    setStatusMessage(state, status){
-      state.statusMessage = status
+    setStatusMessage(state, action: PayloadAction<boolean>){
+      state.statusMessage = action.payload
     },
-    setTextMessage(state, status){
-      state.textMessage = status
+    setTextMessage(state, action: PayloadAction<string>){
+      state.textMessage = action.payload
     },
-    setColorMessage(state, status){
-      state.colorMessage = status
+    setColorMessage(state, action: PayloadAction<string>){
+      state.colorMessage = action.payload
     }
   },
 })
@@ -43,7 +64,7 @@ export const authApi = createApi({
       baseUrl: 'http://localhost:5000/api/'
   }),
     endpoints: (builder) => ({
-       registration: builder.mutation({
+       registration: builder.mutation<User, userArgs>({
         query: (body)=>({
           url: 'user/registration',
           method: 'POST',
@@ -55,7 +76,7 @@ export const authApi = createApi({
             
         }
        }),
-       LogIn: builder.mutation({
+       LogIn: builder.mutation<User, userArgs>({
         query: credentials =>({
           url: 'user/login',
           method: 'POST',
@@ -70,7 +91,7 @@ export const authApi = createApi({
         }
        }),
      
-       Auth:builder.query({
+       Auth:builder.query<User, void>({
         query: ()=>({
           url: 'user/auth',
           method: 'GET',
@@ -85,20 +106,20 @@ export const authApi = createApi({
             
         }
        }),
-       deleteUser:builder.mutation({
-          query:(id:number)=>({
+       deleteUser:builder.mutation<User,deleteUserArgs>({
+          query:(id)=>({
             url: `user/${id}`,
             method: 'DELETE'
           })
        }),
-       forgot:builder.mutation({
+       forgot:builder.mutation<User, forgotPasswordArgs>({
         query:(body)=>({
           url: 'user/forgot-password',
            method: 'POST',
             body
         })
        }),
-       resetPassword:builder.mutation({
+       resetPassword:builder.mutation<User,resetPasswordArgs>({
           query:({token,body}) =>({
             url: `user/reset-password/${token}`,
             method: 'PUT',

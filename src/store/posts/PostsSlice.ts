@@ -8,8 +8,15 @@ interface Post{
     img: string,
     
 }
-
-
+// типы 
+type createPostArgs = Omit<Post, 'id'>& Partial<Pick<Post, 'id'>>
+type deletePostArgs = Pick<Post,'id'>
+type RequiredPost = Required<Post>
+type updatePostArgs ={
+    id: string|number,
+    body: RequiredPost
+}
+type getPostsArgs = Required<Post>
 export const postsApi = createApi({
     reducerPath: 'postsApi',
     baseQuery: fetchBaseQuery({
@@ -19,7 +26,7 @@ export const postsApi = createApi({
     }),
     keepUnusedDataFor: 10,
     endpoints: (builder) => ({
-       getPosts: builder.query <Post[], void>({
+       getPosts: builder.query <Post[], getPostsArgs>({
         
         query: (title)=>  `post/${title}/all`
         
@@ -35,7 +42,7 @@ export const postsApi = createApi({
        getUserPosts:builder.query<Post[], string>({
         query: (userId:string)=>  `post/${userId}/userPosts`,
        }),
-       addPost:builder.mutation({
+       addPost:builder.mutation<Post, createPostArgs>({
         query: (title) => ({
             url: `post`,
             method: 'POST',
@@ -43,14 +50,14 @@ export const postsApi = createApi({
           }),
        }),
        
-       update:builder.mutation({
+       update:builder.mutation<Post,updatePostArgs>({
         query: ({ id, body }) => ({
             url: `/post/${id}`,
             method: 'PUT',
             body,
           }),
        }),
-       delete:builder.mutation({
+       delete:builder.mutation<void, deletePostArgs>({
         query: ( id ) => ({
             url: `/post/${id}`,
             method: 'DELETE',

@@ -43,7 +43,7 @@ export const Navbar=()=>{
             </div>
             {burgerMenuStatus == true? 
           <nav  className="mwenu__mobile" onClick={()=>{menuStatus()}}>
-          {user.payload === true?
+          {user === true?
                  <ul className="">
                   <li> <NavLink  to={HOME_ROUTE} className='list__item'>Главная </NavLink></li>
                   <li>  <NavLink  to={PROFILE_ROUTE} className='list__item'>Профиль </NavLink>   </li>
@@ -69,7 +69,7 @@ export const Navbar=()=>{
           
           </div>
          <nav className="hidden navbar md:block ">
-            {user.payload === true?
+            {user === true?
                    <ul className="navbar_list list">
                    <NavLink  to={HOME_ROUTE} className='list__item'>Главная </NavLink>
                    <NavLink  to={PROFILE_ROUTE} className='list__item'>Профиль </NavLink>   
