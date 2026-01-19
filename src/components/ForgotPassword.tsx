@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router'
 import { RESTORATION_MESSAGE_ROUTE } from '../router/Url'
 import { setColorMessage, setStatusMessage, setTextMessage, useForgotMutation } from '../store/Auth/AuthSlice'
 import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store/store'
 
 
 export const ForgotPassword = ()=>{
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [forgotPassword] = useForgotMutation()
     const {
         register,

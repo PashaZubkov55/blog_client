@@ -6,9 +6,10 @@ import { CreateUserInfo } from "../modals/CreateUserInfoComponent";
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi";
 import { UpdateUserInfoComponent } from "../modals/UpdateUserInfoComponent";
 import { DeleteUserComponent } from "../modals/DeleteUserComponent";
+import { AppDispatch, RootState } from "../store/store";
 export const SettingsPage = ()=>{
-    const modalStatus = useSelector((state)=> state.auth.modal)
-    const dispatch = useDispatch()
+    const modalStatus = useSelector((state:RootState)=> state.auth.modal)
+    const dispatch = useDispatch<AppDispatch>()
     const id = Number(localStorage.getItem('userId'))
     const {data= []} = useGetInfoQuery(id)
     useEffect(()=>{

@@ -1,13 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { useGetPostsQuery, useUpdateMutation } from "../store/posts/PostsSlice";
 import { HOME_ROUTE, URL_SERVER } from "../router/Url";
-export const UpdatePostComponent = ({title, description,  img})=>{
+import { AppDispatch } from "../store/store";
+  type Update = {
+    title: string,
+    description: string
+    img: string
+  }
+export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
     const [update] = useUpdateMutation()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
     const {refetch} = useGetPostsQuery()
@@ -23,7 +29,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
 
     } = useForm()
 
-   const modalClose = (status:boolean)=>{
+   const modalClose = (status:string)=>{
    
     dispatch(setModal(status))
     
@@ -71,7 +77,7 @@ export const UpdatePostComponent = ({title, description,  img})=>{
           formData.append('img', data.file[0])
          
           formData.append('userId', userId )
-          await update({id:id, body:formData}).unwrap()
+          await update({id,formData}).unwrap()
           dispatch(setStatusMessage(true))
           dispatch(setTextMessage('Пост изменен !'))
           dispatch(setColorMessage('bg-green-500'))

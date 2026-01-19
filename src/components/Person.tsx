@@ -1,15 +1,18 @@
-import react from 'react'
+import react, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SESTTINGS_ROUTE, URL_SERVER } from '../router/Url'
 import { NonDataComponent } from './NonDataComponent'
+type person = {
+    userName: string
+    userImg: string
+}
 
-
-export const Person = ({ userName, userImg})=>{
+export const  Person: FC<person>= ({ userName, userImg})=>{
     if (!userName) {
         return(
            <NonDataComponent
             message='данных'
-            modal= 'post'
+           
            />
         )
     }else{

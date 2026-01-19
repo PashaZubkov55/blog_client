@@ -7,18 +7,19 @@ import { setModal } from "../store/Auth/AuthSlice"
 import { UpdatePostComponent } from "../modals/updatePostComponent"
 import { URL_SERVER } from "../router/Url"
 import { DeletePostComponent } from "../modals/DeletePostComponent"
+import { AppDispatch, RootState } from "../store/store"
 
 
 
 export const Postdetail = ()=>{
-    const modalStatus = useSelector((state)=> state.auth.modal)
+    const modalStatus = useSelector((state:RootState)=> state.auth.modal)
     const {id} = useParams()
     const {data, isLoading} =  useGetPostQuery(id,{
         pollingInterval: 3000,
         refetchOnMountOrArgChange: true,
         skip: false,
     })
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     useEffect(()=>{
         console.log(id, data)
         console.log(modalStatus)

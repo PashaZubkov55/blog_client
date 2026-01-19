@@ -6,6 +6,7 @@ import { useCreteInfoMutation } from "../store/userInfo/userInfoApi"
 import {  useNavigate } from "react-router"
 import { HOME_ROUTE } from "../router/Url"
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi" 
+import { AppDispatch } from "../store/store"
 
 export const CreateUserInfo = ()=>{
     const {
@@ -14,13 +15,13 @@ export const CreateUserInfo = ()=>{
         handleSubmit, 
     } = useForm()
    
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [image,setImage] = useState('')
     const userId = Number( localStorage.getItem('userId'))
     const {refetch} = useGetInfoQuery(userId)
     const [createInfo] = useCreteInfoMutation()
-    const modalClose=(status: boolean)=>{
+    const modalClose=(status:any)=>{
         dispatch(setModal(status))
         
     }

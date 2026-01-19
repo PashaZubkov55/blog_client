@@ -3,18 +3,24 @@ import {  useNavigate, useParams } from 'react-router'
 import { setColorMessage, setStatusMessage, setTextMessage, useResetPasswordMutation } from '../store/Auth/AuthSlice'
 import { useDispatch } from 'react-redux'
 import { LOGUIN_ROUTE } from '../router/Url'
+import { AppDispatch } from '../store/store'
 export const RestorationPasswordPage = ()=>{
     const [resetPassword] = useResetPasswordMutation()
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const {token} = useParams()
+    type TFormData= {
+        password: string,
+        repeatPassword: string
+    }
     const {
         register,
         formState: {errors},
         handleSubmit
     } = useForm()
    
-    const restorationAccount = async (data)=>{
+   
+    const restorationAccount = async (data:TFormData)=>{
        
        
            

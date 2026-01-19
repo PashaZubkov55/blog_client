@@ -11,11 +11,11 @@ interface Userinfo{
 }
 
 type getInfoArgs = Pick<Userinfo, 'userId'>
-type createInfoArgs =  Omit<Userinfo, 'id'> & Partial<Pick<Userinfo, 'id'>>
+
 
 type UpdateInfoArgs=  {
-    userId: string;
-    body: Required<Omit<Userinfo, 'id'| 'userId'>> & Partial<Pick<Userinfo,  'id'|'userId'>>;
+    userId: number;
+    formData: FormData
     
 }
 
@@ -32,19 +32,19 @@ export const userInfoApi = createApi({
         
 
        }),
-       creteInfo: builder.mutation<Userinfo, createInfoArgs>({
-       query:(body)=>({
+       creteInfo: builder.mutation<Userinfo, FormData>({
+       query:(formData)=>({
         url: 'userInfo',
         method: 'POST',
-        body
+        body:formData
        })
         
        }),
        updateInfo: builder.mutation<Userinfo,UpdateInfoArgs>({
-        query: ({userId, body})=>({
+        query: ({userId, formData})=>({
             url: `userInfo/${userId}`,
             method: 'PUT',
-            body: body
+            body: formData
 
         })
        })

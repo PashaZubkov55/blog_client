@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { authRouts, publicRouts } from "./routes";
 import { useEffect, useState } from "react";
 import { NotFaundPage } from "../pages/NotFaundPage";
+import { RootState } from "../store/store";
 const AppRouter=()=>{
     const [auth, setAuth] = useState(false)
-    const user = useSelector((state) => state.auth.user)
+    const user = useSelector((state:RootState) => state.auth.user)
 
       return(
         <Routes>

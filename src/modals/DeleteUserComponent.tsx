@@ -4,13 +4,14 @@ import { useNavigate } from "react-router"
 import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
 import { useGetPostsQuery, useGetUserPostsQuery } from "../store/posts/PostsSlice"
 import { HOME_ROUTE } from "../router/Url"
+import { AppDispatch } from "../store/store"
 
 export  const  DeleteUserComponent = ()=>{
     const [Userdelete] = useDeleteUserMutation()
     const id = Number(localStorage.getItem('userId'))
     const userId = Number(localStorage.getItem('userId'))
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const userInfo =useGetInfoQuery(userId)
     const posts = useGetPostsQuery()
     const userPosts = useGetUserPostsQuery(userId)

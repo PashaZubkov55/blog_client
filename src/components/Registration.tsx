@@ -4,9 +4,10 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { LOGUIN_ROUTE } from '../router/Url'
 import { setColorMessage, setStatusMessage, setTextMessage, useRegistrationMutation } from '../store/Auth/AuthSlice'
 import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store/store'
 
 export const Registration = ()=>{
-    const dispatch =useDispatch()
+    const dispatch =useDispatch<AppDispatch>()
     const [registration] = useRegistrationMutation()
     const navigate = useNavigate()
     const {

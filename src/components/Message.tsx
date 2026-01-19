@@ -1,11 +1,12 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setStatusMessage } from "../store/Auth/AuthSlice"
+import { RootState } from "../store/store"
 
 export const Message = ()=>{
-    const statusMessage = useSelector((state)=>state.auth.statusMessage)
-    const textMessage = useSelector((state)=>state.auth.textMessage)
-    const colorMessage = useSelector((state)=>state.auth.colorMessage)
+    const statusMessage = useSelector((state:RootState)=>state.auth.statusMessage)
+    const textMessage = useSelector((state:RootState)=>state.auth.textMessage)
+    const colorMessage = useSelector((state:RootState)=>state.auth.colorMessage)
 
 
        const  dispatch = useDispatch()

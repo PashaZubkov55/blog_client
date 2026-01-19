@@ -5,8 +5,8 @@ import { jwtDecode } from 'jwt-decode'
 
 interface AutchState{
   isAuth: boolean,
-  modal: string,
-  statusMessage: boolean,
+  modal: string| boolean,
+  statusMessage: boolean|string,
   textMessage: string,
   colorMessage: string,
   user: boolean

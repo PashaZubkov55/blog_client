@@ -9,12 +9,13 @@ interface Post{
     
 }
 // типы 
-type createPostArgs = Omit<Post, 'id'>& Partial<Pick<Post, 'id'>>
+
+
 type deletePostArgs = Pick<Post,'id'>
-type RequiredPost = Required<Post>
+
 type updatePostArgs ={
-    id: string|number,
-    body: RequiredPost
+   id: string|undefined
+    formData: FormData
 }
 type getPostsArgs = Required<Post>
 export const postsApi = createApi({
@@ -42,19 +43,19 @@ export const postsApi = createApi({
        getUserPosts:builder.query<Post[], string>({
         query: (userId:string)=>  `post/${userId}/userPosts`,
        }),
-       addPost:builder.mutation<Post, createPostArgs>({
-        query: (title) => ({
+       addPost:builder.mutation<Post, FormData>({
+        query: (formData) => ({
             url: `post`,
             method: 'POST',
-            body: title
+            body:formData
           }),
        }),
        
        update:builder.mutation<Post,updatePostArgs>({
-        query: ({ id, body }) => ({
+        query: ({id,formData}) => ({
             url: `/post/${id}`,
             method: 'PUT',
-            body,
+            body: formData,
           }),
        }),
        delete:builder.mutation<void, deletePostArgs>({

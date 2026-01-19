@@ -4,7 +4,6 @@ import { Post } from "../components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 import { NonDataComponent } from "../components/NonDataComponent"
 import { useDebounce } from "../hooks/useDebounce"
-import { Message } from "../components/Message"
 export const HomePage =()=>{
    
    
@@ -22,53 +21,6 @@ export const HomePage =()=>{
         
 
     }
-  /*
-    if (isLoading ) {
-        return(
-
-            <Loader/>
-        )
-    } 
-    if (!data || data.length === 0) {
-        return <NonDataComponent
-        message ='постов'
-        modal ='post'
-        />
-    }
-       
-       
-
-    return(
-            <div className="conteiner">
-                
-            <div className="postList ">
-                
-               
-                
-               {
-                data?
-                data.map(post=>(
-                
-                    <Post 
-                    key = {post.id} 
-                    title ={post.title}
-                    img = {post.img}
-                    id = {post.id}
-                    
-                    />
-                    ))
-                    : false
-                    
-            
-                }
-           
-    
-            </div>
-            </div>
-            
-            
-)
-*/
 return(
     <div className="post">
            
@@ -94,8 +46,7 @@ return(
         
         {isLoading? <Loader/>: !data|| data.length== 0?
         <NonDataComponent
-        message ='постов'
-        modal ='post'
+        message =' Еще нет постов'
         />:  <div className="posts__postList ">
                      
         {

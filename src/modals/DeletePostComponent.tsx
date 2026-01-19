@@ -5,9 +5,10 @@ import { useNavigate, useParams } from "react-router";
 import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
 import { useDeleteMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
+import { AppDispatch } from "../store/store";
 
 export const DeletePostComponent = ()=>{
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deletePost] = useDeleteMutation()
     const {refetch} = useGetPostsQuery()

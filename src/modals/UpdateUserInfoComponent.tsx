@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { URL_SERVER } from "../router/Url"
 import { useGetInfoQuery, useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
-export const UpdateUserInfoComponent =({name, img })=>{
-    const dispatch = useDispatch()
+import { AppDispatch } from "../store/store"
+type UserInfo = {
+  name: string,
+  img: string
+}
+export const UpdateUserInfoComponent: FC<UserInfo> =({name, img })=>{
+    const dispatch = useDispatch<AppDispatch>()
     const userId = Number( localStorage.getItem('userId'))
     const [updateInfo] = useUpdateInfoMutation()
     
@@ -49,7 +54,7 @@ const updateUserInfo = async(data)=>{
       formData.append('img', '')
       formData.append('userId',userId)
       console.log('userId -',userId)
-      await updateInfo({userId, body:formData}).unwrap()
+      await updateInfo({userId, formData}).unwrap()
       dispatch(setStatusMessage(true))
       dispatch(setTextMessage('Ваша информация изменена!'))
       dispatch(setColorMessage('bg-green-500'))

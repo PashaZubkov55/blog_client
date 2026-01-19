@@ -5,14 +5,15 @@ import { useForm } from "react-hook-form";
 import { useAddPostMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
 import { useNavigate } from "react-router";
 import { HOME_ROUTE } from "../router/Url";
+import { AppDispatch } from "../store/store";
 export const CreatePostComponent = ()=>{
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const {refetch} = useGetPostsQuery()
     const fileInputRef = useRef(null);
     const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')
-    const userId = localStorage.getItem('userId')
+    const userId =Number( localStorage.getItem('userId'))
     const {
         register,
         formState:{errors},
@@ -21,7 +22,7 @@ export const CreatePostComponent = ()=>{
 
     } = useForm()
 
-   const modalClose = ( status:boolean)=>{
+   const modalClose = ( status:string)=>{
    
     dispatch(setModal(status))
     
@@ -35,7 +36,7 @@ export const CreatePostComponent = ()=>{
            
       };
      
-      const createPost= async(data)=>{
+      const createPost = async(data)=>{
         const  userId = localStorage.getItem('userId')
        //console.log(data.file)
         try {

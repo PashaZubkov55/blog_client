@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router"
-import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE, REGISTRATION_ROUTE, RESTORATION_MESSAG_ROUTE } from "../router/Url"
+import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
 import {  setColorMessage, setStatusMessage, setTextMessage, setUser, useLogInMutation } from "../store/Auth/AuthSlice"
 import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch } from "../store/store"
 
 
 export const Login = ()=>{
-    const statusMessage = useSelector((state)=>state.auth.statusMessage)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [logIn] = useLogInMutation()
     const {
         register,

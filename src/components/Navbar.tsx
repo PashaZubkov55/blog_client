@@ -4,10 +4,11 @@ import { HOME_ROUTE, LOGUIN_ROUTE, PROFILE_ROUTE } from "../router/Url"
 import { setColorMessage, setStatusMessage, setTextMessage, setUser } from "../store/Auth/AuthSlice"
 import { NavbarMobile } from "./NavbarMobile"
 import { useState } from "react"
+import { AppDispatch, RootState } from "../store/store"
 export const Navbar=()=>{
     const navigate = useNavigate()
-    const user = useSelector((state)=>state.auth.user)
-    const dispatch = useDispatch()
+    const user = useSelector((state:RootState)=>state.auth.user)
+    const dispatch = useDispatch<AppDispatch>()
     const [burgerMenuStatus, setBurgerMenuStatus] = useState(false)
     
     const menuStatus =()=>{

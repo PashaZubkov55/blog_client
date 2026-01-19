@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setModal } from "../store/Auth/AuthSlice"
-import { CreatePostComponent } from "../modals/CreatePostComponent"
 import { useNavigate } from "react-router"
 import { SESTTINGS_ROUTE } from "../router/Url"
+import { AppDispatch, RootState } from "../store/store"
+import { FC } from "react"
+type Message = {
+    message: string
+}
 
 
-
-export const NonDataComponent = ({message, modal})=>{
-    const modalStatus = useSelector((state)=> state.auth.modal)
-    const dispatch = useDispatch()
+export const NonDataComponent :FC<Message> = ({message})=>{
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
   
         return(
@@ -16,7 +17,7 @@ export const NonDataComponent = ({message, modal})=>{
             <div className="detail bg-white  overflow-hidden  max-w-200 mb-18 pb-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-sm    ">
             
                     <div className="detail__title px-8 ">
-                        <h1 className='title   text-3xl font-extrabold dark:text-white px8 '>Еще нет {message}</h1>
+                        <h1 className='title   text-3xl font-extrabold dark:text-white px8 '> {message}</h1>
                         </div>
                    
                     <div className="details_button">
@@ -25,7 +26,6 @@ export const NonDataComponent = ({message, modal})=>{
                     </button>
                     </div>
                     </div>
-                    { modalStatus.payload == 'post'? <CreatePostComponent/>:false}
 
          </div>
         )
