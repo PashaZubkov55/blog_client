@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form"
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
-import { useCreteInfoMutation } from "../store/userInfo/userInfoApi"
-import {  useNavigate } from "react-router"
+import { useCreteInfoMutation } from "@store/userInfo/userInfoApi"
+import {  useNavigate } from "react-router-dom"
 import { HOME_ROUTE } from "../router/Url"
-import { useGetInfoQuery } from "../store/userInfo/userInfoApi" 
+import { useGetInfoQuery } from "@store/userInfo/userInfoApi" 
 import { AppDispatch } from "../store/store"
 
 export const CreateUserInfo = ()=>{

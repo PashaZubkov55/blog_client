@@ -1,14 +1,14 @@
 import { FC, useEffect } from "react";
-import { useNavigate } from "react-router"
+
 import { POST_ROUTE, URL_SERVER } from "../router/Url"
-import { useGetPostsQuery } from "../store/posts/PostsSlice";
+import { useNavigate } from "react-router-dom";
 type post = {
     title: string,
     img: string,
     id:number
 }
 export const Post: FC<post> = ({title, img, id})=>{
-    const navigate = useNavigate()
+   const navigate = useNavigate()
    
         return(
             <div className="post ">

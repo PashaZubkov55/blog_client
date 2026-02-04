@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { CreatePostComponent } from "../modals/CreatePostComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../store/Auth/AuthSlice";
+import { setModal } from "@store/Auth/AuthSlice";
 import { CreateUserInfo } from "../modals/CreateUserInfoComponent";
-import { useGetInfoQuery } from "../store/userInfo/userInfoApi";
+import { useGetInfoQuery } from "@store/userInfo/userInfoApi";
 import { UpdateUserInfoComponent } from "../modals/UpdateUserInfoComponent";
 import { DeleteUserComponent } from "../modals/DeleteUserComponent";
 import { AppDispatch, RootState } from "../store/store";

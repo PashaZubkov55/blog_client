@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
-import { setColorMessage, setModal, setStatusMessage, setTextMessage, setUser, useDeleteUserMutation } from "../store/Auth/AuthSlice"
-import { useNavigate } from "react-router"
-import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
-import { useGetPostsQuery, useGetUserPostsQuery } from "../store/posts/PostsSlice"
+import { setColorMessage, setModal, setStatusMessage, setTextMessage, setUser, useDeleteUserMutation } from "@store/Auth/AuthSlice"
+import { useNavigate } from "react-router-dom"
+import { useGetInfoQuery } from "@store/userInfo/userInfoApi"
+import { useGetPostsQuery, useGetUserPostsQuery } from "@store/posts/PostsSlice"
 import { HOME_ROUTE } from "../router/Url"
 import { AppDispatch } from "../store/store"
 

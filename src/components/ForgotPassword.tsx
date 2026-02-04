@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { RESTORATION_MESSAGE_ROUTE } from '../router/Url'
 import { setColorMessage, setStatusMessage, setTextMessage, useForgotMutation } from '../store/Auth/AuthSlice'
 import { useDispatch } from 'react-redux'

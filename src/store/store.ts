@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import AuthSlice, { authApi } from './Auth/AuthSlice'
 import { postsApi } from './posts/PostsSlice'
-import { userInfoApi } from './userInfo/userInfoApi'
+import { userInfoApi } from './userInfo/UserInfoApi'
+
 
 
 

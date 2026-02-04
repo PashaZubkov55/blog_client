@@ -1,4 +1,4 @@
-import { useLocation } from "react-router"
+import { useLocation } from "react-router-dom"
 import { FORGOT_PASSWORD_ROUTE, RESTORATION_MESSAGE_ROUTE, RESTORATION_PASSWORD_ROUTE } from "../router/Url"
 import { ForgotPassword } from "../components/ForgotPassword"
 import { RestorationMessage } from "../components/RestorationMessage"

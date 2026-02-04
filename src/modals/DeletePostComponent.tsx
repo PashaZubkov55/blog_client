@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage, setUser } from "../store/Auth/AuthSlice";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { HOME_ROUTE, PROFILE_ROUTE } from "../router/Url";
 import { useForm } from "react-hook-form";
 import { useDeleteMutation, useGetPostsQuery } from "../store/posts/PostsSlice";

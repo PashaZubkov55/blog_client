@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form'
-import {  useNavigate, useParams } from 'react-router'
+import {  useNavigate, useParams } from 'react-router-dom'
 import { setColorMessage, setStatusMessage, setTextMessage, useResetPasswordMutation } from '../store/Auth/AuthSlice'
 import { useDispatch } from 'react-redux'
 import { LOGUIN_ROUTE } from '../router/Url'

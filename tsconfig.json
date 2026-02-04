@@ -4,5 +4,14 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
   ],
+  "compilerOptions": {
+    "baseUrl": ".", // точка отсчета для абсолютных путей
+    "paths": {
+      "@components/*": ["src/components/*"], // все пути к компонентам начинаются отсюда
+      "@pages/*": ["src/pages/*"],           // все пути к страницам
+      "@store/*": ["src/store/*"],           // все пути к хранилищу
+      "@utils/*": ["src/utils/*"]            // все утилиты
+    }
+  }
    
 }

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
 import { useAddPostMutation, useGetPostsQuery } from "../store/posts/PostsSlice";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { HOME_ROUTE } from "../router/Url";
 import { AppDispatch } from "../store/store";
 export const CreatePostComponent = ()=>{

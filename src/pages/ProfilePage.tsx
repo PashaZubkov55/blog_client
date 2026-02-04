@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
-import { Post } from "../components/Past"
-import {Person} from '../components/Person'
-import { useGetUserPostsQuery } from "../store/posts/PostsSlice"
-import { useNavigate } from "react-router"
+import { Post } from "@components/Past"
+import {Person} from '@components/Person'
+import { useGetUserPostsQuery } from "@store/posts/PostsSlice"
+import { useNavigate } from "react-router-dom"
 
-import { Loader } from "../components/Loader"
-import { useGetInfoQuery } from "../store/userInfo/userInfoApi"
-import { NonDataComponent } from "../components/NonDataComponent"
+
+
+
+   
+
+import { NonDataComponent } from "@components/NonDataComponent"
+import { useGetInfoQuery } from "@store/userInfo/userInfoApi"
 
 
 export const ProfilePage=()=>{

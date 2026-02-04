@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 import { SESTTINGS_ROUTE } from "../router/Url"
 import { AppDispatch, RootState } from "../store/store"
 import { FC } from "react"

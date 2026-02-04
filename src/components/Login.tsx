@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
 import {  setColorMessage, setStatusMessage, setTextMessage, setUser, useLogInMutation } from "../store/Auth/AuthSlice"
 import { useDispatch, useSelector } from "react-redux"

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetPostsQuery, useUpdateMutation } from "../store/posts/PostsSlice";
 import { HOME_ROUTE, URL_SERVER } from "../router/Url";
 import { AppDispatch } from "../store/store";

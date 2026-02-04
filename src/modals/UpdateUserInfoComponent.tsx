@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice"
+import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "@store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { URL_SERVER } from "../router/Url"
-import { useGetInfoQuery, useUpdateInfoMutation } from "../store/userInfo/userInfoApi"
+import { useGetInfoQuery, useUpdateInfoMutation } from "@store/userInfo/userInfoApi"
 import { AppDispatch } from "../store/store"
 type UserInfo = {
   name: string,
