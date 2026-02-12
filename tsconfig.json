@@ -8,9 +8,10 @@
     "baseUrl": ".", // точка отсчета для абсолютных путей
     "paths": {
       "@components/*": ["src/components/*"], // все пути к компонентам начинаются отсюда
-      "@pages/*": ["src/pages/*"],           // все пути к страницам
-      "@store/*": ["src/store/*"],           // все пути к хранилищу
-      "@utils/*": ["src/utils/*"]            // все утилиты
+      "@pages/*": ["src/pages/*"],               // все пути к хранилищу
+      "@utils/*": ["src/utils/*"],           // все утилиты
+      "@modals/*": ["src/modals/*"], 
+      "@store/*": ["src/store/*"]
     }
   }
    

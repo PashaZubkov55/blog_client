@@ -17,7 +17,7 @@ type updatePostArgs ={
    id: string|undefined
     formData: FormData
 }
-type getPostsArgs = Required<Post>
+
 export const postsApi = createApi({
     reducerPath: 'postsApi',
     baseQuery: fetchBaseQuery({
@@ -27,7 +27,7 @@ export const postsApi = createApi({
     }),
     keepUnusedDataFor: 10,
     endpoints: (builder) => ({
-       getPosts: builder.query <Post[], getPostsArgs>({
+       getPosts: builder.query <Post[], string>({
         
         query: (title)=>  `post/${title}/all`
         

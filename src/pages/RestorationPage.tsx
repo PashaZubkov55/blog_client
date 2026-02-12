@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom"
-import { FORGOT_PASSWORD_ROUTE, RESTORATION_MESSAGE_ROUTE, RESTORATION_PASSWORD_ROUTE } from "../router/Url"
-import { ForgotPassword } from "../components/ForgotPassword"
-import { RestorationMessage } from "../components/RestorationMessage"
-import { RestorationPassword } from "../components/RestorationPassword"
+import { FORGOT_PASSWORD_ROUTE, } from "../router/Url"
+import { ForgotPassword } from "@components/ForgotPassword"
+import { RestorationMessage } from "@components/RestorationMessage"
+
 
 export  const RestorationPage = ()=>{
     const location = useLocation()

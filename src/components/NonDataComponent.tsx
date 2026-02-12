@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { SESTTINGS_ROUTE } from "../router/Url"
-import { AppDispatch, RootState } from "../store/store"
 import { FC } from "react"
 type Message = {
     message: string
@@ -9,7 +7,6 @@ type Message = {
 
 
 export const NonDataComponent :FC<Message> = ({message})=>{
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
   
         return(

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC} from "react";
 
 import { POST_ROUTE, URL_SERVER } from "../router/Url"
 import { useNavigate } from "react-router-dom";

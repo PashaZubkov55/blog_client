@@ -1,6 +1,6 @@
 
 import { NavLink } from 'react-router-dom';
-import { HOME_ROUTE, LOGUIN_ROUTE } from '../router/Url';
+import { HOME_ROUTE} from '../router/Url';
 import { Navbar } from './Navbar';
 export const Header =()=>{
     return(

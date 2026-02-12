@@ -8,17 +8,20 @@ import { useAuthQuery,  setUser} from './store/Auth/AuthSlice'
 import { useEffect } from 'react'
 import { ArrowTop } from './components/ArrowTop'
 import { Message } from './components/Message'
+import { RootState } from './store/store'
+
+
+
 
 
 function App() {
- const user = useSelector((state)=> state.auth.user)
- const message = useSelector((state)=> state.auth.statusMessage)
+ const message = useSelector((state:RootState)=> state.auth.statusMessage)
 
  
  // const {data =[]} = useAuthQuery()
  //const {Auth} = useAuthQuery()
   const dispatch = useDispatch()
-  const {data=[], refetch, isLoading, error} = useAuthQuery()
+  const {data=[], isLoading, error} = useAuthQuery()
  
   
 

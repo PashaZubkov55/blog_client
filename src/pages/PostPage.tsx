@@ -1,4 +1,4 @@
-import { Postdetail } from "../components/Postdetail"
+import { Postdetail } from "@components/Postdetail"
 
 export const PostPage=()=>{
     return(

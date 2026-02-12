@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import { FORGOT_PASSWORD_ROUTE, HOME_ROUTE, REGISTRATION_ROUTE } from "../router/Url"
 import {  setColorMessage, setStatusMessage, setTextMessage, setUser, useLogInMutation } from "../store/Auth/AuthSlice"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch} from "react-redux"
 import { AppDispatch } from "../store/store"
 
 
@@ -18,7 +18,7 @@ export const Login = ()=>{
 
     } = useForm()
 
-    const isLogin =  async (data)=>{
+    const isLogin =  async (data:any)=>{
         const formData = new  FormData()
             formData.append('email', data.email)
             formData.append('password', data.password)
@@ -66,7 +66,9 @@ export const Login = ()=>{
         }
     })}
     />
-    <div className="input__error text-red-600">{errors?.email?.message}</div>
+    <div className="input__error text-red-600">
+    {typeof errors?.email?.message === 'string' ? errors.email.message : ''}
+    </div>
   </div>
   <div className="mb-5">
     <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Введите Пароль</label>
@@ -81,7 +83,9 @@ export const Login = ()=>{
         }
     })}
   />
-   <div className="input__error text-red-600">{errors?.password?.message}</div>
+   <div className="input__error text-red-600">
+   {typeof errors?.email?.message === 'string' ? errors.email.message : ''}
+   </div>
 
   </div>
   <div className="mb-5">

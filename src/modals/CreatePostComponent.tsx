@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
@@ -6,10 +6,13 @@ import { useAddPostMutation, useGetPostsQuery } from "../store/posts/PostsSlice"
 import { useNavigate } from "react-router-dom";
 import { HOME_ROUTE } from "../router/Url";
 import { AppDispatch } from "../store/store";
+import { useDebounce } from "../hooks/useDebounce";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const {refetch} = useGetPostsQuery()
+    const [searchValue, setSearchValue] = useState('')
+    const title = useDebounce(searchValue)
+    const {refetch} = useGetPostsQuery({title})
     const fileInputRef = useRef(null);
     const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')

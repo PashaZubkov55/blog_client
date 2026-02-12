@@ -12,13 +12,12 @@ interface AutchState{
   user: boolean
 }
 interface User{
-  id: number
+  id: number,
   email: string,
-  password: string
+  password: string,
 }
-type userArgs = Required<User>
 type deleteUserArgs = Pick<User,'id'>
-type forgotPasswordArgs = Pick<User,'email'>
+
 type resetPasswordArgs = {
   token:string
   body:User
@@ -76,7 +75,7 @@ export const authApi = createApi({
             
         }
        }),
-       LogIn: builder.mutation<User, userArgs>({
+       LogIn: builder.mutation<User, FormData>({
         query: credentials =>({
           url: 'user/login',
           method: 'POST',
@@ -112,7 +111,7 @@ export const authApi = createApi({
             method: 'DELETE'
           })
        }),
-       forgot:builder.mutation<User, forgotPasswordArgs>({
+       forgot:builder.mutation<User, FormData>({
         query:(body)=>({
           url: 'user/forgot-password',
            method: 'POST',

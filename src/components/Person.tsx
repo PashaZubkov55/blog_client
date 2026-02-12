@@ -1,4 +1,4 @@
-import react, { FC } from 'react'
+import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SESTTINGS_ROUTE, URL_SERVER } from '../router/Url'
 import { NonDataComponent } from './NonDataComponent'

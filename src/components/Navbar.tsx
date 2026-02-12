@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from "react-router-dom"
 import {useDispatch, useSelector } from "react-redux"
 import { HOME_ROUTE, LOGUIN_ROUTE, PROFILE_ROUTE } from "../router/Url" 
 import { setColorMessage, setStatusMessage, setTextMessage, setUser } from "../store/Auth/AuthSlice"
-import { NavbarMobile } from "./NavbarMobile"
 import { useState } from "react"
 import { AppDispatch, RootState } from "../store/store"
 export const Navbar=()=>{
@@ -43,7 +42,7 @@ export const Navbar=()=>{
             </svg>
             </div>
             {burgerMenuStatus == true? 
-          <nav  className="mwenu__mobile" onClick={()=>{menuStatus()}}>
+          <nav  className="menu__mobile" onClick={()=>{menuStatus()}}>
           {user === true?
                  <ul className="">
                   <li> <NavLink  to={HOME_ROUTE} className='list__item'>Главная </NavLink></li>

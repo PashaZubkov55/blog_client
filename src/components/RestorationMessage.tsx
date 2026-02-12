@@ -1,9 +1,8 @@
-import {  useNavigate } from "react-router-dom"
-import { RESTORATION_PASSWORD_ROUTE } from "../router/Url"
+
 
 
 export  const RestorationMessage = ()=>{
-    const navigate = useNavigate()
+    
     const email = localStorage.getItem('email')
     return(
         <div className="restorationMessage">

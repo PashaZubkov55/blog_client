@@ -11,8 +11,10 @@ export default defineConfig({
       '@components': resolve(__dirname, 'src/components'), // псевдоним @components ссылается на src/components
       '@pages': resolve(__dirname, 'src/pages'),           // псевдоним @pages ссылается на src/pages
       '@store': resolve(__dirname, 'src/store'),           // псевдоним @store ссылается на src/store
-      '@utils': resolve(__dirname, 'src/utils')            // псевдоним @utils ссылается на src/utils
+      '@utils': resolve(__dirname, 'src/utils'),            // псевдоним @utils ссылается на src/utils
+      '@modals': resolve(__dirname, 'src/modals'),   
     }
+
   },
   plugins: [
     react(),

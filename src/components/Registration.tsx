@@ -16,7 +16,7 @@ export const Registration = ()=>{
         handleSubmit,
 
     } = useForm()
-    const isRegistration= async(data)=>{
+    const isRegistration= async(data:any)=>{
         try {
             const formData = new  FormData()
             formData.append('email', data.email)
@@ -61,7 +61,10 @@ export const Registration = ()=>{
         }
     })}
     />
-    <div className="input__error text-red-600">{errors?.email?.message}</div>
+    <div className="input__error text-red-600">
+    {typeof errors?.email?.message === 'string' ? errors.email.message : ''}
+    </div>
+    
   </div>
   <div className="mb-5">
     <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Введите Пароль</label>
@@ -76,7 +79,9 @@ export const Registration = ()=>{
         }
     })}
   />
-   <div className="input__error text-red-600">{errors?.password?.message}</div>
+   <div className="input__error text-red-600">
+   {typeof errors?.password?.message === 'string' ? errors.password.message : ''}
+   </div>
 
   </div>
   <div className="flex items-start mb-5">

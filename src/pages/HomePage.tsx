@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { Loader } from "../components/Loader"
-import { Post } from "../components/Past"
+import { Loader } from "@components/Loader"
+import { Post } from "@components/Past"
 import { useGetPostsQuery } from "../store/posts/PostsSlice"
 import { NonDataComponent } from "../components/NonDataComponent"
 import { useDebounce } from "../hooks/useDebounce"
