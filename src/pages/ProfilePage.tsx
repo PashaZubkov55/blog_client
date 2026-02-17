@@ -1,25 +1,20 @@
-import { useEffect, useState } from "react"
-import { Post } from "@components/Past"
-import {Person} from '@components/Person'
-import { useGetUserPostsQuery } from "@store/posts/PostsSlice"
-import { useNavigate } from "react-router-dom"
+import { useEffect} from "react"
+import { Post } from "../components/Past"
+import {Person} from '../components/Person'
+import { useGetUserPostsQuery } from "../store/posts/PostsSlice"
+
+import { NonDataComponent } from "../components/NonDataComponent"
+import { useGetInfoQuery } from "../store/userInfo/UserInfoApi"
 
 
-
-
-   
-
-import { NonDataComponent } from "@components/NonDataComponent"
-import { useGetInfoQuery } from "@store/userInfo/userInfoApi"
 
 
 export const ProfilePage=()=>{
-    const navigate = useNavigate()
-    const userId =Number( localStorage.getItem('userId'))
+
+
+    const userId = Number( localStorage.getItem('userId'))
     const userInfo = useGetInfoQuery(userId)
     const userPosts = useGetUserPostsQuery(userId)
-
-
     useEffect(()=>{
            if (userInfo.isLoading && userPosts.isLoading) {
             console.log('загрузка...')
@@ -31,19 +26,22 @@ export const ProfilePage=()=>{
       
     return (
         <div className="profile">
-          {/* Блок с информацией о пользователе */}
-          <div className="profile__person">
-            {userInfo && userInfo.data ? (
-              <Person userImg={userInfo.data.img} userName={userInfo.data.name} />
-            ) : (
-              <NonDataComponent message="Нет данных о пользователе" modal="user" />
-            )}
-          </div>
+         <div className="profile__person">
+        {userInfo.isSuccess && userInfo.data ? (
+          <Person
+            img={userInfo.data.img ?? ""}
+            name={userInfo.data.name}
+          />
+        ) : (
+          <NonDataComponent message="Нет данных о пользователе" modal="user" />
+        )}
+      </div>
+
       
           {/* Постоянный блок с постами, который всегда отображается */}
           <div className="profile__posts">
             {userPosts && userPosts.data && userPosts.data.length > 0 ? (
-              userPosts.data.map((post) => (
+              userPosts.data.map((post:any) => (
                 <Post
                   key={post.id}
                   title={post.title}

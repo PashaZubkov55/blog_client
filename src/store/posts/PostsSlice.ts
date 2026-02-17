@@ -11,7 +11,7 @@ interface Post{
 // типы 
 
 
-type deletePostArgs = Pick<Post,'id'>
+
 
 type updatePostArgs ={
    id: string|undefined
@@ -40,7 +40,7 @@ export const postsApi = createApi({
 
        
        }),
-       getUserPosts:builder.query<Post[], string>({
+       getUserPosts:builder.query<Post[], string|number>({
         query: (userId:string)=>  `post/${userId}/userPosts`,
        }),
        addPost:builder.mutation<Post, FormData>({
@@ -58,7 +58,7 @@ export const postsApi = createApi({
             body: formData,
           }),
        }),
-       delete:builder.mutation<void, deletePostArgs>({
+       delete:builder.mutation<void, string|undefined>({
         query: ( id ) => ({
             url: `/post/${id}`,
             method: 'DELETE',

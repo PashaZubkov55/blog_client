@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form"
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
-import { useCreteInfoMutation } from "@store/userInfo/userInfoApi"
+import { useCreteInfoMutation } from '../store/userInfo/UserInfoApi'
 import {  useNavigate } from "react-router-dom"
 import { HOME_ROUTE } from "../router/Url"
-import { useGetInfoQuery } from "@store/userInfo/userInfoApi" 
+import { useGetInfoQuery } from "../store/userInfo/UserInfoApi" 
 import { AppDispatch } from "../store/store"
 
 export const CreateUserInfo = ()=>{
@@ -18,22 +18,22 @@ export const CreateUserInfo = ()=>{
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [image,setImage] = useState('')
-    const userId = Number( localStorage.getItem('userId'))
+    const userId = Number(localStorage.getItem('userId'))
     const {refetch} = useGetInfoQuery(userId)
     const [createInfo] = useCreteInfoMutation()
     const modalClose=(status:any)=>{
         dispatch(setModal(status))
         
     }
-   const handleFileChange=(event)=>{
+   const handleFileChange=(event:any)=>{
         console.log('Выбранный файл:', event.target.files[0].name);
         setImage(URL.createObjectURL(event.target.files[0]))
     }
-    const createUserInfo = async (data)=>{
+    const createUserInfo = async (data:any)=>{
         try {
             const formData = new FormData()
             formData.append('name', data.name)
-            formData.append('userId', userId)
+            formData.append('userId', `${userId}`);
             formData.append('img', data.file[0])
             await createInfo(formData).unwrap()
             dispatch(setStatusMessage(true))
@@ -55,7 +55,7 @@ export const CreateUserInfo = ()=>{
 
     }
     return(
-        <div className="modal"  onClick={(e)=>{modalClose(false)}}>
+        <div className="modal"  onClick={()=>{modalClose(false)}}>
         <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -79,7 +79,10 @@ export const CreateUserInfo = ()=>{
                      
                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Ваше имя"  />
                      </div>
-                     <div className = 'input__error mt-2 text-red-600'>{errors?.name?.message}</div>
+                     <div className = 'input__error mt-2 text-red-600'>
+                     {typeof errors?.name?.message === 'string' ? errors.name.message : ''}
+
+                     </div>
                   
   
                      <div className=" person__awatar flex justify-center">
@@ -103,7 +106,10 @@ export const CreateUserInfo = ()=>{
                     />
                       
                       
-                      <div className = 'input__error mt-2 text-red-600'>{errors?.file?.message}</div>
+                      <div className = 'input__error mt-2 text-red-600'>
+                      {typeof errors?.file?.message === 'string' ? errors.file.message : ''}
+
+                      </div>
                       
                       
                      </div>

@@ -4,13 +4,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface Userinfo{
     id: number,
-    userName: string,
-    userId: number,
-    userImg: string,
+    name: string,
+    userId: number|string,
+    img: string,
     
 }
-
-type getInfoArgs = Pick<Userinfo, 'userId'>
 
 
 type UpdateInfoArgs=  {
@@ -27,7 +25,7 @@ export const userInfoApi = createApi({
     }),
    
     endpoints: (builder) => ({
-       getInfo: builder.query <Userinfo, getInfoArgs> ({
+       getInfo: builder.query <Userinfo, number|string > ({
         query: (userid)=> `userInfo/${userid}`,
         
 

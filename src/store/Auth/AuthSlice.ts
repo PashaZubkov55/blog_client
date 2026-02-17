@@ -1,4 +1,4 @@
-import { createSlice, isAction, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { jwtDecode } from 'jwt-decode'
 //import { Login } from '../../components/Login'
@@ -14,13 +14,13 @@ interface AutchState{
 interface User{
   id: number,
   email: string,
-  password: string,
+  password:string
+  token:string| undefined
 }
-type deleteUserArgs = Pick<User,'id'>
 
 type resetPasswordArgs = {
   token:string
-  body:User
+  body:FormData
 }
 
 const initialState: AutchState= {
@@ -42,10 +42,10 @@ export const AuthSlice = createSlice({
       state.user = action.payload
     },
     
-    setModal(state, action: PayloadAction<string>){
+    setModal(state, action: PayloadAction<string|boolean>){
       state.modal = action.payload
     }, 
-    setStatusMessage(state, action: PayloadAction<boolean>){
+    setStatusMessage(state, action: PayloadAction<boolean|string>){
       state.statusMessage = action.payload
     },
     setTextMessage(state, action: PayloadAction<string>){
@@ -63,7 +63,7 @@ export const authApi = createApi({
       baseUrl: 'http://localhost:5000/api/'
   }),
     endpoints: (builder) => ({
-       registration: builder.mutation<User, userArgs>({
+       registration: builder.mutation<User, any>({
         query: (body)=>({
           url: 'user/registration',
           method: 'POST',
@@ -105,7 +105,7 @@ export const authApi = createApi({
             
         }
        }),
-       deleteUser:builder.mutation<User,deleteUserArgs>({
+       deleteUser:builder.mutation<User,number|undefined>({
           query:(id)=>({
             url: `user/${id}`,
             method: 'DELETE'

@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
-import { setColorMessage, setModal, setStatusMessage, setTextMessage, setUser, useDeleteUserMutation } from "@store/Auth/AuthSlice"
+import { setColorMessage, setModal, setStatusMessage, setTextMessage, setUser, useDeleteUserMutation } from "../store/Auth/AuthSlice"
 import { useNavigate } from "react-router-dom"
-import { useGetInfoQuery } from "@store/userInfo/userInfoApi"
-import { useGetPostsQuery, useGetUserPostsQuery } from "@store/posts/PostsSlice"
+import { useGetInfoQuery } from "../store/userInfo/UserInfoApi"
+import { useGetPostsQuery, useGetUserPostsQuery } from "../store/posts/PostsSlice"
 import { HOME_ROUTE } from "../router/Url"
 import { AppDispatch } from "../store/store"
 
@@ -13,7 +13,7 @@ export  const  DeleteUserComponent = ()=>{
 
     const dispatch = useDispatch<AppDispatch>()
     const userInfo =useGetInfoQuery(userId)
-    const posts = useGetPostsQuery()
+    const posts = useGetPostsQuery('')
     const userPosts = useGetUserPostsQuery(userId)
     const navigate = useNavigate()
   
@@ -22,7 +22,7 @@ export  const  DeleteUserComponent = ()=>{
        
         }
        
-        const deleteUser = async (e)=>{
+        const deleteUser = async (e:any)=>{
             try {
                
                 e.preventDefault()
@@ -44,13 +44,13 @@ export  const  DeleteUserComponent = ()=>{
           
          }
     return (
-        <div className="modal"  onClick={(e)=>{modalClose( false)}}>
+        <div className="modal"  onClick={()=>{modalClose( false)}}>
         <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
          
                   
-                  <form className="modal_body relative px-20 py-5 " enctype="multipart/form-data" onSubmit={(e)=>{deleteUser(e)}}  onClick={(e)=>{e.stopPropagation()}}>
+                  <form className="modal_body relative px-20 py-5 " encType="multipart/form-data" onSubmit={(e)=>{deleteUser(e)}}  onClick={(e)=>{e.stopPropagation()}}>
                   <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>

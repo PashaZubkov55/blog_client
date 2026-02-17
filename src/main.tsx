@@ -5,11 +5,13 @@ import { Provider } from 'react-redux'
 import App from './App.tsx'
 import './index.css'
 
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+    throw new Error('The #root element was not found in the DOM');
+}
 
-
-createRoot(document.getElementById("root")).render(
-  
+createRoot(rootElement).render(
   <Provider store={store}>
-      <App />
-  </Provider>
+  <App />
+</Provider>
 );

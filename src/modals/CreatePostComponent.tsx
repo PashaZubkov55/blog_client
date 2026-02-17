@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
@@ -10,13 +10,11 @@ import { useDebounce } from "../hooks/useDebounce";
 export const CreatePostComponent = ()=>{
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const [searchValue, setSearchValue] = useState('')
+    const [searchValue, ] = useState('')
     const title = useDebounce(searchValue)
-    const {refetch} = useGetPostsQuery({title})
-    const fileInputRef = useRef(null);
+    const {refetch} = useGetPostsQuery(title)
     const[addPost] = useAddPostMutation()
     const [image, setImage] = useState('')
-    const userId =Number( localStorage.getItem('userId'))
     const {
         register,
         formState:{errors},
@@ -25,13 +23,13 @@ export const CreatePostComponent = ()=>{
 
     } = useForm()
 
-   const modalClose = ( status:string)=>{
+   const modalClose = ( status:string|boolean)=>{
    
     dispatch(setModal(status))
     
     }
    
-      const handleFileChange = (event) => {
+      const handleFileChange = (event:any) => {
         console.log('Выбранный файл:', event.target.files[0].name);
         setImage((URL.createObjectURL(event.target.files[0])))
         
@@ -39,7 +37,7 @@ export const CreatePostComponent = ()=>{
            
       };
      
-      const createPost = async(data)=>{
+      const createPost = async(data:any)=>{
         const  userId = localStorage.getItem('userId')
        //console.log(data.file)
         try {
@@ -48,7 +46,9 @@ export const CreatePostComponent = ()=>{
           formData.append('title',data.title)
           formData.append('description',data.description)
           console.log(data.description)
-          formData.append('userId', userId)
+         
+            formData.append('userId', `${userId}`);
+        
           formData.append('img',  data.file[0])
       
           await addPost(formData).unwrap()
@@ -71,7 +71,7 @@ export const CreatePostComponent = ()=>{
       }
      
     return(
-      <div className="modal"  onClick={(e)=>{modalClose( false)}}>
+      <div className="modal"  onClick={()=>{modalClose( false)}}>
       <div  className=" overflow-y-auto bg-green-50    overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center  items-center h-full w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div className="modal__shawow  relative p-4 w-full max-w-2xl max-h-full">
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -97,7 +97,9 @@ export const CreatePostComponent = ()=>{
                    
                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
                    </div>
-                   <div className = 'input__error mt-2 text-red-600'>{errors?.title?.message}</div>
+                   <div className = 'input__error mt-2 text-red-600'>
+                   {typeof errors?.title?.message === 'string' ? errors.title.message : ''}
+                   </div>
                    <div className="modal__input mt-2">
                     
                    <textarea  rows={4}  id="description"
@@ -108,7 +110,9 @@ export const CreatePostComponent = ()=>{
                    
                    className="  whitespace-pre-line block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                   
                    </div>
-                   <div className = 'input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
+                   <div className = 'input__error mt-2 text-red-600' >
+                   {typeof errors?.description?.message === 'string' ? errors.description.message : ''}
+                   </div>
                    
                    <div className=" person__awatar flex justify-center">
                     {image? 
@@ -131,7 +135,9 @@ export const CreatePostComponent = ()=>{
                   />
                     
                     
-                    <div className = 'input__error mt-2 text-red-600'>{errors?.file?.message}</div>
+                    <div className = 'input__error mt-2 text-red-600'>
+                    {typeof errors?.file?.message === 'string' ? errors.file.message : ''}
+                    </div>
                     
                     
                    </div>

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect,  useState } from "react";
 import { useDispatch } from "react-redux";
 import { setColorMessage, setModal, setStatusMessage, setTextMessage } from "../store/Auth/AuthSlice";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
-    const {refetch} = useGetPostsQuery()
+    const {refetch} = useGetPostsQuery('')
     const [imageVisible, setImageVisible] = useState('')
     const userId:number  =  Number(localStorage.getItem('userId'))
   
@@ -29,7 +29,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
 
     } = useForm()
 
-   const modalClose = (status:string)=>{
+   const modalClose = (status:string|boolean)=>{
    
     dispatch(setModal(status))
     
@@ -39,7 +39,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
     
 
       
-      const handleFileChange = (event) => {
+      const handleFileChange = (event:any) => {
         console.log('Выбранный файл:', event.target.files[0].name);
         const selectedFile = event.target.files[0];
       
@@ -60,7 +60,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
       },[])
       
 
-     const updatePost = async (data)=>{
+     const updatePost = async (data:any)=>{
 
       
        //console.log(data.file)
@@ -68,7 +68,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
         try { 
 
           const  formData = new FormData()
-          formData.append('id', Number(id))
+          formData.append('id', `${id}`)
           formData.append('title',data.title)
           formData.append('description',data.description)
           if (data.file) {
@@ -76,7 +76,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
           }
           formData.append('img', data.file[0])
          
-          formData.append('userId', userId )
+          formData.append('userId', `${userId}` )
           await update({id,formData}).unwrap()
           dispatch(setStatusMessage(true))
           dispatch(setTextMessage('Пост изменен !'))
@@ -102,7 +102,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
          
                   
-                  <form className="modal_body relative px-20 py-5 " enctype="multipart/form-data" onSubmit={handleSubmit(updatePost)}  onClick={(e)=>{e.stopPropagation()}}>
+                  <form className="modal_body relative px-20 py-5 " encType="multipart/form-data" onSubmit={handleSubmit(updatePost)}  onClick={(e)=>{e.stopPropagation()}}>
                   <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
@@ -121,16 +121,20 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
                      onChange={(e)=>setValue('title', e.target.value)}
                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Название"  />
                      </div>
-                     <div className = 'input__error mt-2 text-red-600'>{errors?.title?.message}</div>
+                     <div className = 'input__error mt-2 text-red-600'>
+                     {typeof errors?.title?.message === 'string' ? errors.title.message : ''}
+                     </div>
                      <div className="modal__input mt-2">
-                     <textarea id="description" rows="4" 
+                     <textarea id="description" rows={4} 
                       {...register('description',{
                         required: 'Поля обизательное'
                        })}
                        onChange={(e)=>setValue('description', e.target.value)}
-                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                    
+                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Текст поста"></textarea>                    
                      </div>
-                     <div className = 'whitespace-pre-line input__error mt-2 text-red-600' text-red-600>{errors?.description?.message}</div>
+                     <div className = 'whitespace-pre-line input__error mt-2 text-red-600'>
+                     {typeof errors?.description?.message === 'string' ? errors.description.message : ''}
+                     </div>
                      
                      <div className=" person__awatar flex justify-center">
                       {imageVisible? 
@@ -174,4 +178,3 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
                   </div>
        )
     }
-

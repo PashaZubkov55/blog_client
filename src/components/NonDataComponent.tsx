@@ -2,12 +2,14 @@ import { useNavigate } from "react-router-dom"
 import { SESTTINGS_ROUTE } from "../router/Url"
 import { FC } from "react"
 type Message = {
-    message: string
+    message: string,
+    modal?: boolean|string
 }
 
 
-export const NonDataComponent :FC<Message> = ({message})=>{
+export const NonDataComponent :FC<Message> = ({message,})=>{
     const navigate = useNavigate()
+
   
         return(
             <div className=" flex justify-center  mt-20  ">    

@@ -1,14 +1,14 @@
 import {useForm} from 'react-hook-form'
 import {  useNavigate, useParams } from 'react-router-dom'
-import { setColorMessage, setStatusMessage, setTextMessage, useResetPasswordMutation } from '@store/Auth/AuthSlice'
+import { setColorMessage, setStatusMessage, setTextMessage, useResetPasswordMutation } from '../store/Auth/AuthSlice'
 import { useDispatch } from 'react-redux'
 import { LOGUIN_ROUTE } from '../router/Url'
-import { AppDispatch } from '@store/store'
+import { AppDispatch } from '../store/store'
 export const RestorationPasswordPage = ()=>{
     const [resetPassword] = useResetPasswordMutation()
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const {token} = useParams()
+    
     type TFormData= {
         password: string,
         repeatPassword: string
@@ -19,7 +19,7 @@ export const RestorationPasswordPage = ()=>{
         handleSubmit
     } = useForm()
    
-   
+    const {token} = useParams()
     const restorationAccount = async (data:TFormData)=>{
        
        
@@ -33,7 +33,12 @@ export const RestorationPasswordPage = ()=>{
             try {
                 const formData = new FormData()
                 formData.append('newPassword', data.password)
-                await resetPassword({token, body: formData}).unwrap()
+                if (!token || !formData) {
+                    throw new Error('Token or form data are missing');
+                }
+                await resetPassword({ token, body: formData }).unwrap();
+                
+                
                 dispatch(setStatusMessage(true))
                 dispatch(setTextMessage('Акаут востановлен !'))
                 dispatch(setColorMessage('bg-green-500'))
@@ -67,7 +72,9 @@ export const RestorationPasswordPage = ()=>{
                 }
             })}
           />
-           <div className="input__error text-red-600">{errors?.password?.message}</div>
+           <div className="input__error text-red-600">
+           {typeof errors?.password?.message === 'string' ? errors.password.message : ''}
+           </div>
         
           </div>
           <div className="mb-5">
@@ -83,7 +90,9 @@ export const RestorationPasswordPage = ()=>{
                 }
             })}
           />
-           <div className="input__error text-red-600">{errors?.repeatPassword?.message}</div>
+           <div className="input__error text-red-600">
+           {typeof errors?.repeatPassword?.message === 'string' ? errors.repeatPassword.message : ''}
+           </div>
         
           </div>
           <div className="flex items-start mb-5">

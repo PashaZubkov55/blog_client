@@ -1,7 +1,7 @@
 
 import { useLocation } from 'react-router-dom';
 import { Login } from "../components/Login"
-import { Registration } from '../components/registration';
+import { Registration } from '../components/Registration';
 import { LOGUIN_ROUTE } from "../router/Url"
 
 
