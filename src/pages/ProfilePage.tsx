@@ -19,8 +19,6 @@ export const ProfilePage=()=>{
            if (userInfo.isLoading && userPosts.isLoading) {
             console.log('загрузка...')
            }
-           console.log('данные пользователя - ', userInfo.data)
-           console.log('данные постов пользователя - ', userPosts.data)
 
     },[userInfo.isLoading, userPosts.isLoading])
       

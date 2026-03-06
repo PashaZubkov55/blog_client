@@ -52,7 +52,7 @@ export  const  DeleteUserComponent = ()=>{
                   
                   <form className="modal_body relative px-20 py-5 " encType="multipart/form-data" onSubmit={(e)=>{deleteUser(e)}}  onClick={(e)=>{e.stopPropagation()}}>
                   <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                          <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
                      <div className=" text-lg font-semibold modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                       Вы действительно хотите удалить акаунт ?

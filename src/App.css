@@ -13,7 +13,7 @@
     cursor: pointer;
 }
 
-.mwenu__mobile{
+.menu__mobile{
     position: fixed;
     width: 100%;
     padding: 15px;

@@ -80,7 +80,7 @@ const updateUserInfo = async(data:any)=>{
                   
                   <form className="modal_body relative px-20 py-5 " encType="multipart/form-data" onSubmit={handleSubmit(updateUserInfo)}  onClick={(e)=>{e.stopPropagation()}}>
                   <svg className="w-3 h-3 absolute right-5 top-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  onClick={()=>{modalClose(false)}} >
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                          <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
                      <div className=" text-lg font-semibold modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                       Изменить данные
@@ -136,7 +136,7 @@ const updateUserInfo = async(data:any)=>{
                     
                      <div className="modal__sucsess mt-2">
                      <button  type="submit"  className="text-white inline-flex w-full justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                     Изменить пост
+                     Изменить данные
                   </button>
                      </div>
                     
