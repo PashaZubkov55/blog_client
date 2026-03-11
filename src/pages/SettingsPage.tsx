@@ -10,7 +10,7 @@ export const SettingsPage = ()=>{
     const modalStatus = useSelector((state:RootState)=> state.auth.modal)
     const dispatch = useDispatch<AppDispatch>()
     const id = Number(localStorage.getItem('userId'))
-    const {data= []} = useGetInfoQuery(id)
+    const {data} = useGetInfoQuery(id)
     useEffect(()=>{
         console.log('data-',data)
         console.log(modalStatus)
@@ -57,10 +57,10 @@ export const SettingsPage = ()=>{
                 </div>
                { modalStatus == 'post'?
             <CreatePostComponent/> 
-            :modalStatus == 'createUnfo'? <CreateUserInfo/>
+           
             : modalStatus == 'updateInfo'? <UpdateUserInfoComponent
-                name = {data.name}
-                img = {data.img}
+                name = {data?.name??""}
+                img = {data?.img?? ""}
 
             />:modalStatus == 'delete'? <DeleteUserComponent/>:false
             }

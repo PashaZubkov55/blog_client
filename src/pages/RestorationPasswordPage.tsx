@@ -17,7 +17,7 @@ export const RestorationPasswordPage = ()=>{
         register,
         formState: {errors},
         handleSubmit
-    } = useForm()
+    } = useForm<TFormData>()
    
     const {token} = useParams()
     const restorationAccount = async (data:TFormData)=>{

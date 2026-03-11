@@ -22,12 +22,17 @@ type resetPasswordArgs = {
   token:string
   body:FormData
 }
+interface AuthResponse {
+  token: string;
+  id: string;
+}
+
 
 const initialState: AutchState= {
   isAuth: false,
   modal: '',
   statusMessage:true,
-  textMessage: 'message',
+  textMessage: '',
   colorMessage: '',
   user: false
 }
@@ -70,7 +75,7 @@ export const authApi = createApi({
           body,
         }),
         transformResponse: response=>{
-          return jwtDecode(response.token)
+          return jwtDecode((response as { token: string }).token);
           
             
         }
@@ -81,11 +86,13 @@ export const authApi = createApi({
           method: 'POST',
           body: credentials
         }),
-        transformResponse: response=>{
+        transformResponse: (response:AuthResponse)=>{
           localStorage.setItem('token', response.token)
-          localStorage.setItem('userId', response.id)
+          localStorage.setItem('userId',response.id)
+          return jwtDecode(response.token);
 
-          return jwtDecode(response.token)
+          
+
             
         }
        }),
@@ -99,9 +106,10 @@ export const authApi = createApi({
           }
         }),
 
-        transformResponse: response=>{
-          localStorage.setItem('token', response.token)
-          return jwtDecode(response.token)
+        transformResponse: (response: AuthResponse)=>{
+          localStorage.setItem('userId',response.token)
+          return jwtDecode(response.token);
+
             
         }
        }),

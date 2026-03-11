@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { LOGUIN_ROUTE, REGISTRATION_ROUTE, SESTTINGS_ROUTE } from "../router/Url"
+import { LOGUIN_ROUTE,  SESTTINGS_ROUTE } from "../router/Url"
 
 import { FC } from "react"
 type Message = {
