@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import { SESTTINGS_ROUTE } from "../router/Url"
+import { LOGUIN_ROUTE, REGISTRATION_ROUTE, SESTTINGS_ROUTE } from "../router/Url"
+
 import { FC } from "react"
 type Message = {
     message: string,
@@ -9,9 +10,23 @@ type Message = {
 
 export const NonDataComponent :FC<Message> = ({message,})=>{
     const navigate = useNavigate()
-
-  
+        if (!localStorage.token) {
+            return (
+                <div className="restorationMessage">
+                <div className="restorationMessage__wrapper max-w-sm mx-auto mt-40 shadow-2xl p-5">
+                <div className=" restorationMessage__text mb-5">
+                    <span>на сайте нет постов!
+                        <span className="cursor-pointer  text-green-600" onClick={()=>{navigate(LOGUIN_ROUTE)}}> войдите в акаунт </span>
+                         чтобы  добавить пост 
+                    </span>
+                        
+                    </div>
+                </div>
+            </div>
+            )
+        }
         return(
+
             <div className=" flex justify-center  mt-20  ">    
             <div className="detail bg-white  overflow-hidden  max-w-200 mb-18 pb-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-sm    ">
             
