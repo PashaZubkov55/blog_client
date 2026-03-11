@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { API_URL } from '../../config'
 
 interface Post{
     id: number,
@@ -21,8 +22,8 @@ type updatePostArgs ={
 export const postsApi = createApi({
     reducerPath: 'postsApi',
     baseQuery: fetchBaseQuery({
-        //baseUrl: 'https://jsonplaceholder.typicode.com/',
-        baseUrl: 'http://localhost:5000/api/'
+       
+        baseUrl: API_URL
        
     }),
     keepUnusedDataFor: 10,

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_URL } from "../../config";
  
 
 
@@ -20,7 +21,7 @@ type UpdateInfoArgs=  {
 export const userInfoApi = createApi({
     reducerPath: 'userInfoApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:5000/api/'
+        baseUrl: API_URL
        
     }),
    

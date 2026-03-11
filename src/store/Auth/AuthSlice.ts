@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { jwtDecode } from 'jwt-decode'
+import { API_URL } from '../../config'
 //import { Login } from '../../components/Login'
 
 interface AutchState{
@@ -65,7 +66,7 @@ export const AuthSlice = createSlice({
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-      baseUrl: 'http://localhost:5000/api/'
+      baseUrl: API_URL
   }),
     endpoints: (builder) => ({
        registration: builder.mutation<User, any>({
