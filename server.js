@@ -1,18 +1,25 @@
 import express from 'express';
-import { dirname } from 'path';      // Импортируем dirname
-import { fileURLToPath } from 'url'; // Для вычисления __dirname
-import path from 'path';            // Добавляем импорт модуля path
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url); // Получаем абсолютный путь к текущему файлу
-const __dirname = dirname(__filename);              // Определяем директорию текущего файла
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const PORT = process.env.PORT || 8080;               // Порт сервера
-const app = express();                               // Создаем приложение Express
+const PORT = process.env.PORT || 8080;
+const app = express();
 
-// Настраиваем статику
-app.use(express.static(__dirname));                  // Подключаем статику из основной папки
-app.use(express.static(path.resolve(__dirname, 'dist'))); // Отдельный маршрут для папки dist
- 
+// Устанавливаем заголовки Content-Type для .js файлов
+app.use((req, res, next) => {
+  if (req.path.endsWith('.js') && req.headers.accept.includes('application/javascript')) {
+    res.setHeader('Content-Type', 'application/javascript');
+  }
+  next();
+});
+
+// Настройка статики
+app.use(express.static(__dirname));
+app.use(express.static(path.resolve(__dirname, 'dist')));
 
 // Запускаем сервер
 app.listen(PORT, () => {

@@ -13,7 +13,7 @@
       "@utils/*": ["src/utils/*"],           // все утилиты
       "@modals/*": ["src/modals/*"], 
       "@store/*": ["src/store/*"],
-    },
+    }
 
   }
    
