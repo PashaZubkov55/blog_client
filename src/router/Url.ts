@@ -8,7 +8,7 @@ export const FORGOT_PASSWORD_ROUTE =  '/forgotPassword'
 export const RESTORATION_MESSAGE_ROUTE = '/restorationMassage'
 export const RESTORATION_PASSWORD_ROUTE = '/restoratonPassword/'
 export const URL_SERVER = 'http://46.173.16.2:5000/'
-
+ //export const URL_SERVER =  'http://localhost:5000/'
 
 
 
