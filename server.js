@@ -1,27 +1,22 @@
-import express from 'express';
-import { dirname } from 'path';
+import express from 'express'; 
 import { fileURLToPath } from 'url';
-import path from 'path';
+import { dirname, join } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
+
+const __filename = fileURLToPath(import.meta.url); 
+
 const __dirname = dirname(__filename);
 
-const PORT = process.env.PORT || 8080;
 const app = express();
+const PORT = process.env.PORT || 8080;
 
-// Устанавливаем заголовки Content-Type для .js файлов
-app.use((req, res, next) => {
-  if (req.path.endsWith('.js') && req.headers.accept.includes('application/javascript')) {
-    res.setHeader('Content-Type', 'application/javascript');
-  }
-  next();
+
+app.use(express.static(join(__dirname, './dist')));
+
+
+app.get('/', (req, res) => {
+  res.sendFile(join(__dirname, '/dist/index.html'));
 });
 
-// Настройка статики
-app.use(express.static(__dirname));
-app.use(express.static(path.resolve(__dirname, 'dist')));
 
-// Запускаем сервер
-app.listen(PORT, () => {
-  console.log(`Сервер запущен на порте ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
