@@ -34,7 +34,6 @@ export const UpdateUserInfoComponent: FC<UserInfo> =({name, img })=>{
         setValue('name', name)
         setValue('img', img)
         
-        console.log('user-id-- ', userId)
 
     },[])
     const handleFileChange =(event:any)=>{
@@ -54,7 +53,6 @@ const updateUserInfo = async(data:any)=>{
       formData.append('img', '')
         formData.append('userId', `${userId}`);
     
-      console.log('userId -',userId)
       await updateInfo({userId, formData}).unwrap()
       dispatch(setStatusMessage(true))
       dispatch(setTextMessage('Ваша информация изменена!'))

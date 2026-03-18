@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { CreatePostComponent } from "../modals/CreatePostComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../store/Auth/AuthSlice";
@@ -11,13 +10,8 @@ export const SettingsPage = ()=>{
     const dispatch = useDispatch<AppDispatch>()
     const id = Number(localStorage.getItem('userId'))
     const {data} = useGetInfoQuery(id)
-    useEffect(()=>{
-        console.log('data-',data)
-        console.log(modalStatus)
-    },[modalStatus])
     const visibleModal =(status:any)=>{
         dispatch(setModal(status))
-        console.log(modalStatus)
     }
     
 

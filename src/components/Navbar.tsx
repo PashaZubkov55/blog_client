@@ -13,10 +13,9 @@ export const Navbar=()=>{
     const menuStatus =()=>{
        if (burgerMenuStatus == true) {
         setBurgerMenuStatus(false)
-        console.log(burgerMenuStatus)
        }else{
         setBurgerMenuStatus(true)
-        console.log(burgerMenuStatus)
+       
        }
 
        

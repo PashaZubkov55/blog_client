@@ -14,9 +14,7 @@ export const Message = ()=>{
     useEffect(()=>{
         
     const timer = setTimeout(()=>{
-        console.log('66666')
         dispatch(setStatusMessage(false))
-        console.log(statusMessage)
     },5000)
        return ()=>{clearTimeout(timer)}
     },[statusMessage])

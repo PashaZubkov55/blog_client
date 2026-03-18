@@ -17,7 +17,7 @@ export const ProfilePage=()=>{
     const userPosts = useGetUserPostsQuery(userId)
     useEffect(()=>{
            if (userInfo.isLoading && userPosts.isLoading) {
-            console.log('загрузка...')
+            
            }
 
     },[userInfo.isLoading, userPosts.isLoading])

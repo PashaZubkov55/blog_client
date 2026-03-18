@@ -27,8 +27,6 @@ function App() {
 
   useEffect( () => { 
     if (!isLoading && !error) {
-      console.log('Получены данные:', data);
-      console.log('статус сообщение :', message);
 
       dispatch(setUser(true))
     }else{
