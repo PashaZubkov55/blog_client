@@ -83,7 +83,7 @@ export const Login = ()=>{
     })}
   />
    <div className="input__error text-red-600">
-   {typeof errors?.email?.message === 'string' ? errors.email.message : ''}
+   {typeof errors?.password?.message === 'string' ? errors.password.message : ''}
    </div>
 
   </div>

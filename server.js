@@ -13,10 +13,12 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.static(join(__dirname, './dist')));
 
-
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, '/dist/index.html'));
 });
 
+app.get(/.*/, (req, res) => {
+  res.sendFile(join(__dirname, '/dist/index.html'));
+});
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+app.listen(PORT, () => console.log(` ${PORT}`));

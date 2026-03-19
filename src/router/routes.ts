@@ -39,12 +39,12 @@ export const publicRouts =[
 
     },
     {
-        path: RESTORATION_PASSWORD_ROUTE+':token',
+        path: `${RESTORATION_PASSWORD_ROUTE}/:token`,
         component: RestorationPasswordPage
 
     },
     {
-        path: POST_ROUTE +':id',
+        path: `${POST_ROUTE}/:id`,
         component: PostPage
         
     },
