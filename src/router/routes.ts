@@ -44,7 +44,7 @@ export const publicRouts =[
 
     },
     {
-        path: `${POST_ROUTE}/:id`,
+        path: `${POST_ROUTE}:id`,
         component: PostPage
         
     },

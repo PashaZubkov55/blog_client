@@ -21,8 +21,8 @@ export const  Person: FC<UserinfoData>= ({img, name})=>{
         return(
             <div className="person">
                 <div className="person__wrapper flex flex-col items-center  w-full p-4  bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                <div className="person__awatar  w-32 h-32  my-3 border-4 border-green-600 rounded-full overflow-hidden">
-                <img className=" object-cover h-32" src={URL_SERVER+img} alt='Woman looking front'/>
+                <div className="person__awatar h-auto  my-3 border-4 border-green-600 rounded-full overflow-hidden">
+                <img className=" object-fit w-32 h-32" src={URL_SERVER+img} alt='Woman looking front'/>
                
                 </div>
                 <div className="person__name">
