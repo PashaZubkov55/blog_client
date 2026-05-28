@@ -43,9 +43,9 @@ export const Postdetail = ()=>{
               </div>      
               
                     <div className="detail__title px-8 ">
-                        <h1 className='title   text-3xl font-extrabold dark:text-white px8 '>{data?.title|| ''}</h1>
+                        <h1 className='title   text-2xl   font-extrabold dark:text-white px8 '>{data?.title|| ''}</h1>
                         </div>
-                    <div className="detail__description text-lg whitespace-pre-wrap whitespace-pre-line break-all py-5 px-8">{data?.description|| ''}</div>
+                    <div className="detail__description text-justify  break-keep text-left text-balance text-lg whitespace-pre-wrap whitespace-pre-line break-all py-5 px-8">{data?.description|| ''}</div>
                    
                     { data?.userId == Number(localStorage.getItem('userId'))?
                     <div className="detail_buttons px-8">

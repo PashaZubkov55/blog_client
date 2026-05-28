@@ -107,7 +107,7 @@ export const UpdatePostComponent : FC<Update> = ({title, description,  img})=>{
                           <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
                      <div className=" text-lg font-semibold modal__title flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                      Изменить  пост
+                      Изменить пост
                      </div>
                     
                      

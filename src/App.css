@@ -9,9 +9,8 @@
     
 
 }
-.arrow__top:hover{
-    cursor: pointer;
-}
+
+
 
 .menu__mobile{
     position: fixed;
@@ -22,4 +21,16 @@
     top: 0;
     left: 0;
     z-index: 15000000000000000000000;
+}
+
+@media (max-width: 576px) {
+    .arrow__top{
+      
+      position: fixed;
+      bottom: 100px;
+      right: 15px;
+      width: 30px;
+      height: 30px;
+    
+    }
 }
